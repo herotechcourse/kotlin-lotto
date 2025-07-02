@@ -2,12 +2,12 @@ package lotto
 
 class LottoMachine(val userAmount: Int) {
 
-    fun calculateTickets() : Int{
+    private fun calculateTickets() : Int{
         val numberOfTickets = userAmount / 1000
         return numberOfTickets
     }
 
-    fun generateNumbers() : List<Int> {
+    private fun generateNumbers() : List<Int> {
         val randomNumbers = (1..45).shuffled().take(6).sorted()
         return randomNumbers
     }
@@ -22,5 +22,9 @@ class LottoMachine(val userAmount: Int) {
             count++
         }
         return lottos
+    }
+
+    fun compareTickets(lottos : List<Lotto>, winningNumber: List<String>, bonusNumber: Int){
+
     }
 }
