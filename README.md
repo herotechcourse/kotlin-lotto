@@ -17,11 +17,11 @@
 - [x] Create OutputView for tickets
 
 - User Input Winning numbers:
-- [ ] Ask user for winning number
-- [ ] There are 6 numbers 
-- [ ] There are no duplicate numbers
-- [ ] The numbers are between 1 and 45
-- [ ] Ask user for bonus number
+- [x] Ask user for winning number
+- [x] There are 6 numbers 
+- [x] There are no duplicate numbers
+- [x] The numbers are between 1 and 45
+- [x] Ask user for bonus number
 
 - Calculate winners and return rate
 
