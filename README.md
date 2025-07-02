@@ -30,11 +30,8 @@ Lotto Ticket
 - [ ] m. numbers are generated randomly
 
 RandomNumberGenerator
-- [ ] Use `shuffled()` to generate random numbers
-
-RandomTicketGenerator
-- [ ] Use RandomNumberGenerator to generate numbers
-- [ ] Use `sorted()` to sort numbers in array
+- [x] Use `shuffled()` to generate random numbers
+- [x] Use `sorted()` to sort numbers in array
 
 WinningStatistics
 - [ ] e. has count of match
