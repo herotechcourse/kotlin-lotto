@@ -12,13 +12,13 @@ This LottoMachine is written in Kotlin, simulating actual Lotto machine in real 
 ## Features List
 
 Lotto Machine
-- [ ] e. Need input from user for the amount of money
-- [ ] e. Need input from user for last week's winning numbers
-- [ ] e. Need input from user for a bonus number
-- [ ] e. Has amount of ticket
-- [ ] m. calculate amount of ticket from the amount of money
-- [ ] e. Has bundle of tickets
-- [ ] em. generate LottoTicket objects
+- [x] e. Need input from user for the amount of money
+- [x] e. Need input from user for last week's winning numbers
+- [x] e. Need input from user for a bonus number
+- [x] e. Has amount of ticket
+- [x] m. calculate amount of ticket from the amount of money
+- [x] e. Has bundle of tickets
+- [x] em. generate LottoTicket objects
 - [ ] em. generate WinningStatistics object
 
 Lotto Ticket
@@ -27,7 +27,7 @@ Lotto Ticket
 - [x] e. Ticket has 6 int numbers in array
 - [x] Ticket number should be from 1-45
 - [x] numbers are not duplicated
-- [ ] m. numbers are generated randomly
+- [x] m. numbers are generated randomly
 
 RandomNumberGenerator
 - [x] Use `shuffled()` to generate random numbers
