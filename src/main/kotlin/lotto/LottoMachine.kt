@@ -62,6 +62,6 @@ class LottoMachine(val userAmount: Int) {
             prizeCounter[chosen] = prizeCounter.getValue(chosen) + 1
 
         }
-        prizeCounter.forEach { prize -> println("${prize.key} : ${prize.value}") }
+
     }
 }
