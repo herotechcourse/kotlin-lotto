@@ -7,7 +7,7 @@
 - [x] Ticket purchase should be multiple of 1000
 
 - Generate Tickets:
-- [ ] Calculate number of tickets
+- [x] Calculate number of tickets
 - [ ] Generate 6 ticket numbers
   - [ ] Validate non duplicate numbers
   - [ ] Numbers should be between 1 and 45
