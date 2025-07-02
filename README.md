@@ -13,6 +13,9 @@
   - [ ] Numbers should be between 1 and 45
 - [x] Create tickets with generated numbers
 
+- Display tickets
+- [x] Create OutputView for tickets
+
 - User Input Winning numbers:
 - [ ] Ask user for winning number
 - [ ] There are 6 numbers 
