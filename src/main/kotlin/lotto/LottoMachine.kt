@@ -11,4 +11,16 @@ class LottoMachine(val userAmount: Int) {
         val randomNumbers = (1..45).shuffled().take(6)
         return randomNumbers
     }
+
+    fun createTickets() : List<Lotto> {
+        val lottos = mutableListOf<Lotto>()
+        val amountOfTickets = calculateTickets()
+        var count = 0
+        while (count < amountOfTickets ) {
+            val lotto = Lotto(generateNumbers())
+            lottos.add(lotto)
+            count++
+        }
+        return lottos
+    }
 }

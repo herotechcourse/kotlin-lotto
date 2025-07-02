@@ -18,5 +18,10 @@ class LottoMachineTest {
         assertEquals( "Ticket numbers aren't 6", lottoMachine.generateNumbers().count(), 6)
     }
 
+    @Test
+    fun `amount of tickets were generated` () {
+        val lottoMachine = LottoMachine(4000)
+        assertEquals( "Amount of tickets is different then expected", lottoMachine.createTickets().count(), 4)
+    }
 
 }
