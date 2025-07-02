@@ -2,13 +2,19 @@ package lotto
 
 class InputView {
 
-    val userAmount = "5fgf0"
+    fun takePurchaseInput() : Int{
 
-    fun takeInput(){
-        if (userAmount.toIntOrNull() == null ) {
-            throw IllegalArgumentException("Input is not a number")
+        while(true){
+            try{
+                println("Please enter the purchase amount.")
+                val input = readln()
+                val validator = Validator()
+                validator.validateAmount(input)
+                return input.toInt()
+            } catch (e : IllegalArgumentException) {
+                println(e.message)
+            }
         }
     }
-
     // Create a test for non-numerical input
 }
