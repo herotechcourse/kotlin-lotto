@@ -3,8 +3,8 @@
 # lotto Features:
 
 - Validate User input Amount:
-- [ ] ask user input
-- [ ] Ticket purchase should be multiple of 1000
+- [x] ask user input
+- [x] Ticket purchase should be multiple of 1000
 
 - Generate Tickets:
 - [ ] Calculate number of tickets
