@@ -8,7 +8,7 @@ class LottoMachine(val userAmount: Int) {
     }
 
     fun generateNumbers() : List<Int> {
-        val randomNumbers = (1..45).shuffled().take(6)
+        val randomNumbers = (1..45).shuffled().take(6).sorted()
         return randomNumbers
     }
 
