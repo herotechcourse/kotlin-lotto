@@ -11,7 +11,6 @@ class LottoTest {
         assertThrows<IllegalArgumentException>{
             Lotto(lottoNumbers)
         }
-
     }
 
 }

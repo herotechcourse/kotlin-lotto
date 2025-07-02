@@ -8,6 +8,5 @@ class ResultView() {
             val lottoNumbers = lotto.getNumbers()
             println(lottoNumbers.joinToString(",", "[", "]"))
         }
-
     }
 }

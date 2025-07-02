@@ -1,6 +1,7 @@
 package lotto
 
 class InputView {
+    val validator = Validator()
 
     fun takePurchaseInput() : Int{
 
@@ -8,7 +9,6 @@ class InputView {
             try{
                 println("Please enter the purchase amount.")
                 val input = readln()
-                val validator = Validator()
                 validator.validateAmount(input)
                 return input.toInt()
             } catch (e : IllegalArgumentException) {
