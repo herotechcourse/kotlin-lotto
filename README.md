@@ -11,21 +11,15 @@ This LottoMachine is written in Kotlin, simulating actual Lotto machine in real 
 
 ## Features List
 
-User Input
-- [ ] User inputs amount of money to buy Lotto tickets
-   - (consider to add limit for user to input)
-- [ ] User input is dividable by 1000
-- [ ] User input is positive number
-- [ ] User input should be integer
-
-Lotto
+Lotto Machine
 - [ ] e. Need input from user for the amount of money
-- [ ] e. Need input from user for last week's winning number
+- [ ] e. Need input from user for last week's winning numbers
 - [ ] e. Need input from user for a bonus number
 - [ ] e. Has amount of ticket
 - [ ] m. calculate amount of ticket from the amount of money
 - [ ] e. Has bundle of tickets
-- [ ] m. generate bundle of tickets
+- [ ] em. generate LottoTicket objects
+- [ ] em. generate WinningStatistics object
 
 Lotto Ticket
 - [x] e. Ticket has attribute named cost 1,000 KRW
@@ -59,6 +53,7 @@ Rank
 - [ ] winning money is magic number
 
 InputView
+- [x] User input is dividable by 1000
 - [x] msg. `Please enter the purchase amount.`
 - [x] msg. `Please enter last week’s winning numbers.`
 - [x] msg. `Please enter the bonus number.`
