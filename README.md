@@ -11,6 +11,7 @@
 - [x] Generate 6 ticket numbers
   - [ ] Validate non duplicate numbers
   - [ ] Numbers should be between 1 and 45
+- [ ] Create tickets with generated numbers
 
 - User Input Winning numbers:
 - [ ] Ask user for winning number
