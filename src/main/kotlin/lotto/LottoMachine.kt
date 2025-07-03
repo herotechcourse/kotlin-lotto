@@ -12,26 +12,18 @@ class LottoMachine(
     // TODO: might have to update resultTable before initiating winStat
     val winStat: WinningStatistics = WinningStatistics()
 
-//    fun generateLottoTickets(amountOfTicket: Int): List<LottoTicket> {
-//        val tempList = mutableListOf<LottoTicket>()
-//        (1..amountOfTicket).forEach {
-//            it
-//            val ticket = LottoTicket(RandomNumberGenerator.generateNumber())
-//            tempList.add(ticket)
-//        }
-//        return tempList
-//    }
-
     fun writeResultTable() {
-        bundleOfLottoTicket.forEach { ticket ->
-            when (getRankOfTicket(ticket)) {
-                Rank.FIRST -> resultTable[1]++
-                Rank.SECOND -> resultTable[2]++
-                Rank.THIRD -> resultTable[3]++
-                Rank.FOURTH -> resultTable[4]++
-                Rank.FIFTH -> resultTable[5]++
-                Rank.MISS -> resultTable[0]++
-            }
+        bundleOfLottoTicket.forEach { filterTicket(it) }
+    }
+
+    fun filterTicket(ticket: LottoTicket) {
+        when (getRankOfTicket(ticket)) {
+            Rank.FIRST -> resultTable[1]++
+            Rank.SECOND -> resultTable[2]++
+            Rank.THIRD -> resultTable[3]++
+            Rank.FOURTH -> resultTable[4]++
+            Rank.FIFTH -> resultTable[5]++
+            Rank.MISS -> resultTable[0]++
         }
     }
 
