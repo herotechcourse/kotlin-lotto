@@ -19,7 +19,7 @@ Lotto Machine
 - [x] m. calculate amount of ticket from the amount of money
 - [x] e. Has bundle of tickets
 - [x] em. generate LottoTicket objects
-- [ ] em. generate WinningStatistics object
+- [x] em. generate WinningStatistics object
 
 Lotto Ticket
 - [x] e. Ticket has attribute named cost 1,000 KRW
@@ -56,6 +56,6 @@ InputView
 - [x] msg. `Please enter the bonus number.`
 
 ResultView
-- [ ] msg. `You have purchased N tickets.`
-- [ ] msg. `Winning Statistics\n------------------\n`
+- [x] msg. `You have purchased N tickets.`
+- [x] msg. `Winning Statistics\n------------------\n`
 - [ ] msg. `Total return rate is 0.N (A rate below 1 means a loss)`
