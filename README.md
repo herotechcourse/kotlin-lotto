@@ -58,4 +58,4 @@ InputView
 ResultView
 - [x] msg. `You have purchased N tickets.`
 - [x] msg. `Winning Statistics\n------------------\n`
-- [ ] msg. `Total return rate is 0.N (A rate below 1 means a loss)`
+- [x] msg. `Total return rate is 0.N (A rate below 1 means a loss)`
