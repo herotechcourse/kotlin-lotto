@@ -34,13 +34,13 @@ RandomNumberGenerator
 - [x] Use `sorted()` to sort numbers in array
 
 WinningStatistics
-- [ ] e. has count of match
-- [ ] e. winning money
-- [ ] m. calculate winning money
-- [ ] e. winning ticket(s)
-- [ ] m. calculate winning ticket(s)
-- [ ] e. return rate
-- [ ] m. calculate return rate
+- [ ] e. has count of match --> resultTable in LottoMachine
+- [x] e. winning money
+- [x] m. calculate winning money
+- [ ] e. winning ticket(s) --> LottoMachine
+- [ ] m. calculate winning ticket(s) --> LottoMachine
+- [x] e. return rate
+- [x] m. calculate return rate
 
 Rank
 - [x] Rank is enum class
