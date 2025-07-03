@@ -6,21 +6,21 @@ class LottoMachine(
     val bonusNumber: Int,
 ) {
     val amountOfTicket: Int = amountOfMoney / LottoTicket.COST_OF_TICKET
-    val bundleOfLottoTicket: List<LottoTicket> = generateLottoTickets(amountOfTicket)
+    lateinit var bundleOfLottoTicket: List<LottoTicket>
     val resultTable: MutableList<Int> = MutableList(6) { 0 }
 
     // TODO: might have to update resultTable before initiating winStat
     val winStat: WinningStatistics = WinningStatistics()
 
-    fun generateLottoTickets(amountOfTicket: Int): List<LottoTicket> {
-        val tempList = mutableListOf<LottoTicket>()
-        (1..amountOfTicket).forEach {
-            it
-            val ticket = LottoTicket(RandomNumberGenerator.generateNumber())
-            tempList.add(ticket)
-        }
-        return tempList
-    }
+//    fun generateLottoTickets(amountOfTicket: Int): List<LottoTicket> {
+//        val tempList = mutableListOf<LottoTicket>()
+//        (1..amountOfTicket).forEach {
+//            it
+//            val ticket = LottoTicket(RandomNumberGenerator.generateNumber())
+//            tempList.add(ticket)
+//        }
+//        return tempList
+//    }
 
     fun writeResultTable() {
         bundleOfLottoTicket.forEach { ticket ->

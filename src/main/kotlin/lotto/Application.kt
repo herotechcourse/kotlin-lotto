@@ -2,15 +2,17 @@ package lotto
 
 fun main() {
     val amountOfMoney = InputView.getPurchaseAmount()
+    val printer = LottoPrinter(amountOfMoney)
+
+    ResultView.displayNumberOfTickets(printer.amountOfTicket)
+    ResultView.displayTickets(printer.bundleOfLottoTicket)
+
     val lastWeekWinningNumbers = InputView.getLastWeekWinningNumbers()
     val bonusNumber = InputView.getBonusNumber()
     println()
 
     val machine = LottoMachine(amountOfMoney, lastWeekWinningNumbers, bonusNumber)
-
-    ResultView.displayNumberOfTickets(machine.amountOfTicket)
-    ResultView.displayTickets(machine.bundleOfLottoTicket)
-
+    machine.bundleOfLottoTicket = printer.bundleOfLottoTicket
     machine.writeResultTable()
 
     val winStats = machine.winStat
@@ -19,6 +21,4 @@ fun main() {
 
     ResultView.displayWinningStatistics(machine.resultTable)
     ResultView.displayReturnRate(winStats.returnRate)
-
-    println("what?")
 }
