@@ -23,7 +23,7 @@ object InputView {
         }
         val finalInput = userInput.distinct()
         require(finalInput.size == 6) { "Invalid Input." }
-        return finalInput
+        return finalInput.sorted()
     }
 
     fun getBonusNumber(): Int {
