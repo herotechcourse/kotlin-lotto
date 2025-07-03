@@ -2,12 +2,12 @@ package lotto
 
 class LottoMachine() {
     private fun calculateTickets(userAmount: Int): Int {
-        val numberOfTickets = userAmount / 1000
+        val numberOfTickets = userAmount / LOTTO_PRICE
         return numberOfTickets
     }
 
     private fun generateNumbers(): List<Int> {
-        val randomNumbers = (1..45).shuffled().take(6).sorted()
+        val randomNumbers = (MIN_VAL..MAX_VAL).shuffled().take(6).sorted()
         return randomNumbers
     }
 
@@ -23,7 +23,7 @@ class LottoMachine() {
         return lottos
     }
 
-    fun compareTicketToWinningNumbers(
+    private fun compareTicketToWinningNumbers(
         lotto: Lotto,
         winningNumbers: List<String>,
     ): Int {
@@ -36,14 +36,14 @@ class LottoMachine() {
         return countMatches
     }
 
-    fun compareTicketToBonusNumber(
+    private fun compareTicketToBonusNumber(
         lotto: Lotto,
         bonusNumber: Int,
     ): Boolean {
         return bonusNumber in lotto.getNumbers()
     }
 
-    fun createMap(): MutableMap<Rank, Int> {
+    private fun createMap(): MutableMap<Rank, Int> {
         val prizeCounter = mutableMapOf<Rank, Int>()
         for (rank in Rank.values()) {
             prizeCounter[rank] = 0
@@ -60,7 +60,6 @@ class LottoMachine() {
 
         lottos.forEach { ticket ->
             var hasBonus = false
-
             val matches = compareTicketToWinningNumbers(ticket, winningNumber)
             if (matches == 5) {
                 hasBonus = compareTicketToBonusNumber(ticket, bonusNumber)
@@ -71,7 +70,7 @@ class LottoMachine() {
         return prizeCounter
     }
 
-    fun calculateTotalPrize(results: MutableMap<Rank, Int>): Int {
+    private fun calculateTotalPrize(results: MutableMap<Rank, Int>): Int {
         var totalPrize = 0
         results.forEach { (key, value) ->
             totalPrize += key.winningMoney * value
@@ -85,5 +84,11 @@ class LottoMachine() {
     ): Double {
         val totalPrize = calculateTotalPrize(results)
         return (totalPrize.toDouble() / userAmount.toDouble())
+    }
+
+    companion object {
+        const val LOTTO_PRICE = 1000
+        const val MIN_VAL = 1
+        const val MAX_VAL = 45
     }
 }

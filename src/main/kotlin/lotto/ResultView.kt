@@ -11,8 +11,8 @@ class ResultView() {
 
     fun printResult(results: MutableMap<Rank, Int>) {
         println()
-        println("Winning Statistics")
-        println("------------------")
+        println(PRESENT_WINNING)
+        println(SEPARATOR)
         println("3 Matches (5,000 KRW) - ${results.getValue(Rank.FIFTH)} tickets")
         println("4 Matches (50,000 KRW) - ${results.getValue(Rank.FOURTH)} tickets")
         println("5 Matches (1,500,000 KRW) - ${results.getValue(Rank.THIRD)} tickets")
@@ -23,5 +23,10 @@ class ResultView() {
     fun printReturnRate(rate: Double) {
         val formattedRate = String.format("%.1f", rate).replace(',', '.')
         println("Total return rate is $formattedRate")
+    }
+
+    companion object Messages {
+        const val PRESENT_WINNING = "Winning Statistics"
+        const val SEPARATOR = "------------------"
     }
 }

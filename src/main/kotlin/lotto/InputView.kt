@@ -44,7 +44,7 @@ class InputView {
         }
     }
 
-    companion object Messages {
+    companion object {
         const val ASK_AMOUNT = "Please enter the purchase amount."
         const val ASK_WINNING_NUMBERS = "Please enter last week's winning numbers."
         const val ASK_BONUS_NUMBER = "Please enter the bonus number."

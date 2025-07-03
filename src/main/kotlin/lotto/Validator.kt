@@ -5,7 +5,7 @@ class Validator {
         if (userAmount.toIntOrNull() == null) {
             throw IllegalArgumentException("Input is not a number")
         }
-        if ((userAmount.toInt() % 1000) != 0) {
+        if ((userAmount.toInt() % LOTTO_PRICE) != 0) {
             throw IllegalArgumentException("Input is not multiple of 1000")
         }
     }
@@ -16,15 +16,12 @@ class Validator {
                 throw IllegalArgumentException("Input has invalid numbers")
             }
         }
-
         if (userInput.count() != 6) {
             throw IllegalArgumentException("Input should have 6 numbers")
         }
-
         if (userInput.count() != userInput.toSet().count()) {
             throw IllegalArgumentException("Numbers should be unique")
         }
-
         userInput.forEach { item ->
             if (item.toInt() !in 1..45) {
                 throw IllegalArgumentException("The winning numbers should be between 1 and 45")
@@ -46,5 +43,9 @@ class Validator {
         if (bonusInput.toInt() !in 1..45) {
             throw IllegalArgumentException("The bonus number should be between 1 and 45")
         }
+    }
+
+    companion object {
+        const val LOTTO_PRICE = 1000
     }
 }
