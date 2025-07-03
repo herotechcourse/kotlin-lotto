@@ -9,6 +9,9 @@ class LottoMachine(
     val bundleOfLottoTicket: List<LottoTicket> = generateLottoTickets(amountOfTicket)
     val resultTable: MutableList<Int> = MutableList(6) { 0 }
 
+    // TODO: might have to update resultTable before initiating winStat
+    val winStat: WinningStatistics = WinningStatistics()
+
     fun generateLottoTickets(amountOfTicket: Int): List<LottoTicket> {
         val tempList = mutableListOf<LottoTicket>()
         (1..amountOfTicket).forEach {
