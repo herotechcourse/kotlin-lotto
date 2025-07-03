@@ -1,11 +1,10 @@
 package lotto
 
 import io.kotest.matchers.collections.shouldNotContainDuplicates
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.*
 
 class LottoTicketTest {
-
     @Test
     fun `The cost of a ticket is 1000 KRW`() {
         val ticket = LottoTicket()

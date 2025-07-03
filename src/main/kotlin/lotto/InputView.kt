@@ -1,8 +1,7 @@
 package lotto
 
 object InputView {
-
-    //TODO: Have to deal with the exception
+    // TODO: Have to deal with the exception
     // How about dealing it with retryable command?
     fun getPurchaseAmount(): Int {
         println("Please enter the purchase amount.")
@@ -12,14 +11,12 @@ object InputView {
         return userInput
     }
 
-    //TODO: Exceeding 10 lines, have to refactor later.
+    // TODO: Exceeding 10 lines, have to refactor later.
     fun getLastWeekWinningNumbers(): List<Int> {
         println("Please enter last week’s winning numbers.")
         val input = readln() // -> "1,2,3,4,5,6"
         val usedInput = input.split(",") // -> ["1", " 2", " 3", " 4", " 5", " 6"]
-        val userInput = usedInput.map {
-            it.toIntOrNull() ?: throw IllegalArgumentException("This is not a number.")
-        }
+        val userInput = usedInput.map { it.toIntOrNull() ?: throw IllegalArgumentException("This is not a number.") }
         userInput.forEach {
             require(it > 0)
             require(it < 46)
@@ -37,5 +34,4 @@ object InputView {
         require(userInput < 46)
         return userInput
     }
-
 }

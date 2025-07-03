@@ -10,11 +10,11 @@ class LottoMachine(
 
     fun generateLottoTickets(amountOfTicket: Int): List<LottoTicket> {
         val tempList = mutableListOf<LottoTicket>()
-        (1..amountOfTicket).forEach { it
+        (1..amountOfTicket).forEach {
+            it
             val ticket = LottoTicket(RandomNumberGenerator.generateNumber())
             tempList.add(ticket)
         }
         return tempList
     }
-
 }
