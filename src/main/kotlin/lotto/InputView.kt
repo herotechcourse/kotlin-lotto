@@ -6,7 +6,7 @@ class InputView {
     fun takePurchaseInput(): Int {
         while (true) {
             try {
-                println("Please enter the purchase amount.")
+                println(ASK_AMOUNT)
                 val input = readln()
                 validator.validateAmount(input)
                 return input.toInt()
@@ -20,7 +20,7 @@ class InputView {
         while (true) {
             try {
                 println()
-                println("Please enter last week's winning numbers.")
+                println(ASK_WINNING_NUMBERS)
                 val input = readln().split(",")
                 input.forEach { item -> item.trim() }
                 validator.validateWinningNumbers(input)
@@ -34,7 +34,7 @@ class InputView {
     fun takeBonusNumber(winningNumbers: List<String>): Int {
         while (true) {
             try {
-                println("Please enter the bonus number.")
+                println(ASK_BONUS_NUMBER)
                 val bonusInput = readln()
                 validator.validateBonusNumber(bonusInput, winningNumbers)
                 return bonusInput.toInt()
@@ -42,5 +42,11 @@ class InputView {
                 println(e.message)
             }
         }
+    }
+
+    companion object Messages {
+        const val ASK_AMOUNT = "Please enter the purchase amount."
+        const val ASK_WINNING_NUMBERS = "Please enter last week's winning numbers."
+        const val ASK_BONUS_NUMBER = "Please enter the bonus number."
     }
 }
