@@ -1,7 +1,7 @@
 package lotto
 
-class LottoMachine(val userAmount: Int) {
-    private fun calculateTickets(): Int {
+class LottoMachine() {
+    private fun calculateTickets(userAmount: Int): Int {
         val numberOfTickets = userAmount / 1000
         return numberOfTickets
     }
@@ -11,9 +11,9 @@ class LottoMachine(val userAmount: Int) {
         return randomNumbers
     }
 
-    fun createTickets(): List<Lotto> {
+    fun createTickets(userAmount: Int): List<Lotto> {
         val lottos = mutableListOf<Lotto>()
-        val amountOfTickets = calculateTickets()
+        val amountOfTickets = calculateTickets(userAmount)
         var count = 0
         while (count < amountOfTickets) {
             val lotto = Lotto(generateNumbers())

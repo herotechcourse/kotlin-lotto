@@ -3,9 +3,9 @@ package lotto
 fun main() {
     val inputView = InputView()
     val userAmount = inputView.takePurchaseInput()
-    val lottoMachine = LottoMachine(userAmount)
+    val lottoMachine = LottoMachine()
 
-    val tickets = lottoMachine.createTickets() // move userAmount to here
+    val tickets = lottoMachine.createTickets(userAmount) // move userAmount to here
     val resultView = ResultView()
 
     resultView.printLottos(tickets)
