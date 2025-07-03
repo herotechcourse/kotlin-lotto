@@ -4,9 +4,8 @@ import org.junit.jupiter.api.Test
 import kotlin.test.DefaultAsserter.assertEquals
 
 class RankTest {
-
     @Test
-    fun `should assign the corresponding rank when it has bonus`(){
+    fun `should assign the corresponding rank when it has bonus`() {
         val matchingNumber = 5
         val hasBonus = true
 
@@ -14,7 +13,7 @@ class RankTest {
     }
 
     @Test
-    fun `should assign the corresponding rank`(){
+    fun `should assign the corresponding rank`() {
         val matchingNumber = 5
         val hasBonus = false
 
@@ -22,7 +21,7 @@ class RankTest {
     }
 
     @Test
-    fun `should assign MISS when is not matching less than 3 numbers`(){
+    fun `should assign MISS when is not matching less than 3 numbers`() {
         val matchingNumber = 2
         val hasBonus = false
 

@@ -1,49 +1,50 @@
 package lotto
 
 class Validator {
-
-    fun validateAmount(userAmount: String){
-
+    fun validateAmount(userAmount: String) {
         if (userAmount.toIntOrNull() == null) {
             throw IllegalArgumentException("Input is not a number")
         }
-        if ((userAmount.toInt() % 1000) != 0 ) {
+        if ((userAmount.toInt() % 1000) != 0) {
             throw IllegalArgumentException("Input is not multiple of 1000")
         }
     }
 
     fun validateWinningNumbers(userInput: List<String>) {
         userInput.forEach { item ->
-            if(item.toIntOrNull() == null) {
+            if (item.toIntOrNull() == null) {
                 throw IllegalArgumentException("Input has invalid numbers")
             }
         }
 
-        if(userInput.count() != 6) {
+        if (userInput.count() != 6) {
             throw IllegalArgumentException("Input should have 6 numbers")
         }
 
-        if(userInput.count() != userInput.toSet().count()) {
-            throw IllegalArgumentException( "Numbers should be unique")
+        if (userInput.count() != userInput.toSet().count()) {
+            throw IllegalArgumentException("Numbers should be unique")
         }
 
-       userInput.forEach { item -> if(item.toInt() !in 1..45) {
-           throw IllegalArgumentException("The winning numbers should be between 1 and 45")
-       } }
-
+        userInput.forEach { item ->
+            if (item.toInt() !in 1..45) {
+                throw IllegalArgumentException("The winning numbers should be between 1 and 45")
+            }
+        }
     }
 
-    fun validateBonusNumber(bonusInput: String, userInput: List<String>){
-        if(bonusInput.toIntOrNull() == null) {
+    fun validateBonusNumber(
+        bonusInput: String,
+        userInput: List<String>,
+    ) {
+        if (bonusInput.toIntOrNull() == null) {
             throw IllegalArgumentException("Bonus number should be entered")
         }
 
-        if(userInput.contains(bonusInput)) {
+        if (userInput.contains(bonusInput)) {
             throw IllegalArgumentException("Bonus number should be different than winning numbers")
         }
-        if(bonusInput.toInt() !in 1..45) {
+        if (bonusInput.toInt() !in 1..45) {
             throw IllegalArgumentException("The bonus number should be between 1 and 45")
         }
     }
-
 }
