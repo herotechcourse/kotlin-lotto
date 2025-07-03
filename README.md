@@ -24,7 +24,7 @@
 - [x] Ask user for bonus number
 
 - Calculate winners and return rate
-- [ ] Compare winning numbers against user tickets
-- [ ] (if user has 5 matches) Compare bonus number against user ticket
-- [ ] Assign Rank and calculate prizes
-- [ ] Calculate return rate
+- [x] Compare winning numbers against user tickets
+- [x] (if user has 5 matches) Compare bonus number against user ticket
+- [x] Assign Rank and calculate prizes
+- [x] Calculate return rate
