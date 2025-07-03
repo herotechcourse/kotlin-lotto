@@ -43,10 +43,10 @@ WinningStatistics
 - [ ] m. calculate return rate
 
 Rank
-- [ ] Rank is enum class
-- [ ] e. count of match
+- [x] Rank is enum class
+- [x] e. count of match
 - [ ] count of match is magic number
-- [ ] e. winning money
+- [x] e. winning money
 - [ ] winning money is magic number
 
 InputView
