@@ -1,3 +1,0 @@
-package lotto
-
-class ApplicationTest
