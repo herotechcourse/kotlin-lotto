@@ -10,7 +10,6 @@ class WinningStatisticsTest {
         val winStat = WinningStatistics()
         winStat.calculateWinningMoney(tempTable)
         winStat.calculateReturnRate(14000)
-        println(winStat.returnRate)
         assertEquals(5000.0 / 14000.0, winStat.returnRate)
     }
 }
