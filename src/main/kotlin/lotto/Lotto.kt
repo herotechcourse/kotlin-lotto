@@ -15,7 +15,7 @@ class Lotto(var numbers: List<Int>) {
 
     companion object {
         const val MIN = 0
-        const val MAX = 50
+        const val MAX = 45
         const val LOTTO_SIZE = 6
     }
 }
