@@ -1,20 +1,20 @@
 # kotlin-lotto
 ## Features
 ### Single Lotto Ticket
-- [x] List of size 6
-- [x] Numbers should be between 0 and 50
+- [x] List of size SIZE
+- [x] Numbers should be between MIN and MAX
 - [x] List has unique elements
 
 ### Lotto Machine 
 - [x] Purchase Amount 
   - [x] Change is calculated for the User
-  - [x] Minimum 1_000, (maximum 20_000 KRW)
+  - [x] Minimum MIN, maximum MAX KRW
 - [x] Generates List of Lotto tickets
   - [x] Each ticket is a random set
-  - [x] Number of tickets equals purchaseAmount / 1000
+  - [x] Number of tickets equals purchaseAmount / TICKET_PRICE
 
 ### Winning Numbers
-- [x] Bonus number in range 0 and 50
+- [x] Bonus number in range MIN and MAX
 - [x] Bonus number different from winning numbers
 - [x] Stores winning numbers as a Lotto ticket
 
@@ -27,7 +27,7 @@
 ### Lotto Handler - Wrapper Class
 - [x] Wrap the input/output handling and lotto game logic
 - [x] Reprompt on wrong input
-  - [x] Max 5 reprompts per input
+  - [x] Max MAX_RETRY reprompts per input
 
 ### Input View and Output View
 - [x] Create Input View
