@@ -18,17 +18,24 @@ object OutputView {
 
     fun displayWinnings(results: Map<Rank, Int>) {
         println("Winning Statistics\n------------------")
-        Rank.entries.reversed().forEach {
-            if (it == Rank.MISS) {
-                return@forEach
+        Rank.entries
+            .filter { it != Rank.MISS }
+            .reversed()
+            .forEach {
+                val count = results.getOrDefault(it, 0)
+                if (it == Rank.SECOND) {
+                    displaySecondRank(it, count)
+                } else {
+                    println(
+                        "${it.countOfMatch} Matches (${
+                            String.format(
+                                "%,d",
+                                it.winningMoney
+                            )
+                        } KRW) - $count tickets"
+                    )
+                }
             }
-            val count = results.getOrDefault(it, 0)
-            if (it == Rank.SECOND) {
-                displaySecondRank(it, count)
-            } else {
-                println("${it.countOfMatch} Matches (${String.format("%,d", it.winningMoney)} KRW) - $count tickets")
-            }
-        }
         println()
     }
 
