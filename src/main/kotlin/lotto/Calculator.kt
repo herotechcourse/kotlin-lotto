@@ -1,9 +1,10 @@
 package lotto
 
+// here ticket is a constructor parameter, but not a property
 class Calculator(
     tickets: MutableList<Lotto>,
-    val winningNumbers: WinningNumbers,
-    var results: MutableMap<Rank, Int> = emptyMap<Rank, Int>().toMutableMap(),
+    private val winningNumbers: WinningNumbers,
+    private var _results: MutableMap<Rank, Int> = emptyMap<Rank, Int>().toMutableMap(),
 ) {
     init {
         tickets.forEach {
@@ -13,9 +14,11 @@ class Calculator(
                     count,
                     bonusNumberPresent(it, winningNumbers.bonusNumber),
                 )
-            results[rank] = results.getOrDefault(rank, 0) + 1
+            _results[rank] = _results.getOrDefault(rank, 0) + 1
         }
     }
+    val results: Map<Rank, Int>
+        get() = _results
 
     fun calculateReturnRate(purchaseAmount: Int): Float {
         return (calculateTotalEarnings() / purchaseAmount.toFloat())
@@ -23,7 +26,7 @@ class Calculator(
 
     fun calculateTotalEarnings(): Float {
         var total = 0
-        results.forEach { total += it.key.winningMoney * it.value }
+        _results.forEach { total += it.key.winningMoney * it.value }
         return total.toFloat()
     }
 

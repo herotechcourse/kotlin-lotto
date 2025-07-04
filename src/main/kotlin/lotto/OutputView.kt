@@ -16,7 +16,7 @@ object OutputView {
         println("Total Earnings $totalAmount KRW.")
     }
 
-    fun displayWinnings(results: MutableMap<Rank, Int>) {
+    fun displayWinnings(results: Map<Rank, Int>) {
         println("Winning Statistics\n------------------")
         Rank.entries.reversed().forEach {
             if (it == Rank.MISS) {
