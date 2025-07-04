@@ -13,7 +13,7 @@ object OutputView {
     }
 
     fun displayTotalWinningAmount(totalAmount: Float) {
-        println("Total Earnings $totalAmount KRW.")
+        println("Total Earnings %,.2f KRW.".format(totalAmount))
     }
 
     fun displayWinnings(results: Map<Rank, Int>) {

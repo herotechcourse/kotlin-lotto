@@ -25,9 +25,7 @@ class Calculator(
     }
 
     fun calculateTotalEarnings(): Float {
-        var total = 0
-        _results.forEach { total += it.key.winningMoney * it.value }
-        return total.toFloat()
+        return _results.entries.sumOf{ it.key.winningMoney * it.value }.toFloat()
     }
 
     private fun findMatches(
