@@ -12,5 +12,7 @@ class LottoTicket(val numbers: List<Int> = listOf(1, 2, 3, 4, 5, 6)) {
     companion object {
         const val COST_OF_TICKET = 1000
         const val SIZE_OF_NUMBERS = 6
+        const val MIN_LOTTO_NUMBER = 1
+        const val MAX_LOTTO_NUMBER = 45
     }
 }
