@@ -1,5 +1,7 @@
 package lotto.domain
 
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
@@ -21,6 +23,13 @@ class LottoNumberTest {
         assertDoesNotThrow {
             val number = LottoNumber.from(value)
         }
+    }
+
+    @Test
+    fun `should return same instance for same input`() {
+        val number = LottoNumber.from(MIN_RANGE_NUMBER)
+        assertThat(LottoNumber.from(MIN_RANGE_NUMBER)).isEqualTo(number)
+        assertThat(LottoNumber.from(MIN_RANGE_NUMBER)).isSameAs(number)
     }
 
     companion object {
