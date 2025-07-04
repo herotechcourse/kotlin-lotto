@@ -1,7 +1,8 @@
 package lotto
 
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import kotlin.test.assertEquals
+
 
 class CalculatorTest {
     @Test
