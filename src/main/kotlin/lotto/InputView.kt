@@ -7,7 +7,7 @@ class InputView {
         while (true) {
             try {
                 println(ASK_AMOUNT)
-                val input = readln()
+                val input = readln().trim()
                 validator.validateAmount(input)
                 return input.toInt()
             } catch (e: IllegalArgumentException) {
