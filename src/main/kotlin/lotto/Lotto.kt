@@ -1,6 +1,6 @@
 package lotto
 
-class Lotto(var numbers: List<Int>) {
+class Lotto(val numbers: List<Int>) {
     init {
         require(numbers.size == LOTTO_SIZE) {
             "[ERROR] Lotto number size has to be $LOTTO_SIZE."
