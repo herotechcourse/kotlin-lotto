@@ -82,17 +82,17 @@
 #### Utils
 - [ ] improve naming
 - [ ] merge into domain
-  - [ ] validate range inside domain logic
+  - [ ] move to domain logic
 
 #### Refactor
 - [ ] fix and clarify condition: `(size == 0 || size == 1)`
 
-### LottoNumber
+### LottoNumber !! still need to understand it
 - [x] wrap `Int` to `LottoNumber`
 - [ ] validate itself
   - [x] require: in range (1 ~ 45)
   - [x] require: no duplicated numbers
-- [ ] override `equals`, `hashCode` !! still need to understand it
+- [ ] override `equals`, `hashCode`
 - [ ] implement `from` function
 - [x] override `toString`
 
@@ -102,10 +102,10 @@
 - [x] override `toString`
 
 ### IssuedTickets
-- [ ] wrap `List<LottoTicket>` to `IssuedTickets`
+- [x] wrap `List<LottoTicket>` to `IssuedTickets`
 
 ### TicketIssuer
-- [ ] implement a flow to issue ticket 
+- [x] implement a flow to issue ticket 
   - get PendingTickets(List<Set<Int>>) → create LottoTickets → return IssuedTickets
 
 ### LottoTicketFactory
