@@ -1,5 +1,6 @@
 package lotto.domain
 
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
@@ -42,4 +43,17 @@ class LottoTicketTest {
         }
     }
 
+    @Test
+    fun `should format LottoTicket numbers as string`() {
+        val setOfLottoNumber = hashSetOf(
+            LottoNumber.from(1),
+            LottoNumber.from(2),
+            LottoNumber.from(3),
+            LottoNumber.from(4),
+            LottoNumber.from(5),
+            LottoNumber.from(6)
+        )
+        assertThat(
+            LottoTicket(setOfLottoNumber).toString()).isEqualTo("1, 2, 3, 4, 5, 6")
+    }
 }
