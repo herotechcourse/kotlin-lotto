@@ -4,10 +4,25 @@ import lotto.domain.Lotto
 import lotto.domain.Rank
 
 object OutputView {
+
+    object Prompt {
+        fun amount() {
+            println(PURCHASE_AMOUNT_PROMPT)
+        }
+
+        private const val PURCHASE_AMOUNT_PROMPT = "Please enter the purchase amount."
+        private const val WINNING_NUMBERS_PROMPT = "Please enter last week’s winning numbers."
+        private const val BONUS_NUMBER_PROMPT = "Please enter the bonus number."
+        private const val TICKETS_NUMBERS_PROMPT = "You have purchased"
+        private const val TITLE_OF_RESULT_PROMPT = "Winning Statistics\n------------------"
+        private const val TOTAL_RETURN_PROMPT = "Total return rate is"
+    }
+
+    // TODO: clean up print methods
     fun printTickets(tickets: List<Lotto>) {
         val numberOfTickets = tickets.size
         println(
-            "${Constants.TICKETS_NUMBERS_PROMPT} " +
+            "${Prompt.TICKETS_NUMBERS_PROMPT} " +
                 "$numberOfTickets ${pluralizeTicket(numberOfTickets)}.",
         )
         for (ticket in tickets) {
@@ -37,11 +52,5 @@ object OutputView {
 
     private fun pluralizeTicket(size: Int): String {
         return if (size == 1) "ticket" else "tickets"
-    }
-
-    object Constants {
-        const val TICKETS_NUMBERS_PROMPT = "You have purchased"
-        const val TITLE_OF_RESULT_PROMPT = "Winning Statistics\n------------------"
-        const val TOTAL_RETURN_PROMPT = "Total return rate is"
     }
 }
