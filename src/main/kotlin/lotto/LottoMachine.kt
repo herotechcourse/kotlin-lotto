@@ -45,7 +45,7 @@ class LottoMachine() {
 
     private fun createMap(): MutableMap<Rank, Int> {
         val prizeCounter = mutableMapOf<Rank, Int>()
-        for (rank in Rank.values()) {
+        for (rank in Rank.entries) {
             prizeCounter[rank] = 0
         }
         return prizeCounter
