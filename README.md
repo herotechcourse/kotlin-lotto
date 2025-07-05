@@ -94,18 +94,22 @@
   - [x] require: no duplicated numbers
 - [ ] override `equals`, `hashCode` !! still need to understand it
 - [ ] implement `from` function
-- [ ] implement `toString`
+- [x] override `toString`
 
 ### LottoTicket
 - [ ] wrap `HashSet<LottoNumber>` to `LottoTicket`
 - [x] require: sufficient size, 6
+- [x] override `toString`
 
 ### IssuedTickets
 - [ ] wrap `List<LottoTicket>` to `IssuedTickets`
 
-### TicketMachine
+### TicketIssuer
+- [ ] implement a flow to issue ticket 
+  - get PendingTickets(List<Set<Int>>) → create LottoTickets → return IssuedTickets
+
+### LottoTicketFactory
 - [x] implement feature to issue a ticket
-- [ ] implement feature to issue tickets
 
 ### Test
 - [ ] add **E2E test**
