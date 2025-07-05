@@ -4,7 +4,7 @@ class Lotto(val lottoNumbers: List<Int>) {
     init {
         require(lottoNumbers.count() == 6)
         require(isInRange(lottoNumbers))
-        require(isDuplicated(lottoNumbers))
+        require(isNotDuplicated(lottoNumbers))
     }
 
     fun getNumbers(): List<Int> {
@@ -21,7 +21,7 @@ class Lotto(val lottoNumbers: List<Int>) {
         return isInRange
     }
 
-    private fun isDuplicated(lottoNumbers: List<Int>): Boolean {
+    private fun isNotDuplicated(lottoNumbers: List<Int>): Boolean {
         return lottoNumbers.count() == lottoNumbers.toSet().count()
     }
 }
