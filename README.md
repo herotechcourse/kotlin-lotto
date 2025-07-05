@@ -1,6 +1,6 @@
 # kotlin-lotto
 
-## Features
+## [step 1] Features
 
 ### Lotto Class
 
@@ -61,3 +61,49 @@
 ### TODOS
 
 - [ ] add **E2E test**
+
+---
+
+## [step 2] Features
+
+### Feedback
+
+#### Application
+- [ ] separate `println()` into `OutputView`
+- [ ] think/search about what `application` means, and refactor if needed
+
+### Output View
+- [ ] collect `const` message and print logic
+
+### Input View 
+- [ ] collect `const` message and print logic 
+
+#### Service
+- [ ] separate service logic clearly
+- [ ] think about why *those functions* should belong to the service layer, and implement a better structure if needed
+
+#### Utils
+- [ ] improve naming
+- [ ] merge into domain
+  - [ ] validate range inside domain logic
+
+#### Refactor
+- [ ] fix and clarify condition: `(size == 0 || size == 1)`
+
+### LottoNumber
+- [ ] wrap `Int` in `LottoNumber`
+- [ ] validate itself
+  - [ ] require: in range (1 ~ 45)
+  - [ ] require: no duplicated numbers
+  - [ ] override `equals`, `hashCode`
+  - [ ] implement `from` function
+
+### LottoTicket
+- [ ] wrap `HashSet<LottoNumber>` in `LottoTicket`
+
+### TicketMachine
+- [ ] issue 2 different types:
+  - [ ] manual
+  - [ ] random
+- [ ] implement feature to issue a ticket
+- [ ] implement feature to issue tickets
