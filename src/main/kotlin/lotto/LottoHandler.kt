@@ -24,7 +24,7 @@ object LottoHandler {
                 val purchaseAmount = InputView.readPurchaseAmount()
                 val machine = LottoMachine(purchaseAmount)
                 OutputView.displayTickets(machine.tickets)
-                OutputView.displayChange(machine.showChange())
+                OutputView.displayChange(machine.change)
                 return machine
             } catch (err: IllegalArgumentException) {
                 println(err.message)
