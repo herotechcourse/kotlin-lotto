@@ -8,4 +8,8 @@ data class LottoTicket(private val lottoNumbers: HashSet<LottoNumber>) {
     companion object {
         private const val SUFFICIENT_SIZE = 6
     }
+
+    override fun toString(): String {
+        return lottoNumbers.joinToString(", ")
+    }
 }
