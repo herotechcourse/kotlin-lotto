@@ -1,13 +1,12 @@
 package lotto.services
 
+import lotto.domain.LottoTicket
 import lotto.dto.IssuedTickets
-import lotto.dto.PendingTickets
-import lotto.factory.LottoTicketFactory
 
 object TicketIssuer {
-    fun with(pendingTickets: PendingTickets) : IssuedTickets {
-        val lottoTickets = pendingTickets.requests.map {
-            LottoTicketFactory.issueTicket(it.numbers)
+    fun with(pendingTickets: List<Set<Int>>): IssuedTickets {
+        val lottoTickets = pendingTickets.map {
+            LottoTicket.from(it)
         }
         return IssuedTickets(lottoTickets)
     }
