@@ -3,13 +3,13 @@ package lotto
 class Lotto(var numbers: List<Int>) {
     init {
         require(numbers.size == LOTTO_SIZE) {
-            throw IllegalArgumentException()
+            "[ERROR] Lotto number size has to be $LOTTO_SIZE."
         }
         require(numbers.all { it in MIN..MAX }) {
-            throw IllegalArgumentException()
+            "[ERROR] Range has to be $MIN..$MAX."
         }
         require(numbers.distinct().size == 6) {
-            throw IllegalArgumentException()
+            "[ERROR] Duplicates found."
         }
     }
 

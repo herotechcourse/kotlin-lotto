@@ -3,10 +3,10 @@ package lotto
 data class WinningNumbers(val winningNumbers: Lotto, val bonusNumber: Int) {
     init {
         require(bonusNumber in Lotto.MIN..Lotto.MAX) {
-            throw IllegalArgumentException()
+            "[ERROR] Bonus number is out of range."
         }
         require(!winningNumbers.numbers.contains(bonusNumber)) {
-            throw IllegalArgumentException()
+            "[ERROR] Winning numbers already contain $bonusNumber."
         }
     }
 }

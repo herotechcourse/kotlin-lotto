@@ -7,7 +7,7 @@ class LottoMachine(val purchaseAmount: Int, val tickets: MutableList<Lotto> = em
 
     init {
         require(purchaseAmount in MIN..MAX) {
-            throw IllegalArgumentException()
+            "[ERROR] Max purchase amount allowed is $MIN-$MAX."
         }
         change = purchaseAmount % TICKET_PRICE
         ticketCount = (purchaseAmount - change) / TICKET_PRICE
