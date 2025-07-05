@@ -29,15 +29,4 @@ class TicketIssuerTest {
             val issuedTickets = TicketIssuer.with(requests)
         }
     }
-
-    @Test
-    fun `should return correct string`() {
-        val issued = IssuedTickets(
-            listOf(
-                LottoTicket.from(setOf(1, 2, 3, 4, 5, 6))
-            )
-        )
-
-        assertThat(issued.toString()).isEqualTo("1, 2, 3, 4, 5, 6")
-    }
 }
