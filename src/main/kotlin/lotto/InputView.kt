@@ -1,31 +1,28 @@
 package lotto
 
+private const val INPUT_ERROR_MESSAGE = "[ERROR] Wrong input"
+
 object InputView {
     fun readPurchaseAmount(): Int {
-        println(PURCHASE_MESSAGE)
-        val amount = readln().toIntOrNull() ?: throw IllegalArgumentException(ERROR_MESSAGE)
+        println("Please enter the purchase amount.")
+        val amount = readln().toIntOrNull() ?: throw IllegalArgumentException(INPUT_ERROR_MESSAGE)
         return amount
     }
 
     fun readWinningNumbers(): List<Int> {
-        println(WINNING_NUMBERS_MESSAGE)
+        println("Please enter last week’s winning numbers.")
         val numbers =
             readln().split(",")
                 .map {
-                    it.trim().toIntOrNull() ?: throw IllegalArgumentException(ERROR_MESSAGE)
+                    it.trim().toIntOrNull() ?: throw IllegalArgumentException(INPUT_ERROR_MESSAGE)
                 }
         return numbers
     }
 
     fun readBonusNumber(): Int {
-        println(BONUS_NUMBER_MESSAGE)
-        val number = readln().toIntOrNull() ?: throw IllegalArgumentException(ERROR_MESSAGE)
+        println("Please enter the bonus number.")
+        val number = readln().toIntOrNull() ?: throw IllegalArgumentException(INPUT_ERROR_MESSAGE)
         println()
         return number
     }
-
-    private const val PURCHASE_MESSAGE = "Please enter the purchase amount."
-    private const val WINNING_NUMBERS_MESSAGE = "Please enter last week’s winning numbers."
-    private const val BONUS_NUMBER_MESSAGE = "Please enter the bonus number."
-    private const val ERROR_MESSAGE = "[ERROR] Wrong input"
 }
