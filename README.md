@@ -88,22 +88,29 @@
 - [ ] fix and clarify condition: `(size == 0 || size == 1)`
 
 ### LottoNumber
-- [x] wrap `Int` in `LottoNumber`
+- [x] wrap `Int` to `LottoNumber`
 - [ ] validate itself
   - [x] require: in range (1 ~ 45)
   - [x] require: no duplicated numbers
-  - [ ] override `equals`, `hashCode` !! still need to understand it
-  - [ ] implement `from` function
+- [ ] override `equals`, `hashCode` !! still need to understand it
+- [ ] implement `from` function
+- [ ] implement `toString`
 
 ### LottoTicket
-- [ ] wrap `HashSet<LottoNumber>` in `LottoTicket`
+- [ ] wrap `HashSet<LottoNumber>` to `LottoTicket`
+- [x] require: sufficient size, 6
+
+### IssuedTickets
+- [ ] wrap `List<LottoTicket>` to `IssuedTickets`
 
 ### TicketMachine
-- [ ] issue 2 different types:
-  - [ ] manual
-  - [ ] random
-- [ ] implement feature to issue a ticket
+- [x] implement feature to issue a ticket
 - [ ] implement feature to issue tickets
 
 ### Test
 - [ ] add **E2E test**
+
+### todo
+- [ ] issue 2 different types:
+  - [ ] manual
+  - [ ] random
