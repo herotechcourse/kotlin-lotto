@@ -9,7 +9,11 @@ class RankTest {
         val matchingNumber = 5
         val hasBonus = true
 
-        assertEquals("Should match the right rank", Rank.valueOf(matchingNumber, hasBonus).toString(), "SECOND")
+        assertEquals(
+            actual = "SECOND",
+            expected = Rank.valueOf(countOfMatch = matchingNumber, matchBonus = hasBonus).toString(),
+            message = "Should match the right rank",
+        )
     }
 
     @Test
@@ -17,7 +21,11 @@ class RankTest {
         val matchingNumber = 5
         val hasBonus = false
 
-        assertEquals("Should match the right rank", Rank.valueOf(matchingNumber, hasBonus).toString(), "THIRD")
+        assertEquals(
+            actual = "THIRD",
+            expected = Rank.valueOf(countOfMatch = matchingNumber, matchBonus = hasBonus).toString(),
+            message = "Should match the right rank",
+        )
     }
 
     @Test
@@ -25,6 +33,10 @@ class RankTest {
         val matchingNumber = 2
         val hasBonus = false
 
-        assertEquals("Should match the right rank", Rank.valueOf(matchingNumber, hasBonus).toString(), "MISS")
+        assertEquals(
+            actual = "MISS",
+            expected = Rank.valueOf(countOfMatch = matchingNumber, matchBonus = hasBonus).toString(),
+            message = "Should match the right rank",
+        )
     }
 }
