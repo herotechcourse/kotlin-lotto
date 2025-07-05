@@ -13,6 +13,10 @@ class Lotto(val numbers: List<Int>) {
         }
     }
 
+    fun hasBonusNumber(bonusNumber: Int): Boolean {
+        return numbers.contains(bonusNumber)
+    }
+
     companion object {
         const val MIN = 0
         const val MAX = 45

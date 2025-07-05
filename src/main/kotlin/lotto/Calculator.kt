@@ -18,7 +18,7 @@ class Calculator(
             val rank =
                 Rank.valueOf(
                     count,
-                    bonusNumberPresent(it, winningNumbers.bonusNumber),
+                    it.hasBonusNumber(winningNumbers.bonusNumber),
                 )
             _results[rank] = _results.getOrDefault(rank, 0) + 1
         }
@@ -39,12 +39,5 @@ class Calculator(
         var count = 0
         ticket.numbers.forEach { count += if (winningTicket.numbers.contains(it)) 1 else 0 }
         return count
-    }
-
-    private fun bonusNumberPresent(
-        ticket: Lotto,
-        bonusNumber: Int,
-    ): Boolean {
-        return ticket.numbers.contains(bonusNumber)
     }
 }
