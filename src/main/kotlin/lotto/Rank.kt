@@ -14,9 +14,7 @@ enum class Rank(val countOfMatch: Int, val winningMoney: Int, val hasBonus: Bool
             countOfMatch: Int,
             matchBonus: Boolean,
         ): Rank {
-            return values().find { it ->
-                (it.countOfMatch == countOfMatch && it.hasBonus == matchBonus)
-            } ?: MISS
+            return entries.find { it.countOfMatch == countOfMatch && it.hasBonus == matchBonus } ?: MISS
         }
     }
 }
