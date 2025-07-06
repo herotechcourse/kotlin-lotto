@@ -20,5 +20,5 @@ fun main() {
     game.play()
 
     ResultView.viewWinning(game.results)
-    ResultView.viewRate(game.winningAmount, purchaseAmount.amount)
+    ResultView.viewRate(game.winningAmount, purchaseAmount.value)
 }
