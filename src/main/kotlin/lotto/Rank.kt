@@ -17,12 +17,11 @@ enum class Rank(
             matchCount: Int,
             matchBonus: Boolean,
         ): Rank {
-            return when {
-                matchCount == FIRST.matchCount -> FIRST
-                matchCount == SECOND.matchCount && (SECOND.matchBonus == matchBonus) -> SECOND
-                matchCount == THIRD.matchCount -> THIRD
-                matchCount == FOURTH.matchCount -> FOURTH
-                matchCount == FIFTH.matchCount -> FIFTH
+            return when (matchCount) {
+                6 -> FIRST
+                5 -> if (matchBonus) SECOND else THIRD
+                4 -> FOURTH
+                3 -> FIFTH
                 else -> NONE
             }
         }
