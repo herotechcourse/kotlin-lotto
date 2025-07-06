@@ -22,6 +22,4 @@ open class Lotto(val numbers: List<Int>) {
     }
 
     fun containsBonusNum(num: Int) = num in numbers
-
-    open fun getListOfNumbers(): List<Int> = numbers
 }
