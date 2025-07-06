@@ -7,6 +7,9 @@ class LottoTicket(val numbers: List<Int> = listOf(1, 2, 3, 4, 5, 6)) {
     init {
         require(cost == COST_OF_TICKET) { "Cost of Ticket should be $COST_OF_TICKET" }
         require(numbers.size == SIZE_OF_NUMBERS) { "Size of numbers should be $SIZE_OF_NUMBERS" }
+        require(
+            numbers.all { it >= MIN_LOTTO_NUMBER && it <= MAX_LOTTO_NUMBER },
+        ) { "All numbers should be in the range [$MIN_LOTTO_NUMBER, $MAX_LOTTO_NUMBER]" }
     }
 
     companion object {
