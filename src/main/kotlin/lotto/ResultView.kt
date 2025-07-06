@@ -25,7 +25,7 @@ object ResultView {
     // TODO: make return rate output properly with 2 decimals
     fun displayReturnRate(returnRate: Double) {
         val processingResult = returnRate.toString()
-        val result = processingResult.substring(0, processingResult.indexOf(".") + 2)
+        val result = processingResult.substring(0, processingResult.indexOf(".") + 3)
         println("Total return rate is ${String.format("%.2f", result.toDouble())} (A rate below 1 means a loss)")
     }
 }
