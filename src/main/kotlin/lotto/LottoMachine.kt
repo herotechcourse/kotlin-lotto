@@ -6,7 +6,7 @@ class LottoMachine(
     val bonusNumber: Int,
 ) {
     val amountOfTicket: Int = amountOfMoney / LottoTicket.COST_OF_TICKET
-    lateinit var bundleOfLottoTicket: List<LottoTicket>
+    var bundleOfLottoTicket: List<LottoTicket> = emptyList()
     val resultTable: MutableList<Int> = MutableList(6) { 0 }
 
     // TODO: might have to update resultTable before initiating winStat
