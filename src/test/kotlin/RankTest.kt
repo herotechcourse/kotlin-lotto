@@ -1,7 +1,7 @@
 package lotto
 
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import kotlin.test.DefaultAsserter.assertEquals
 
 class RankTest {
     @Test
@@ -10,9 +10,9 @@ class RankTest {
         val hasBonus = true
 
         assertEquals(
-            actual = "SECOND",
-            expected = Rank.valueOf(countOfMatch = matchingNumber, matchBonus = hasBonus).toString(),
-            message = "Should match the right rank",
+            "SECOND",
+            Rank.valueOf(countOfMatch = matchingNumber, matchBonus = hasBonus).toString(),
+            "Should match the right rank",
         )
     }
 
@@ -22,9 +22,9 @@ class RankTest {
         val hasBonus = false
 
         assertEquals(
-            actual = "THIRD",
-            expected = Rank.valueOf(countOfMatch = matchingNumber, matchBonus = hasBonus).toString(),
-            message = "Should match the right rank",
+            "THIRD",
+            Rank.valueOf(countOfMatch = matchingNumber, matchBonus = hasBonus).toString(),
+            "Should match the right rank",
         )
     }
 
@@ -34,9 +34,9 @@ class RankTest {
         val hasBonus = false
 
         assertEquals(
-            actual = "MISS",
-            expected = Rank.valueOf(countOfMatch = matchingNumber, matchBonus = hasBonus).toString(),
-            message = "Should match the right rank",
+            "MISS",
+            Rank.valueOf(countOfMatch = matchingNumber, matchBonus = hasBonus).toString(),
+            "Should match the right rank",
         )
     }
 }
