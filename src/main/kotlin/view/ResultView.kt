@@ -14,7 +14,7 @@ object ResultView {
         }
     }
 
-    fun viewWinning(resul: Map<Rank, Int>) {
+    fun viewWinning(result: Map<Rank, Int>) {
         println("Winning statistic")
         println("------------------")
         for (rank in Rank.entries.sortedBy { it.prizeAmount }) {
@@ -24,7 +24,7 @@ object ResultView {
                     Rank.SECOND -> "+ Bonus Ball"
                     else -> ""
                 }
-            println("${rank.matchCount} matches $bonusBall (${rank.prizeAmount} KRW) - ${resul[rank] ?: 0}  tickets")
+            println("${rank.matchCount} matches $bonusBall (${rank.prizeAmount} KRW) - ${result[rank] ?: 0}  tickets")
         }
     }
 
