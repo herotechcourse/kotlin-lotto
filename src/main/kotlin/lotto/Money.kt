@@ -9,6 +9,4 @@ class Money(val amount: Int) {
             "the amount should be divisible by 1000"
         }
     }
-
-//    fun getMoneyAmount(): Int = amount
 }
