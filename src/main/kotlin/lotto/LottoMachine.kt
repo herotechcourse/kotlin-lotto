@@ -1,16 +1,6 @@
 package lotto
 
 class LottoMachine() {
-    private fun calculateTickets(userAmount: Int): Int {
-        val numberOfTickets = userAmount / LOTTO_PRICE
-        return numberOfTickets
-    }
-
-    private fun generateNumbers(): List<Int> {
-        val randomNumbers = (MIN_VAL..MAX_VAL).shuffled().take(6).sorted()
-        return randomNumbers
-    }
-
     fun createTickets(userAmount: Int): List<Lotto> {
         val lottos = mutableListOf<Lotto>()
         val amountOfTickets = calculateTickets(userAmount)
@@ -21,6 +11,35 @@ class LottoMachine() {
             count++
         }
         return lottos
+    }
+
+    private fun calculateTickets(userAmount: Int): Int {
+        val numberOfTickets = userAmount / LOTTO_PRICE
+        return numberOfTickets
+    }
+
+    private fun generateNumbers(): List<Int> {
+        val randomNumbers = (MIN_VAL..MAX_VAL).shuffled().take(6).sorted()
+        return randomNumbers
+    }
+
+    fun compareTickets(
+        lottos: List<Lotto>,
+        winningNumber: List<String>,
+        bonusNumber: Int,
+    ): MutableMap<Rank, Int> {
+        val prizeCounter = createMap()
+
+        lottos.forEach { ticket ->
+            var hasBonus = false
+            val matches = compareTicketToWinningNumbers(ticket, winningNumber)
+            if (matches == 5) {
+                hasBonus = compareTicketToBonusNumber(ticket, bonusNumber)
+            }
+            val chosen = Rank.valueOf(matches, hasBonus)
+            prizeCounter[chosen] = prizeCounter.getValue(chosen) + 1
+        }
+        return prizeCounter
     }
 
     private fun compareTicketToWinningNumbers(
@@ -51,23 +70,12 @@ class LottoMachine() {
         return prizeCounter
     }
 
-    fun compareTickets(
-        lottos: List<Lotto>,
-        winningNumber: List<String>,
-        bonusNumber: Int,
-    ): MutableMap<Rank, Int> {
-        val prizeCounter = createMap()
-
-        lottos.forEach { ticket ->
-            var hasBonus = false
-            val matches = compareTicketToWinningNumbers(ticket, winningNumber)
-            if (matches == 5) {
-                hasBonus = compareTicketToBonusNumber(ticket, bonusNumber)
-            }
-            val chosen = Rank.valueOf(matches, hasBonus)
-            prizeCounter[chosen] = prizeCounter.getValue(chosen) + 1
-        }
-        return prizeCounter
+    fun calculateReturnRate(
+        results: MutableMap<Rank, Int>,
+        userAmount: Int,
+    ): Double {
+        val totalPrize = calculateTotalPrize(results)
+        return (totalPrize.toDouble() / userAmount.toDouble())
     }
 
     private fun calculateTotalPrize(results: MutableMap<Rank, Int>): Int {
@@ -76,14 +84,6 @@ class LottoMachine() {
             totalPrize += key.winningMoney * value
         }
         return totalPrize
-    }
-
-    fun calculateReturnRate(
-        results: MutableMap<Rank, Int>,
-        userAmount: Int,
-    ): Double {
-        val totalPrize = calculateTotalPrize(results)
-        return (totalPrize.toDouble() / userAmount.toDouble())
     }
 
     companion object {
