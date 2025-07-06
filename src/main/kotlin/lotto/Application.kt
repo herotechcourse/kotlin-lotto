@@ -18,5 +18,5 @@ fun main() {
     val game = LottoGame()
     val gameResults = game.play(lottoTickets, winningNumbers, bonusNumber)
     ResultView.viewWinning(gameResults)
-    ResultView.viewRate(game.countWinningAmount(gameResults), purchaseAmount.value)
+    ResultView.viewRate((game.countWinningAmount(gameResults) / purchaseAmount.value).toDouble())
 }

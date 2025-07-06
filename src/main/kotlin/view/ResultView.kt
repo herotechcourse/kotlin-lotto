@@ -28,11 +28,7 @@ object ResultView {
         }
     }
 
-    fun viewRate(
-        winningAmount: Int,
-        purchaseAmount: Int,
-    ) {
-        val rate = winningAmount / purchaseAmount
+    fun viewRate(rate: Double) {
         println("Total return rate is $rate (A rate below 1 means a loss)")
     }
 }
