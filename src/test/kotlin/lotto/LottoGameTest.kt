@@ -19,12 +19,12 @@ class LottoGameTest {
             )
         val game = LottoGame()
         val result = game.play(tickets, winningNumbers, bonusNumber)
-        assertEquals(1, result.getValue(Rank.FIRST))
-        assertEquals(1, result.getValue(Rank.SECOND))
-        assertEquals(1, result.getValue(Rank.THIRD))
-        assertEquals(1, result.getValue(Rank.FOURTH))
-        assertEquals(1, result.getValue(Rank.FIFTH))
-        assertEquals(1, result.getValue(Rank.NONE))
+        assertEquals(1, result.find { it.rank == Rank.FIRST }?.ticketsCount)
+        assertEquals(1, result.find { it.rank == Rank.SECOND }?.ticketsCount)
+        assertEquals(1, result.find { it.rank == Rank.THIRD }?.ticketsCount)
+        assertEquals(1, result.find { it.rank == Rank.FOURTH }?.ticketsCount)
+        assertEquals(1, result.find { it.rank == Rank.FIFTH }?.ticketsCount)
+        assertEquals(1, result.find { it.rank == Rank.NONE }?.ticketsCount)
     }
 
     @Test

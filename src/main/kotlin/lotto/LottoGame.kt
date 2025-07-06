@@ -5,22 +5,34 @@ class LottoGame() {
         playersTickets: List<Lotto>,
         winningNumbers: Lotto,
         bonusNumber: Int,
-    ): Map<Rank, Int> {
-        val results: MutableMap<Rank, Int> = mutableMapOf()
+    ): List<RankResult> {
+        val results: MutableList<RankResult> = mutableListOf()
         for (ticket in playersTickets) {
             val matchCount = ticket.matchCount(winningNumbers.numbers)
             val hasBonusNum = ticket.containsBonusNum(bonusNumber)
             val rank = Rank.getRank(matchCount, hasBonusNum)
-            results[rank] = results.getOrDefault(rank, 0) + 1
+            updateRankResultList(results, rank)
         }
-        return results.toMap()
+        return results.toList()
     }
 
-    fun countWinningAmount(results: Map<Rank, Int>): Int {
+    fun countWinningAmount(results: List<RankResult>): Int {
         var amount = 0
-        for ((rank, ticketCount) in results) {
-            amount += rank.prizeAmount * ticketCount
+        for (result in results) {
+            amount += result.rank.prizeAmount * result.ticketsCount
         }
         return amount
+    }
+
+    private fun updateRankResultList(
+        results: MutableList<RankResult>,
+        rank: Rank,
+    ) {
+        val resultElement = results.find { it.rank == rank }
+        if (resultElement != null) {
+            resultElement.ticketsCount++
+        } else {
+            results.add(RankResult(rank, 1))
+        }
     }
 }

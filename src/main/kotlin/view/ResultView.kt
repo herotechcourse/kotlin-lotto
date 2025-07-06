@@ -2,6 +2,7 @@ package view
 
 import lotto.Lotto
 import lotto.Rank
+import lotto.RankResult
 
 object ResultView {
     fun viewTicketsAmount(ticketsAmount: Int) {
@@ -14,7 +15,7 @@ object ResultView {
         }
     }
 
-    fun viewWinning(result: Map<Rank, Int>) {
+    fun viewWinning(results: List<RankResult>) {
         println("Winning statistic")
         println("------------------")
         for (rank in Rank.entries.sortedBy { it.prizeAmount }) {
@@ -24,7 +25,8 @@ object ResultView {
                     Rank.SECOND -> "+ Bonus Ball"
                     else -> ""
                 }
-            println("${rank.matchCount} matches $bonusBall (${rank.prizeAmount} KRW) - ${result[rank] ?: 0}  tickets")
+            val ticketsCount = results.find { it.rank == rank }?.ticketsCount
+            println("${rank.matchCount} matches $bonusBall (${rank.prizeAmount} KRW) - ${ticketsCount ?: 0}  tickets")
         }
     }
 
