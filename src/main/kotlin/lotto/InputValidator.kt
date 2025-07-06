@@ -1,6 +1,6 @@
 package lotto
 
-class Validator {
+class InputValidator {
     fun validateAmount(userAmount: String) {
         if (userAmount.toIntOrNull() == null) {
             throw IllegalArgumentException("Input is not a number")

@@ -1,14 +1,14 @@
 package lotto
 
 class InputView {
-    val validator = Validator()
+    val inputValidator = InputValidator()
 
     fun takePurchaseInput(): Int {
         while (true) {
             try {
                 println(ASK_AMOUNT)
                 val input = readln().trim()
-                validator.validateAmount(input)
+                inputValidator.validateAmount(input)
                 return input.toInt()
             } catch (e: IllegalArgumentException) {
                 println(e.message)
@@ -23,7 +23,7 @@ class InputView {
                 println(ASK_WINNING_NUMBERS)
                 val input = readln().split(",")
                 input.forEach { item -> item.trim() }
-                validator.validateWinningNumbers(input)
+                inputValidator.validateWinningNumbers(input)
                 return input
             } catch (e: IllegalArgumentException) {
                 println(e.message)
@@ -36,7 +36,7 @@ class InputView {
             try {
                 println(ASK_BONUS_NUMBER)
                 val bonusInput = readln()
-                validator.validateBonusNumber(bonusInput, winningNumbers)
+                inputValidator.validateBonusNumber(bonusInput, winningNumbers)
                 return bonusInput.toInt()
             } catch (e: IllegalArgumentException) {
                 println(e.message)
