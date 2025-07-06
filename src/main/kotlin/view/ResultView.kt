@@ -1,6 +1,5 @@
 package view
 
-import lotto.Calculator
 import lotto.Lotto
 import lotto.Rank
 
@@ -11,7 +10,7 @@ object ResultView {
 
     fun viewTickets(tickets: List<Lotto>) {
         tickets.forEach {
-            println(it.getListOfNumbers().toString())
+            println(it.numbers.toString())
         }
     }
 
@@ -33,7 +32,7 @@ object ResultView {
         winningAmount: Int,
         purchaseAmount: Int,
     ) {
-        val rate = Calculator.division(winningAmount, purchaseAmount)
+        val rate = winningAmount / purchaseAmount
         println("Total return rate is $rate (A rate below 1 means a loss)")
     }
 }
