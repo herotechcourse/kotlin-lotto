@@ -1,12 +1,10 @@
 package lotto
 
-private const val TICKET_COST = 1000
-
 class LottoMachine(val money: Money) {
     val tickets: List<Lotto> = issueTickets()
 
     fun issueTickets(): List<Lotto> {
-        val ticketCount: Int = money.value / TICKET_COST
+        val ticketCount: Int = money.value / TICKET_PRICE
 
         return (1..ticketCount).map {
             Lotto(generateRandomNumber())
