@@ -18,7 +18,7 @@ class LottoTest {
     @Test
     fun `if lotto ticket should have 6 numbers`() {
         val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
-        assertTrue(lotto.getListOfNumbers().size == NUMBERS_SIZE)
+        assertTrue(lotto.numbers.size == NUMBERS_SIZE)
     }
 
     @Test
