@@ -19,7 +19,7 @@ class LottoMachine() {
     }
 
     private fun generateNumbers(): List<Int> {
-        val randomNumbers = (MIN_VAL..MAX_VAL).shuffled().take(6).sorted()
+        val randomNumbers = (MINIMUM_LOTTO_NUMBER..MAXIMUM_LOTTO_NUMBER).shuffled().take(6).sorted()
         return randomNumbers
     }
 
@@ -88,7 +88,7 @@ class LottoMachine() {
 
     companion object {
         const val LOTTO_PRICE = 1000
-        const val MIN_VAL = 1
-        const val MAX_VAL = 45
+        const val MINIMUM_LOTTO_NUMBER = 1
+        const val MAXIMUM_LOTTO_NUMBER = 45
     }
 }
