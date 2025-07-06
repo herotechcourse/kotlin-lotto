@@ -10,6 +10,10 @@ This LottoMachine is written in Kotlin, simulating actual Lotto machine in real 
 
 
 ## Features List
+Acronym descriptions: 
+- e. = entity 
+- m. = method
+- em. = entity + method
 
 Lotto Machine
 - [x] e. Need input from user for the amount of money
@@ -34,20 +38,20 @@ RandomNumberGenerator
 - [x] Use `sorted()` to sort numbers in array
 
 WinningStatistics
-- [ ] e. has count of match --> resultTable in LottoMachine
+- [x] e. has count of match --> resultTable in LottoMachine
 - [x] e. winning money
 - [x] m. calculate winning money
-- [ ] e. winning ticket(s) --> LottoMachine
-- [ ] m. calculate winning ticket(s) --> LottoMachine
+- [x] e. winning ticket(s) --> LottoMachine
+- [x] m. calculate winning ticket(s) --> LottoMachine
 - [x] e. return rate
 - [x] m. calculate return rate
 
 Rank
 - [x] Rank is enum class
 - [x] e. count of match
-- [ ] count of match is magic number
+- [x] count of match is magic number
 - [x] e. winning money
-- [ ] winning money is magic number
+- [x] winning money is magic number
 
 InputView
 - [x] User input is dividable by 1000
