@@ -31,35 +31,10 @@ class LottoMachine() {
         val prizeCounter = createMap()
 
         lottos.forEach { ticket ->
-            var hasBonus = false
-            val matches = compareTicketToWinningNumbers(ticket, winningNumber)
-            if (matches == 5) {
-                hasBonus = compareTicketToBonusNumber(ticket, bonusNumber)
-            }
-            val chosen = Rank.valueOf(matches, hasBonus)
-            prizeCounter[chosen] = prizeCounter.getValue(chosen) + 1
+            val rank = ticket.calculateRank(winningNumber, bonusNumber)
+            prizeCounter[rank] = prizeCounter.getValue(rank) + 1
         }
         return prizeCounter
-    }
-
-    private fun compareTicketToWinningNumbers(
-        lotto: Lotto,
-        winningNumbers: List<String>,
-    ): Int {
-        var countMatches = 0
-        winningNumbers.forEach { number ->
-            if (number.toInt() in lotto.getNumbers()) {
-                countMatches++
-            }
-        }
-        return countMatches
-    }
-
-    private fun compareTicketToBonusNumber(
-        lotto: Lotto,
-        bonusNumber: Int,
-    ): Boolean {
-        return bonusNumber in lotto.getNumbers()
     }
 
     private fun createMap(): MutableMap<Rank, Int> {
