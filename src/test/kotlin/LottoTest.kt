@@ -7,15 +7,14 @@ import org.junit.jupiter.api.assertThrows
 class LottoTest {
     @Test
     fun `throw error exception when amount of numbers aren't 6`() {
-        val lottoNumbers = listOf(1, 2, 3, 4, 5)
-        assertThrows<IllegalArgumentException> {
-            Lotto(lottoNumbers)
-        }
-    }
-
-    @Test
-    fun `throw error exception when numbers are out of the range between 1 and 45`() {
-        val lottoNumbers = listOf(1, 2, 3, 4, 5, 46)
+        val lottoNumbers =
+            listOf(
+                LottoNumber(1),
+                LottoNumber(2),
+                LottoNumber(3),
+                LottoNumber(4),
+                LottoNumber(5),
+            )
         assertThrows<IllegalArgumentException> {
             Lotto(lottoNumbers)
         }
@@ -23,7 +22,15 @@ class LottoTest {
 
     @Test
     fun `throw error exception when numbers are duplicated`() {
-        val lottoNumbers = listOf(1, 2, 2, 3, 4, 5)
+        val lottoNumbers =
+            listOf(
+                LottoNumber(1),
+                LottoNumber(2),
+                LottoNumber(2),
+                LottoNumber(4),
+                LottoNumber(5),
+                LottoNumber(45),
+            )
         assertThrows<IllegalArgumentException> {
             Lotto(lottoNumbers)
         }
@@ -31,7 +38,16 @@ class LottoTest {
 
     @Test
     fun `6 matching numbers without bonus returns FIRST prize`() {
-        val lotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
+        val lottoNumbers =
+            listOf(
+                LottoNumber(1),
+                LottoNumber(2),
+                LottoNumber(3),
+                LottoNumber(4),
+                LottoNumber(5),
+                LottoNumber(6),
+            )
+        val lotto = Lotto(lottoNumbers)
         val winningNumbers = listOf("1", "2", "3", "4", "5", "6")
         val bonusNumber = 8
         assertEquals(
@@ -43,7 +59,16 @@ class LottoTest {
 
     @Test
     fun `5 matching numbers with bonus returns SECOND prize`() {
-        val lotto = Lotto(listOf(1, 2, 3, 4, 5, 7))
+        val lottoNumbers =
+            listOf(
+                LottoNumber(1),
+                LottoNumber(2),
+                LottoNumber(3),
+                LottoNumber(4),
+                LottoNumber(5),
+                LottoNumber(7),
+            )
+        val lotto = Lotto(lottoNumbers)
         val winningNumbers = listOf("1", "2", "3", "4", "5", "6")
         val bonusNumber = 7
         assertEquals(
@@ -55,7 +80,16 @@ class LottoTest {
 
     @Test
     fun `5 matching numbers without bonus returns THIRD prize`() {
-        val lotto = Lotto(listOf(1, 2, 3, 4, 5, 7))
+        val lottoNumbers =
+            listOf(
+                LottoNumber(1),
+                LottoNumber(2),
+                LottoNumber(3),
+                LottoNumber(4),
+                LottoNumber(5),
+                LottoNumber(7),
+            )
+        val lotto = Lotto(lottoNumbers)
         val winningNumbers = listOf("1", "2", "3", "4", "5", "6")
         val bonusNumber = 6
         assertEquals(
@@ -67,7 +101,16 @@ class LottoTest {
 
     @Test
     fun `4 matching numbers without bonus returns FOUR prize`() {
-        val lotto = Lotto(listOf(1, 2, 3, 4, 44, 45))
+        val lottoNumbers =
+            listOf(
+                LottoNumber(1),
+                LottoNumber(2),
+                LottoNumber(3),
+                LottoNumber(4),
+                LottoNumber(44),
+                LottoNumber(45),
+            )
+        val lotto = Lotto(lottoNumbers)
         val winningNumbers = listOf("1", "2", "3", "4", "5", "6")
         val bonusNumber = 8
         assertEquals(
@@ -79,7 +122,16 @@ class LottoTest {
 
     @Test
     fun `3 matching numbers without bonus returns FIFTH prize`() {
-        val lotto = Lotto(listOf(1, 2, 3, 43, 44, 45))
+        val lottoNumbers =
+            listOf(
+                LottoNumber(1),
+                LottoNumber(2),
+                LottoNumber(3),
+                LottoNumber(43),
+                LottoNumber(44),
+                LottoNumber(45),
+            )
+        val lotto = Lotto(lottoNumbers)
         val winningNumbers = listOf("1", "2", "3", "4", "5", "6")
         val bonusNumber = 6
         assertEquals(
@@ -91,7 +143,16 @@ class LottoTest {
 
     @Test
     fun `less than 3 matching numbers without bonus returns MISS`() {
-        val lotto = Lotto(listOf(1, 2, 30, 40, 41, 42))
+        val lottoNumbers =
+            listOf(
+                LottoNumber(1),
+                LottoNumber(2),
+                LottoNumber(30),
+                LottoNumber(40),
+                LottoNumber(41),
+                LottoNumber(42),
+            )
+        val lotto = Lotto(lottoNumbers)
         val winningNumbers = listOf("1", "2", "3", "4", "5", "6")
         val bonusNumber = 40
         assertEquals(

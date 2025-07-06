@@ -20,7 +20,7 @@ class LottoMachineTest {
     fun `ticket should contain 6 numbers`() {
         val lottoMachine = LottoMachine()
         val tickets = lottoMachine.createTickets(1000)
-        val numbersInTicket = tickets[0].getNumbers()
+        val numbersInTicket = tickets[0].getLottoNumbersAsInt()
         assertEquals(
             6,
             numbersInTicket.count(),

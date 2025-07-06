@@ -6,8 +6,7 @@ class LottoMachine() {
         val amountOfTickets = calculateTickets(userAmount)
         var count = 0
         while (count < amountOfTickets) {
-            val lotto = Lotto(generateNumbers())
-            lottos.add(lotto)
+            lottos.add(Lotto.create())
             count++
         }
         return lottos
@@ -16,11 +15,6 @@ class LottoMachine() {
     private fun calculateTickets(userAmount: Int): Int {
         val numberOfTickets = userAmount / LOTTO_PRICE
         return numberOfTickets
-    }
-
-    private fun generateNumbers(): List<Int> {
-        val randomNumbers = (MINIMUM_LOTTO_NUMBER..MAXIMUM_LOTTO_NUMBER).shuffled().take(6).sorted()
-        return randomNumbers
     }
 
     fun compareTickets(
@@ -63,7 +57,5 @@ class LottoMachine() {
 
     companion object {
         const val LOTTO_PRICE = 1000
-        const val MINIMUM_LOTTO_NUMBER = 1
-        const val MAXIMUM_LOTTO_NUMBER = 45
     }
 }

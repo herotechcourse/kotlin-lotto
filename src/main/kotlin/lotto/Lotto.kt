@@ -1,28 +1,19 @@
 package lotto
 
-class Lotto(val lottoNumbers: List<Int>) {
+import kotlin.collections.shuffled
+
+class Lotto(val lottoNumbers: List<LottoNumber>) {
     init {
         require(lottoNumbers.count() == 6)
-        require(isInRange(lottoNumbers))
         require(isNotDuplicated(lottoNumbers))
     }
 
-    fun getNumbers(): List<Int> {
-        return lottoNumbers
+    fun getLottoNumbersAsInt(): List<Int> {
+        return lottoNumbers.map { it.value }
     }
 
-    private fun isInRange(lottoNumbers: List<Int>): Boolean {
-        var isInRange = true
-        lottoNumbers.forEach { number ->
-            if (number !in 1..45) {
-                isInRange = false
-            }
-        }
-        return isInRange
-    }
-
-    private fun isNotDuplicated(lottoNumbers: List<Int>): Boolean {
-        return lottoNumbers.count() == lottoNumbers.toSet().count()
+    private fun isNotDuplicated(lottoNumbers: List<LottoNumber>): Boolean {
+        return lottoNumbers.count() == lottoNumbers.map { it.value }.toSet().count()
     }
 
     fun calculateRank(
@@ -41,7 +32,7 @@ class Lotto(val lottoNumbers: List<Int>) {
     private fun compareToWinningNumbers(winningNumbers: List<String>): Int {
         var countMatches = 0
         winningNumbers.forEach { number ->
-            if (number.toInt() in getNumbers()) {
+            if (number.toInt() in getLottoNumbersAsInt()) {
                 countMatches++
             }
         }
@@ -49,6 +40,27 @@ class Lotto(val lottoNumbers: List<Int>) {
     }
 
     private fun compareToBonusNumber(bonusNumber: Int): Boolean {
-        return bonusNumber in getNumbers()
+        return bonusNumber in getLottoNumbersAsInt()
+    }
+
+    companion object {
+        const val MINIMUM_LOTTO_NUMBER = 1
+        const val MAXIMUM_LOTTO_NUMBER = 45
+
+        fun create(): Lotto {
+            return Lotto(generateNumbers())
+        }
+
+        private fun generateNumbers(): List<LottoNumber> {
+            val randomNumbers =
+                (MINIMUM_LOTTO_NUMBER..MAXIMUM_LOTTO_NUMBER)
+                    .shuffled()
+                    .take(6)
+                    .sorted()
+                    .map {
+                        LottoNumber(it)
+                    }
+            return randomNumbers
+        }
     }
 }
