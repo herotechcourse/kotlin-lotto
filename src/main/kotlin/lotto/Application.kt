@@ -15,10 +15,8 @@ fun main() {
     val winningNumbers = Lotto(InputView.getWinningNumbers())
     val bonusNumber = InputView.getBonusNumber()
 
-    val game = LottoGame(lottoTickets, winningNumbers, bonusNumber)
-
-    game.play()
-
-    ResultView.viewWinning(game.results)
-    ResultView.viewRate(game.winningAmount, purchaseAmount.value)
+    val game = LottoGame()
+    val gameResults = game.play(lottoTickets, winningNumbers, bonusNumber)
+    ResultView.viewWinning(gameResults)
+    ResultView.viewRate(game.countWinningAmount(gameResults), purchaseAmount.value)
 }

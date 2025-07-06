@@ -14,7 +14,7 @@ object ResultView {
         }
     }
 
-    fun viewWinning(resul: MutableMap<Rank, Int>) {
+    fun viewWinning(resul: Map<Rank, Int>) {
         println("Winning statistic")
         println("------------------")
         for (rank in Rank.entries.sortedBy { it.prizeAmount }) {
