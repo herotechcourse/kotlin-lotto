@@ -1,7 +1,6 @@
 package lotto.view
 
-import lotto.domain.Lotto
-import lotto.domain.Rank
+import lotto.dto.IssuedTickets
 
 object OutputView {
 
@@ -23,9 +22,22 @@ object OutputView {
         private const val MANUAL_TICKET_PROMPT = "Enter the numbers for manual tickets."
         private const val WINNING_NUMBERS_PROMPT = "Please enter last week’s winning numbers."
         private const val BONUS_NUMBER_PROMPT = "Please enter the bonus number."
-        private const val TICKETS_NUMBERS_PROMPT = "You have purchased"
         private const val TITLE_OF_RESULT_PROMPT = "Winning Statistics\n------------------"
         private const val TOTAL_RETURN_PROMPT = "Total return rate is"
+    }
+
+    object Result {
+        fun purchase(manualTickets: IssuedTickets, randomTickets: IssuedTickets) {
+            val manualNumber = manualTickets.size()
+            val randomNumber = randomTickets.size()
+            val pluralized = pluralizeTicket(manualNumber + randomNumber)
+            println("Purchased $manualNumber manual and $randomNumber automatic $pluralized.")
+        }
+
+    }
+
+    private fun pluralizeTicket(size: Int): String {
+        return if (size == 1 || size == 0) "ticket" else "tickets"
     }
 
     // TODO: clean up print methods
