@@ -31,7 +31,7 @@ enum class Rank(
             ticket: LottoTicket,
             winningNumbers: List<Int>,
             bonusNumber: Int,
-        ): Rank  {
+        ): Rank {
             val matchCount = ticket.numbers.count { winningNumbers.contains(it) }
             val hasBonus = ticket.numbers.contains(bonusNumber)
             return of(matchCount, hasBonus)

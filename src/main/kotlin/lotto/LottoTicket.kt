@@ -1,6 +1,6 @@
 package lotto
 
-class LottoTicket(val numbers: List<Int> = listOf(1, 2, 3, 4, 5, 6)) {
+class LottoTicket(val numbers: List<Int>) {
     val cost: Int = COST_OF_TICKET
 
     init {
