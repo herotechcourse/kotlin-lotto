@@ -10,31 +10,31 @@ enum class Rank(
     THIRD(5, false, 1_500_000),
     FOURTH(4, false, 50_000),
     FIFTH(3, false, 5_000),
-    MISS(0, false, 0), ;
+    MISS(0, false, 0),
+    ;
 
     companion object {
         fun of(
             matchCount: Int,
             isMatchBonusNumber: Boolean,
         ): Rank {
-            return when {
-                matchCount == 6 -> FIRST
-                matchCount == 5 && isMatchBonusNumber -> SECOND
-                matchCount == 5 -> THIRD
-                matchCount == 4 -> FOURTH
-                matchCount == 3 -> FIFTH
+            return when (matchCount) {
+                6 -> FIRST
+                5 -> if (isMatchBonusNumber) SECOND else THIRD
+                4 -> FOURTH
+                3 -> FIFTH
                 else -> MISS
             }
         }
+    }
 
-        fun ofTicket(
-            ticket: LottoTicket,
-            winningNumbers: List<Int>,
-            bonusNumber: Int,
-        ): Rank {
-            val matchCount = ticket.numbers.count { winningNumbers.contains(it) }
-            val hasBonus = ticket.numbers.contains(bonusNumber)
-            return of(matchCount, hasBonus)
-        }
+    fun ofTicket(
+        ticket: LottoTicket,
+        winningNumbers: List<Int>,
+        bonusNumber: Int,
+    ): Rank {
+        val matchCount = ticket.numbers.count { winningNumbers.contains(it) }
+        val hasBonus = ticket.numbers.contains(bonusNumber)
+        return of(matchCount, hasBonus)
     }
 }
