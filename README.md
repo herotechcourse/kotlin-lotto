@@ -4,7 +4,7 @@ This LottoMachine is written in Kotlin, simulating actual Lotto machine in real 
 This step extends the Lotto program by supporting manual ticket input.
 
 ## Features List Step 2
--[ ] Ask the user how many manual tickets they want to enter.
+-[x] Ask the user how many manual tickets they want to enter.
 -[ ] Read and validate manual ticket numbers from user input.
 -[ ] Generate the remaining tickets automatically.
 -[ ] Combine manual and automatic tickets into a full ticket bundle.
