@@ -23,7 +23,7 @@ Lotto Machine
 
 Lotto Ticket
 - [x] e. Ticket has attribute named cost 1,000 KRW
-- [x] cost of ticket is an magic number
+- [x] cost of ticket is a magic number
 - [x] e. Ticket has 6 int numbers in array
 - [x] Ticket number should be from 1-45
 - [x] numbers are not duplicated
@@ -59,3 +59,9 @@ ResultView
 - [x] msg. `You have purchased N tickets.`
 - [x] msg. `Winning Statistics\n------------------\n`
 - [x] msg. `Total return rate is 0.N (A rate below 1 means a loss)`
+
+
+## Remindable Ideas
+
+- Create a value object, `LottoTickts` as a wrapper collection of `LottoTicket`
+    > "You could create a value object (e.g., LottoTickets) and send it a message like filterTicket()." -- da-nyee
