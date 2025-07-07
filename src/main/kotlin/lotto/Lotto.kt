@@ -3,23 +3,29 @@ package lotto
 object Lotto {
     fun run() {
         val amountOfMoney = retryable { InputView.getPurchaseAmount() }
-        val printer = LottoPrinter(amountOfMoney)
+        val totalTickets = amountOfMoney / LottoTicket.COST_OF_TICKET
 
-        ResultView.displayNumberOfTickets(printer.amountOfTicket)
-        ResultView.displayTickets(printer.bundleOfLottoTicket)
+        val manualCount = retryable { InputView.getManualTicketCount(totalTickets) }
+        val manualTickets = retryable { InputView.getManualTickets(manualCount) }
 
-        val lastWeekWinningNumbers = retryable { InputView.getLastWeekWinningNumbers() }
+        val autoCount = totalTickets - manualCount
+        val autoTickets = LottoPrinter.generateLottoTickets(autoCount)
+
+        val allTickets = manualTickets + autoTickets
+
+        ResultView.displayTicketPurchaseSummary(manualCount, autoCount)
+        ResultView.displayTickets(allTickets)
+
+        val winningNumbers = retryable { InputView.getLastWeekWinningNumbers() }
         val bonusNumber = retryable { InputView.getBonusNumber() }
-        println()
 
-        val machine = LottoMachine(amountOfMoney, lastWeekWinningNumbers, bonusNumber)
-        machine.bundleOfLottoTicket = printer.bundleOfLottoTicket
-        machine.writeResultTable()
+        val machine = LottoMachine(winningNumbers, bonusNumber)
+        val resultTable = machine.createResultTable(allTickets)
 
-        val winningMoney = WinStatCalculator.calculateWinningMoney(machine.resultTable)
-        val returnRate = WinStatCalculator.calculateReturnRate(winningMoney, machine.amountOfMoney)
+        val winningMoney = WinStatCalculator.calculateWinningMoney(resultTable)
+        val returnRate = WinStatCalculator.calculateReturnRate(winningMoney, amountOfMoney)
 
-        ResultView.displayWinningStatistics(machine.resultTable)
+        ResultView.displayWinningStatistics(resultTable)
         ResultView.displayReturnRate(returnRate)
     }
 

@@ -5,6 +5,13 @@ object ResultView {
         println("$numberOfTickets tickets were purchased.")
     }
 
+    fun displayTicketPurchaseSummary(
+        manual: Int,
+        auto: Int,
+    ) {
+        println("Purchased $manual manual and $auto automatic tickets.")
+    }
+
     fun displayTickets(bundleOfLottoTicket: List<LottoTicket>) {
         bundleOfLottoTicket.forEach {
             println(it.numbers.sorted())
