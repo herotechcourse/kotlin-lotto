@@ -1,10 +1,6 @@
 package lotto
 
 object ResultView {
-    fun displayNumberOfTickets(numberOfTickets: Int) {
-        println("$numberOfTickets tickets were purchased.")
-    }
-
     fun displayTicketPurchaseSummary(
         manual: Int,
         auto: Int,
