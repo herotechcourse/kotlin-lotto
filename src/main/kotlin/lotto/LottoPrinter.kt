@@ -7,7 +7,8 @@ class LottoPrinter(amountOfMoney: Int) {
     private fun generateLottoTickets(amountOfTicket: Int): List<LottoTicket> {
         val tickets = mutableListOf<LottoTicket>()
         repeat((1..amountOfTicket).count()) {
-            val ticket = LottoTicket(RandomNumberGenerator.generateNumber())
+            val numbers = Numbers(RandomNumberGenerator.generateNumber())
+            val ticket = LottoTicket(numbers)
             tickets.add(ticket)
         }
         return tickets
