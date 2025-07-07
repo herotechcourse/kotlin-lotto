@@ -3,6 +3,7 @@ package lotto.dto
 import lotto.domain.LottoTicket
 import lotto.services.TicketIssuer
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 class IssuedTicketsTest {
@@ -48,24 +49,34 @@ class IssuedTicketsTest {
         val totalIssuedTickets = issuedTickets1 + issuedTickets2
         assertThat(totalIssuedTickets.get().map { it.toString() })
             .isEqualTo(
-                listOf("1, 2, 3, 4, 5, 6", "7, 8, 9, 10, 11, 12", "1, 2, 3, 4, 5, 6", "7, 8, 9, 10, 11, 12")
+                listOf(
+                    "1, 2, 3, 4, 5, 6",
+                    "7, 8, 9, 10, 11, 12",
+                    "1, 2, 3, 4, 5, 6",
+                    "7, 8, 9, 10, 11, 12"
+                )
             )
     }
 
     @Test
     fun `should combine issued tickets and a lotto ticket correctly`() {
-        val issuedTickets1 = TicketIssuer.with(
+        val issuedTickets = TicketIssuer.with(
             listOf(
                 setOf(1, 2, 3, 4, 5, 6),
                 setOf(7, 8, 9, 10, 11, 12)
             )
         )
-        val aLottoTicket = LottoTicket.from(setOf(14, 15, 16, 17, 18, 13))
-        val totalIssuedTickets = issuedTickets1 + aLottoTicket
+        val aLottoTicket = LottoTicket.from(setOf(13, 14, 15, 16, 17, 18))
+        val totalIssuedTickets = issuedTickets + aLottoTicket
+        assertTrue(totalIssuedTickets.get().last() == aLottoTicket)
+
         assertThat(totalIssuedTickets.get().map { it.toString() })
             .isEqualTo(
-                listOf("1, 2, 3, 4, 5, 6", "7, 8, 9, 10, 11, 12", "13, 14, 15, 16, 17, 18")
+                listOf(
+                    "1, 2, 3, 4, 5, 6",
+                    "7, 8, 9, 10, 11, 12",
+                    "13, 14, 15, 16, 17, 18"
+                )
             )
     }
-
 }
