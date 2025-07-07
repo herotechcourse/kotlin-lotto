@@ -66,7 +66,7 @@
 ### Feedback
 
 #### Application
-- [ ] separate `println()` into `OutputView`
+- [x] separate `println()` into `OutputView`
 - [ ] think/search about what `application` means, and refactor if needed
 
 ### Output View
@@ -76,7 +76,7 @@
 - [x] collect read and retry logic
 
 #### Service
-- [ ] separate service logic clearly
+- [x] separate service logic clearly
 - [ ] think about why *those functions* should belong to the service layer, and implement a better structure if needed
 
 #### Utils
@@ -84,15 +84,15 @@
   - [x] move to domain logic
 
 #### Refactor
-- [ ] fix and clarify condition: `(size == 0 || size == 1)`
+- [x] fix and clarify condition: `(size == 0 || size == 1)`
 
 ### LottoNumber !! still need to understand it
 - [x] wrap `Int` to `LottoNumber`
-- [ ] validate itself
+- [x] validate itself
   - [x] require: in range (1 ~ 45)
   - [x] require: no duplicated numbers
-- [ ] override `equals`, `hashCode`
-- [ ] implement `from` function
+- [x] override `equals`, `hashCode`
+- [x] implement `from` function
 - [x] override `toString`
 
 ### LottoTicket
