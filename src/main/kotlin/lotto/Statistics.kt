@@ -1,7 +1,7 @@
 package lotto
 
 // here ticket is a constructor parameter, but not a property
-class Calculator(
+class Statistics(
     tickets: List<Lotto>,
     purchaseAmount: Int,
     private val winningNumbers: WinningNumbers,

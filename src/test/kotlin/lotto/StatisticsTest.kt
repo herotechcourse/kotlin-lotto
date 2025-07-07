@@ -4,15 +4,15 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 
-class CalculatorTest {
+class StatisticsTest {
     @Test
     fun `Count number of matches between Lotto ticket and winning numbers`() {
         val lotto = Lotto(listOf(3, 8, 27, 30, 35, 44))
         val numbers = Lotto(listOf(3, 8, 27, 4, 5, 6))
         val winningNumbers = WinningNumbers(numbers, 7)
 
-        val calculator = Calculator(mutableListOf<Lotto>(lotto), winningNumbers)
-        assertEquals(calculator.results.contains(Rank.FIFTH), true)
+        val statistics = Statistics(mutableListOf<Lotto>(lotto), winningNumbers)
+        assertEquals(statistics.results.contains(Rank.FIFTH), true)
     }
 
     @Test
@@ -29,7 +29,7 @@ class CalculatorTest {
             )
         val numbers = Lotto(listOf(3, 8, 27, 4, 5, 6))
         val winningNumbers = WinningNumbers(numbers, 7)
-        val calculator = Calculator(tickets, winningNumbers)
-        assertEquals(calculator.calculateReturnRate(5000), 400300f)
+        val statistics = Statistics(tickets, winningNumbers)
+        assertEquals(statistics.calculateReturnRate(5000), 400300f)
     }
 }
