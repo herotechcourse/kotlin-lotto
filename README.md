@@ -20,6 +20,8 @@ Lotto Machine
 - [x] e. Has bundle of tickets
 - [x] ~~em. generate LottoTicket objects~~
 - [x] em. generate WinningStatistics object
+- [x] e. has count of match --> resultTable
+- [x] m. calculate winning ticket(s)
 
 Lotto Ticket
 - [x] e. Ticket has attribute named cost 1,000 KRW
@@ -37,11 +39,8 @@ RandomNumberGenerator
 - [x] Use `sorted()` to sort numbers in array
 
 WinningStatistics
-- [ ] e. has count of match --> resultTable in LottoMachine
 - [x] e. winning money
 - [x] m. calculate winning money
-- [ ] e. winning ticket(s) --> LottoMachine
-- [ ] m. calculate winning ticket(s) --> LottoMachine
 - [x] e. return rate
 - [x] m. calculate return rate
 
