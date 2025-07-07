@@ -2,17 +2,14 @@ package lotto
 
 import kotlin.collections.shuffled
 
-class LottoMachine(val purchaseAmount: Int, val tickets: MutableList<Lotto> = emptyList<Lotto>().toMutableList()) {
-    var change = 0
-        private set
-    private var ticketCount = 0
+class LottoMachine(val purchaseAmount: Int, val tickets: MutableList<Lotto> = mutableListOf<Lotto>()) {
+    val change = purchaseAmount % TICKET_PRICE
+    private val ticketCount = (purchaseAmount - change) / TICKET_PRICE
 
     init {
         require(purchaseAmount in MIN..MAX) {
             "[ERROR] Max purchase amount allowed is $MIN-$MAX."
         }
-        change = purchaseAmount % TICKET_PRICE
-        ticketCount = (purchaseAmount - change) / TICKET_PRICE
         generateTickets()
     }
 
