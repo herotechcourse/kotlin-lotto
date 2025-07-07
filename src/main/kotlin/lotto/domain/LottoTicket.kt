@@ -5,6 +5,18 @@ data class LottoTicket(private val lottoNumbers: HashSet<LottoNumber>) {
         require(lottoNumbers.size == SUFFICIENT_SIZE)
     }
 
+    fun get() = lottoNumbers
+
+    override fun toString(): String {
+        return lottoNumbers.joinToString(", ")
+    }
+
+    fun getRank(winningCombination: WinningCombination): Rank {
+        val countOfMatch = lottoNumbers.count() { it in winningCombination.winningTicket.lottoNumbers }
+        val matchBonus = lottoNumbers.any { it == winningCombination.bonusNumber }
+        return Rank.valueOf(countOfMatch, matchBonus)
+    }
+
     companion object {
         const val SUFFICIENT_SIZE = 6
         const val PRICE_OF_TICKET = 1000
@@ -19,11 +31,8 @@ data class LottoTicket(private val lottoNumbers: HashSet<LottoNumber>) {
                 requests.map {
                     LottoNumber.from(it)
                 }.toCollection(linkedSetOf())
+                // TODO: find better way to figure out, set but also as has order
             )
         }
-    }
-
-    override fun toString(): String {
-        return lottoNumbers.joinToString(", ")
     }
 }
