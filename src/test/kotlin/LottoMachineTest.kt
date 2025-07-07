@@ -5,21 +5,9 @@ import org.junit.jupiter.api.Test
 
 class LottoMachineTest {
     @Test
-    fun `should return right amount of tickets`() {
-        val lottoMachine = LottoMachine()
-        val userAmount = lottoMachine.createTickets(5000).count()
-        val actual = 5
-        assertEquals(
-            actual,
-            userAmount,
-            "Amount isn't a multiple of 1000",
-        )
-    }
-
-    @Test
     fun `ticket should contain 6 numbers`() {
         val lottoMachine = LottoMachine()
-        val tickets = lottoMachine.createTickets(1000)
+        val tickets = lottoMachine.createTickets(1, 0)
         val numbersInTicket = tickets[0].getLottoNumbersAsInt()
         assertEquals(
             6,
@@ -32,8 +20,8 @@ class LottoMachineTest {
     fun `amount of tickets were generated`() {
         val lottoMachine = LottoMachine()
         assertEquals(
-            4,
-            lottoMachine.createTickets(4000).count(),
+            2,
+            lottoMachine.createTickets(4, 2).count(),
             "Amount of tickets is different then expected",
         )
     }
