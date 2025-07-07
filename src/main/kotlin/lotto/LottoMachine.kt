@@ -1,8 +1,9 @@
 package lotto
 
+import kotlin.collections.shuffled
+
 class LottoMachine(val purchaseAmount: Int, val tickets: MutableList<Lotto> = emptyList<Lotto>().toMutableList()) {
-    private val numberList = (Lotto.MIN..Lotto.MAX)
-    private var _change = 0
+    var _change = 0
     val change: Int
         get() = _change
     private var ticketCount = 0
@@ -20,13 +21,14 @@ class LottoMachine(val purchaseAmount: Int, val tickets: MutableList<Lotto> = em
 
     fun generateTickets() {
         repeat(ticketCount) {
-            tickets.add(Lotto(generateNumbers()))
+            tickets.add(Lotto(generateRandomNumbers()))
         }
     }
 
-    private fun generateNumbers(): List<Int> {
-        return numberList.shuffled().subList(0, Lotto.LOTTO_SIZE)
-    }
+    private fun generateRandomNumbers(): List<Int> =
+        (LottoNumber.MIN..LottoNumber.MAX)
+            .shuffled()
+            .subList(0, Lotto.LOTTO_SIZE)
 
     companion object {
         private const val MIN = 1_000
