@@ -26,15 +26,15 @@ enum class Rank(
                 else -> MISS
             }
         }
-    }
 
-    fun ofTicket(
-        ticket: LottoTicket,
-        winningNumbers: List<Int>,
-        bonusNumber: Int,
-    ): Rank {
-        val matchCount = ticket.numbers.count { winningNumbers.contains(it) }
-        val hasBonus = ticket.numbers.contains(bonusNumber)
-        return of(matchCount, hasBonus)
+        fun ofTicket(
+            ticket: LottoTicket,
+            winningNumbers: List<Int>,
+            bonusNumber: Int,
+        ): Rank {
+            val matchCount = ticket.numbers.count { winningNumbers.contains(it) }
+            val hasBonus = ticket.numbers.contains(bonusNumber)
+            return of(matchCount, hasBonus)
+        }
     }
 }
