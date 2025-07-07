@@ -10,13 +10,15 @@ class Lotto(val numbers: List<LottoNumber>) {
         }
     }
 
-    constructor(numbers: List<Int>) : this(numbers.map { LottoNumber.from(it) })
-
     fun hasBonusNumber(bonusNumber: LottoNumber): Boolean {
         return numbers.contains(bonusNumber)
     }
 
     companion object {
         const val LOTTO_SIZE = 6
+
+        fun from(numbers: List<Int>): Lotto {
+            return Lotto(numbers.map { LottoNumber.from(it) })
+        }
     }
 }
