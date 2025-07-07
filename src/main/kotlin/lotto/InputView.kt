@@ -5,7 +5,7 @@ object InputView {
         println("Please enter the purchase amount.")
         val input = readln()
         val userInput = input.toIntOrNull() ?: throw IllegalArgumentException("This is not a number.")
-        require(userInput % 1000 == 0)
+        require(userInput % LottoTicket.COST_OF_TICKET == 0)
         return userInput
     }
 
