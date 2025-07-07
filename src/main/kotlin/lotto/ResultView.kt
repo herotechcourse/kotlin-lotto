@@ -24,7 +24,7 @@ class ResultView() {
         )
     }
 
-    fun printReturnRate(rate: Double) {
+    fun printReturnRate(rate: Long) {
         val formattedRate = String.format("%.1f", rate).replace(',', '.')
         println(PRESENT_RATE.format(formattedRate))
     }

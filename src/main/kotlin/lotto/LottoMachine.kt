@@ -41,9 +41,9 @@ class LottoMachine() {
     fun calculateReturnRate(
         results: MutableMap<Rank, Int>,
         userAmount: Int,
-    ): Double {
+    ): Long {
         val totalPrize = calculateTotalPrize(results)
-        return (totalPrize.toDouble() / userAmount.toDouble())
+        return (totalPrize.toLong() / userAmount)
     }
 
     private fun calculateTotalPrize(results: MutableMap<Rank, Int>): Int {
