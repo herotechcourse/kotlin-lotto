@@ -7,7 +7,7 @@ class LottoMachineTest {
     @Test
     fun `ticket should contain 6 numbers`() {
         val lottoMachine = LottoMachine()
-        val tickets = lottoMachine.createTickets(1, 0)
+        val tickets = lottoMachine.createGeneratedTickets(1, 0)
         val numbersInTicket = tickets[0].getLottoNumbersAsInt()
         assertEquals(
             6,
@@ -21,7 +21,7 @@ class LottoMachineTest {
         val lottoMachine = LottoMachine()
         assertEquals(
             2,
-            lottoMachine.createTickets(4, 2).count(),
+            lottoMachine.createGeneratedTickets(4, 2).count(),
             "Amount of tickets is different then expected",
         )
     }

@@ -1,17 +1,18 @@
 package lotto
 
 class LottoMachine() {
-    fun createTickets(
+    fun createGeneratedTickets(
         totalPurchasedTickets: Int,
         manualTicketsQuantity: Int,
     ): List<Lotto> {
         val lottos = mutableListOf<Lotto>()
         var ticketsToBeGenerated = totalPurchasedTickets - manualTicketsQuantity
-        var count = 0
-        while (count < ticketsToBeGenerated) {
+        var countGeneratedTickets = 0
+        while (countGeneratedTickets < ticketsToBeGenerated) {
             lottos.add(Lotto.create())
-            count++
+            countGeneratedTickets++
         }
+
         return lottos
     }
 
@@ -51,6 +52,10 @@ class LottoMachine() {
             totalPrize += key.winningMoney * value
         }
         return totalPrize
+    }
+
+    fun createManualTickets(userManualTicketNumbers: List<List<Int>>): List<Lotto> {
+        return userManualTicketNumbers.map { ticket -> Lotto(ticket.map { number -> LottoNumber(number) }) }
     }
 
     companion object {

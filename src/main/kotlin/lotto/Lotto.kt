@@ -1,6 +1,7 @@
 package lotto
 
 import kotlin.collections.shuffled
+import kotlin.collections.sorted
 
 class Lotto(val lottoNumbers: List<LottoNumber>) {
     init {

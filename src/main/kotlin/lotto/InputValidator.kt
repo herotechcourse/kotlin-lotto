@@ -8,6 +8,27 @@ class InputValidator {
         if ((userAmount.toInt() % LOTTO_PRICE) != 0) {
             throw IllegalArgumentException("Input is not multiple of 1000")
         }
+        if ((userAmount.toInt()) < 1000) {
+            throw IllegalArgumentException("Input is not enough to buy a ticket")
+        }
+    }
+
+    fun validateManualTicketsAmount(
+        ticketQuantity: String,
+        totalPurchasedTickets: Int,
+    ) {
+        if (ticketQuantity.toIntOrNull() == null) {
+            throw IllegalArgumentException("Input is not a number")
+        }
+        if (ticketQuantity.toInt() > totalPurchasedTickets) {
+            throw IllegalArgumentException("You bought $totalPurchasedTickets tickets.")
+        }
+    }
+
+    fun validateManualListOfNumbers(numbersList: String) {
+        if (numbersList.toIntOrNull() == null) {
+            throw IllegalArgumentException("Input is not a number")
+        }
     }
 
     fun validateWinningNumbers(userInput: List<String>) {
