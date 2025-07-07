@@ -1,14 +1,16 @@
 package lotto.exceptions
 
-import lotto.domain.Lotto
+import lotto.domain.LottoNumber
+import lotto.domain.LottoTicket
 
 sealed class LottoException(msg: String) : IllegalArgumentException("[ERROR]: $msg") {
     class InvalidAmountFormatException(input: String) : LottoException("Wrong amount format: $input.\n")
 
     class InvalidAmountException(amount: Int) :
         LottoException(
-            "Wrong amount: $amount, Amount should be at least ${Lotto.PRICE_OF_TICKET} ${Lotto.CURRENCY}" +
-                "and divisible by ${Lotto.PRICE_OF_TICKET}.\n",
+            "Wrong amount: $amount, " +
+                    "Amount should be at least ${LottoTicket.PRICE_OF_TICKET} ${LottoTicket.CURRENCY}" +
+                    "and divisible by ${LottoTicket.PRICE_OF_TICKET}.\n",
         )
 
     class InvalidWinningNumbersFormatException(input: String) :
@@ -16,19 +18,21 @@ sealed class LottoException(msg: String) : IllegalArgumentException("[ERROR]: $m
 
     class InvalidWinningNumbersException() :
         LottoException(
-            "Invalid winning numbers: Expected ${Lotto.LOTTO_PICK_SIZE} numbers in range + " +
-                "${Lotto.MIN_RANGE} to ${Lotto.MAX_RANGE}\n",
+            "Invalid winning numbers: Expected ${LottoTicket.SUFFICIENT_SIZE} numbers in range + " +
+                    "${LottoNumber.MIN_RANGE_NUMBER} to ${LottoNumber.MAX_RANGE_NUMBER}\n",
         )
 
     class InvalidBonusNumberFormatException(input: String) :
         LottoException(
-            "Invalid bonus number format: '$input'. Expected a number in the range of ${Lotto.MIN_RANGE} " +
-                "to ${Lotto.MAX_RANGE} and different to the winning numbers.",
+            "Invalid bonus number format: '$input'. " +
+                    "Expected a number in the range of ${LottoNumber.MIN_RANGE_NUMBER} " +
+                    "to ${LottoNumber.MAX_RANGE_NUMBER} and different to the winning numbers.",
         )
 
     class InvalidBonusNumberException(bonusNumber: Int) :
         LottoException(
-            "Invalid bonus number format: '$bonusNumber'. Expected a number in the range of ${Lotto.MIN_RANGE} " +
-                "to ${Lotto.MAX_RANGE} and different to the winning numbers.",
+            "Invalid bonus number format: '$bonusNumber'. " +
+                    "Expected a number in the range of ${LottoNumber.MIN_RANGE_NUMBER} " +
+                    "to ${LottoNumber.MAX_RANGE_NUMBER} and different to the winning numbers.",
         )
 }
