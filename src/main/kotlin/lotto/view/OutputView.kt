@@ -3,7 +3,7 @@ package lotto.view
 import lotto.domain.LottoTicket
 import lotto.domain.Rank
 import lotto.dto.IssuedTickets
-import lotto.services.GameResult
+import lotto.domain.GameResult
 
 object OutputView {
 
@@ -15,6 +15,12 @@ object OutputView {
             println("Purchased $manualNumber manual and $randomNumber automatic $pluralized.")
         }
 
+        fun purchase(randomTickets: IssuedTickets) {
+            val randomTicketsCount = randomTickets.size()
+            val pluralized = pluralizeTicket(randomTicketsCount)
+            println("You have purchased $randomTicketsCount $pluralized.")
+        }
+
         fun issuedTickets(tickets: IssuedTickets) {
             tickets.get().forEach { println("[$it]") }
         }
@@ -24,7 +30,7 @@ object OutputView {
             Rank.entries.filter { it != Rank.MISS }.reversed().forEach {
                 eachRank(it, gameResult.ranks)
             }
-            totalRate(gameResult.returnRate)
+            totalRate(gameResult)
         }
 
         private fun eachRank(
@@ -38,8 +44,9 @@ object OutputView {
             println("${entry.countOfMatch} Matches$hasBonus ($winningMoney ${LottoTicket.CURRENCY}) - $matchCount $pluralizedTicket")
         }
 
-        fun totalRate(totalRate: Double) {
-            println("${Prompt.totalReturnRate()} ${"%.2f".format(totalRate)}")
+        fun totalRate(result: GameResult) {
+            Prompt.totalReturnRate()
+            println("%.2f".format(result.returnRate))
         }
 
         private fun pluralizeTicket(size: Int): String {

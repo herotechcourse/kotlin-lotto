@@ -1,6 +1,6 @@
 package lotto.domain
 
-import lotto.services.GameResult
+import lotto.domain.GameResult
 import lotto.services.TicketIssuer
 import lotto.services.TicketsEvaluator
 import org.assertj.core.api.Assertions
