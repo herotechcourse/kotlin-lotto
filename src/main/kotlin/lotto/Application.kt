@@ -1,6 +1,7 @@
 package lotto
 
-import lotto.controller.LottoController
+import lotto.controller.Controller
+import lotto.view.OutputView
 import kotlin.system.exitProcess
 
 /**
@@ -12,10 +13,10 @@ import kotlin.system.exitProcess
  */
 fun main() {
     try {
-        val controller = LottoController()
+        val controller = Controller
         controller.run()
-    } catch (e: Exception) {
-        println(e.message ?: "Unexpected error occurred.")
+    } catch (exception: Exception) {
+        OutputView.Prompt.error(exception)
         exitProcess(1)
     }
 }
