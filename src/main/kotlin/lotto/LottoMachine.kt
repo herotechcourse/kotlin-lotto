@@ -4,7 +4,7 @@ class LottoMachine(val money: Money) {
     val tickets: List<Lotto> = issueTickets()
 
     fun issueTickets(): List<Lotto> {
-        val ticketCount: Int = money.value / TICKET_PRICE
+        val ticketCount: Int = money.getValue() / TICKET_PRICE
 
         return (1..ticketCount).map {
             Lotto(generateRandomNumber())
