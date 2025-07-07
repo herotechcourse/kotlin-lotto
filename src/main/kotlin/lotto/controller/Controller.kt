@@ -8,16 +8,16 @@ import lotto.view.InputView
 import lotto.view.ResultView
 
 class Controller {
-    var amountOfMoney: Int = retryable { InputView.getPurchaseAmount() }
-    var amountOfTicket: Int = amountOfMoney / LottoTicket.COST_OF_TICKET
-    var amountOfManualTicket = 0
+    val amountOfMoney: Int = retryable { InputView.getPurchaseAmount() }
+    val amountOfTicket: Int = amountOfMoney / LottoTicket.COST_OF_TICKET
+    private var amountOfManualTicket = 0
     val amountOfAutoTicket: Int
         get() {
             return amountOfTicket - amountOfManualTicket
         }
-    var bundleOfTicket: List<LottoTicket> = emptyList()
-    var lastWeekWinningNumbers: List<Int> = emptyList()
-    var bonusNumber: Int = 0
+    private var bundleOfTicket: List<LottoTicket> = emptyList()
+    private var lastWeekWinningNumbers: List<Int> = emptyList()
+    private var bonusNumber: Int = 0
 
     fun run() {
         val manualTickets = buyManualLottoTickets()
@@ -26,7 +26,7 @@ class Controller {
         runLottoMachine()
     }
 
-    fun buyManualLottoTickets(): List<LottoTicket> {
+    private fun buyManualLottoTickets(): List<LottoTicket> {
         amountOfManualTicket = retryable { InputView.getNumberOfManualTickets(amountOfTicket) }
         InputView.informForManualTicketNumbers()
         val manualTickets = mutableListOf<LottoTicket>()
@@ -39,7 +39,7 @@ class Controller {
         return manualTickets
     }
 
-    fun printLottoTickets(manualTickets: List<LottoTicket>) {
+    private fun printLottoTickets(manualTickets: List<LottoTicket>) {
         val printer = LottoPrinter(amountOfAutoTicket)
         val tickets = mutableListOf<LottoTicket>()
         tickets.addAll(manualTickets)
@@ -49,13 +49,13 @@ class Controller {
         ResultView.displayTickets(bundleOfTicket)
     }
 
-    fun readWinningNumbers() {
+    private fun readWinningNumbers() {
         lastWeekWinningNumbers = retryable { InputView.getLastWeekWinningNumbers() }
         bonusNumber = retryable { InputView.getBonusNumber() }
         println()
     }
 
-    fun runLottoMachine() {
+    private fun runLottoMachine() {
         val machine = LottoMachine(amountOfMoney, Numbers(lastWeekWinningNumbers), bonusNumber)
         machine.bundleOfLottoTicket = bundleOfTicket
         machine.writeResultTable()
