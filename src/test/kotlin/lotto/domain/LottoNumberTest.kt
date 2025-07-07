@@ -13,7 +13,7 @@ class LottoNumberTest {
     @ParameterizedTest
     fun `throw if lotto number not in range`(value: Int) {
         assertThrows<IllegalArgumentException> {
-            val number = LottoNumber.from(value)
+            LottoNumber.from(value)
         }
     }
 
@@ -21,7 +21,7 @@ class LottoNumberTest {
     @ParameterizedTest
     fun `do not throw if lotto number in range`(value: Int) {
         assertDoesNotThrow {
-            val number = LottoNumber.from(value)
+            LottoNumber.from(value)
         }
     }
 

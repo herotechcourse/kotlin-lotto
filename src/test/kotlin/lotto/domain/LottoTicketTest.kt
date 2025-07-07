@@ -54,13 +54,17 @@ class LottoTicketTest {
             LottoNumber.from(6)
         )
         assertThat(
-            LottoTicket(setOfLottoNumber).toString()).isEqualTo("1, 2, 3, 4, 5, 6")
+            LottoTicket(setOfLottoNumber).toString()
+        ).isEqualTo("1, 2, 3, 4, 5, 6")
     }
 
     @Test
-    fun `should lotto numbers in LottoTicket are sorted`() {
-        val sorted = LottoTicket.from(setOf(13, 14, 15, 16, 17, 18))
-        val shouldSorted = LottoTicket.from(setOf(14, 16, 17, 15, 13, 18))
-        assertThat(sorted.toString()).isEqualTo(shouldSorted.toString())
+    fun `should get Correct Rank`() {
+        val winningCombination = WinningCombination(
+            LottoTicket.from(setOf(1, 2, 3, 4, 5, 6)),
+            LottoNumber.from(7)
+        )
+        val rankFirstLottoTicket = LottoTicket.from(setOf(1, 2, 3, 4, 5, 6))
+        assertThat(rankFirstLottoTicket.getRank(winningCombination)).isEqualTo(Rank.FIRST)
     }
 }
