@@ -1,10 +1,10 @@
 package lotto
 
 object WinStatCalculator {
-    fun calculateWinningMoney(resultTable: List<Int>): Int {
+    fun calculateWinningMoney(resultTable: Map<Rank, Int>): Int {
         return Rank.entries
             .filter { it != Rank.MISS }
-            .sumOf { rank -> resultTable[rank.ordinal] * rank.prize }
+            .sumOf { rank -> resultTable.getOrDefault(rank, 0) * rank.prize }
     }
 
     fun calculateReturnRate(

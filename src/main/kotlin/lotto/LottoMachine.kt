@@ -7,21 +7,15 @@ class LottoMachine(
 ) {
     val amountOfTicket: Int = amountOfMoney / LottoTicket.COST_OF_TICKET
     lateinit var bundleOfLottoTicket: List<LottoTicket>
-    val resultTable: MutableList<Int> = MutableList(6) { 0 }
+    val resultTable: MutableMap<Rank, Int> = mutableMapOf()
 
     fun writeResultTable() {
         bundleOfLottoTicket.forEach { filterTicket(it) }
     }
 
     fun filterTicket(ticket: LottoTicket) {
-        when (getRankOfTicket(ticket)) {
-            Rank.FIRST -> resultTable[1]++
-            Rank.SECOND -> resultTable[2]++
-            Rank.THIRD -> resultTable[3]++
-            Rank.FOURTH -> resultTable[4]++
-            Rank.FIFTH -> resultTable[5]++
-            Rank.MISS -> resultTable[0]++
-        }
+        val rank = getRankOfTicket(ticket)
+        resultTable[rank] = resultTable.getOrDefault(rank, 0) + 1
     }
 
     private fun getRankOfTicket(ticket: LottoTicket): Rank {

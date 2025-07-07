@@ -2,30 +2,27 @@ package lotto
 
 object ResultView {
     fun displayNumberOfTickets(numberOfTickets: Int) {
-        println("You have purchased $numberOfTickets tickets.")
+        println("$numberOfTickets tickets were purchased.")
     }
 
     fun displayTickets(bundleOfLottoTicket: List<LottoTicket>) {
-        bundleOfLottoTicket.forEach { ticket ->
-            println(ticket.numbers)
+        bundleOfLottoTicket.forEach {
+            println(it.numbers.sorted())
         }
-        println()
     }
 
-    fun displayWinningStatistics(resultTable: MutableList<Int>) {
-        println("Winning Statistics")
+    fun displayWinningStatistics(resultTable: Map<Rank, Int>) {
+        println("\nWinning Statistics")
         println("------------------")
-        println("3 Matches (5,000 KRW) - ${resultTable[5]} tickets")
-        println("4 Matches (50,000 KRW) - ${resultTable[4]} tickets")
-        println("5 Matches (1,500,000 KRW) - ${resultTable[3]} tickets")
-        println("5 Matches + Bonus Ball (30,000,000 KRW) - ${resultTable[2]} tickets")
-        println("6 Matches (2,000,000,000 KRW) - ${resultTable[1]} tickets")
+        Rank.entries
+            .filter { it != Rank.MISS }
+            .forEach { rank ->
+                val count = resultTable[rank] ?: 0
+                println("${rank.matchCount} numbers matched${if (rank.hasBonus) " + bonus ball" else ""} (${rank.prize}₩) - $count times")
+            }
     }
 
-    // TODO: make return rate output properly with 2 decimals
     fun displayReturnRate(returnRate: Double) {
-        val processingResult = returnRate.toString()
-        val result = processingResult.substring(0, processingResult.indexOf(".") + 2)
-        println("Total return rate is ${String.format("%.2f", result.toDouble())} (A rate below 1 means a loss)")
+        println("The total rate of return is ${"%.1f".format(returnRate)}%.")
     }
 }
