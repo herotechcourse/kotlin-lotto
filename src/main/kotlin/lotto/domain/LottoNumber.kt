@@ -6,8 +6,8 @@ data class LottoNumber private constructor(private val value: Int) {
         internal const val MAX_RANGE_NUMBER = 45
         private val LOTTO_NUMBERS = (MIN_RANGE_NUMBER..MAX_RANGE_NUMBER).associateWith(::LottoNumber)
 
-        fun from(value: Int): LottoNumber {
-            return LOTTO_NUMBERS[value] ?: throw IllegalArgumentException()
+        fun from(request: Int): LottoNumber {
+            return LOTTO_NUMBERS[request] ?: throw IllegalArgumentException()
         }
     }
 
