@@ -5,7 +5,13 @@ data class LottoTicket(private val lottoNumbers: HashSet<LottoNumber>) {
         require(lottoNumbers.size == SUFFICIENT_SIZE)
     }
 
-    fun get() = lottoNumbers
+    fun toRawSet(): Set<Int> {
+        return lottoNumbers.map { it.hashCode() }.toSet()
+    }
+
+    fun contains(lottoNumber: LottoNumber): Boolean {
+        return toRawSet().contains(lottoNumber.hashCode())
+    }
 
     override fun toString(): String {
         return lottoNumbers.joinToString(", ")
