@@ -21,7 +21,7 @@ class LottoMachine(val purchaseAmount: Int, val tickets: MutableList<Lotto> = em
 
     fun generateTickets() {
         repeat(ticketCount) {
-            tickets.add(Lotto(generateRandomNumbers()))
+            tickets.add(Lotto.from(generateRandomNumbers()))
         }
     }
 
@@ -29,6 +29,7 @@ class LottoMachine(val purchaseAmount: Int, val tickets: MutableList<Lotto> = em
         (LottoNumber.MIN..LottoNumber.MAX)
             .shuffled()
             .subList(0, Lotto.LOTTO_SIZE)
+            .sorted()
 
     companion object {
         private const val MIN = 1_000
