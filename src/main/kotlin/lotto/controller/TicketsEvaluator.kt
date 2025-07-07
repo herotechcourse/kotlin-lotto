@@ -1,4 +1,4 @@
-package lotto.services
+package lotto.controller
 
 import lotto.domain.Rank
 import lotto.domain.WinningCombination
