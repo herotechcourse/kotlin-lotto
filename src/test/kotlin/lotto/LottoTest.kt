@@ -38,8 +38,8 @@ class LottoTest {
     @Test
     fun `lotto ticket should return match count`() {
         val lotto = Lotto(listOf(5, 6, 7, 8, 9, 10))
-        val winningNums = listOf(1, 2, 3, 4, 5, 6)
-        val matchCount = lotto.matchCount(winningNums)
+        val winningLotto = Lotto(listOf(1, 2, 3, 4, 5, 6))
+        val matchCount = lotto.matchCount(winningLotto.numbers)
         assertThat(matchCount).isEqualTo(2)
     }
 
@@ -47,7 +47,7 @@ class LottoTest {
     fun `lotto ticket should check bonus number`() {
         val lotto = Lotto(listOf(5, 6, 7, 8, 9, 10))
         val bonusNum = 10
-        val result = lotto.containsBonusNum(bonusNum)
+        val result = lotto.containsBonusNum(LottoNumber.from(bonusNum))
         assertTrue(result)
     }
 }

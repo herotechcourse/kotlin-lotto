@@ -18,7 +18,7 @@ class LottoGameTest {
                 Lotto(listOf(10, 11, 12, 13, 14, 15)),
             )
         val game = LottoGame()
-        val result = game.play(tickets, winningNumbers, bonusNumber)
+        val result = game.play(tickets, winningNumbers, LottoNumber.from(bonusNumber))
         assertEquals(1, result.find { it.rank == Rank.FIRST }?.ticketsCount)
         assertEquals(1, result.find { it.rank == Rank.SECOND }?.ticketsCount)
         assertEquals(1, result.find { it.rank == Rank.THIRD }?.ticketsCount)
@@ -41,7 +41,7 @@ class LottoGameTest {
                 Lotto(listOf(10, 11, 12, 13, 14, 15)),
             )
         val game = LottoGame()
-        val result = game.play(tickets, winningNumbers, bonusNumber)
+        val result = game.play(tickets, winningNumbers, LottoNumber.from(bonusNumber))
         val winningAmount = game.countWinningAmount(result)
         assertEquals(winningAmount, 2_031_555_000)
     }

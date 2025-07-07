@@ -13,7 +13,7 @@ fun main() {
     ResultView.viewTickets(lottoTickets)
 
     val winningNumbers = Lotto(InputView.getWinningNumbers())
-    val bonusNumber = InputView.getBonusNumber()
+    val bonusNumber = LottoNumber.from(InputView.getBonusNumber())
 
     val game = LottoGame()
     val gameResults = game.play(lottoTickets, winningNumbers, bonusNumber)

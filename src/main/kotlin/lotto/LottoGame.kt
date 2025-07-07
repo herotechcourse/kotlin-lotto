@@ -4,7 +4,7 @@ class LottoGame() {
     fun play(
         playersTickets: List<Lotto>,
         winningNumbers: Lotto,
-        bonusNumber: Int,
+        bonusNumber: LottoNumber,
     ): List<RankResult> {
         val results: MutableList<RankResult> = mutableListOf()
         for (ticket in playersTickets) {
