@@ -2,10 +2,9 @@ package lotto.model
 
 class LottoMachine(
     val amountOfMoney: Int,
-    val lastWeekWinningNumbers: List<Int>,
+    val lastWeekWinningNumbers: Numbers,
     val bonusNumber: Int,
 ) {
-    val amountOfTicket: Int = amountOfMoney / LottoTicket.COST_OF_TICKET
     var bundleOfLottoTicket: List<LottoTicket> = emptyList()
     val resultTable: MutableList<Int> = MutableList(6) { 0 }
 
@@ -28,8 +27,8 @@ class LottoMachine(
     }
 
     private fun getRankOfTicket(ticket: LottoTicket): Rank {
-        val count = ticket.numbers.count { lastWeekWinningNumbers.contains(it) }
-        val hasBonusNumber = ticket.numbers.contains(bonusNumber)
+        val count = ticket.lottoNumbers.count { lastWeekWinningNumbers.contains(it) }
+        val hasBonusNumber = ticket.lottoNumbers.contains(bonusNumber)
         return Rank.of(count, hasBonusNumber)
     }
 }
