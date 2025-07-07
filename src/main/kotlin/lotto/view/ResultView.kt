@@ -3,15 +3,17 @@ package lotto.view
 import lotto.model.LottoTicket
 
 object ResultView {
-    fun displayNumberOfTickets(numberOfTickets: Int) {
-        println("You have purchased $numberOfTickets tickets.")
+    fun displayNumberOfTickets(
+        numberOfManualTickets: Int,
+        numberOfAutoTickets: Int,
+    ) {
+        println("\nPurchased $numberOfManualTickets manual and $numberOfAutoTickets automatic tickets.")
     }
 
     fun displayTickets(bundleOfLottoTicket: List<LottoTicket>) {
         bundleOfLottoTicket.forEach { ticket ->
-            println(ticket.numbers)
+            println(ticket.lottoNumbers.numbers.toString())
         }
-        println()
     }
 
     fun displayWinningStatistics(resultTable: MutableList<Int>) {

@@ -2,9 +2,8 @@ package lotto.model
 
 import lotto.util.RandomNumberGenerator
 
-class LottoPrinter(amountOfMoney: Int) {
-    val amountOfTicket: Int = amountOfMoney / LottoTicket.COST_OF_TICKET
-    val bundleOfLottoTicket: List<LottoTicket> = generateLottoTickets(amountOfTicket)
+class LottoPrinter(amountOfAutoTicket: Int) {
+    val bundleOfLottoTicket: List<LottoTicket> = generateLottoTickets(amountOfAutoTicket)
 
     private fun generateLottoTickets(amountOfTicket: Int): List<LottoTicket> {
         val tickets = mutableListOf<LottoTicket>()

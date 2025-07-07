@@ -3,28 +3,50 @@ package lotto.controller
 import lotto.model.LottoMachine
 import lotto.model.LottoPrinter
 import lotto.model.LottoTicket
+import lotto.model.Numbers
 import lotto.view.InputView
 import lotto.view.ResultView
 
 class Controller {
-    var amountOfMoney: Int = 0
+    var amountOfMoney: Int = retryable { InputView.getPurchaseAmount() }
+    var amountOfTicket: Int = amountOfMoney / LottoTicket.COST_OF_TICKET
+    var amountOfManualTicket = 0
+    val amountOfAutoTicket: Int
+        get() {
+            return amountOfTicket - amountOfManualTicket
+        }
     var bundleOfTicket: List<LottoTicket> = emptyList()
     var lastWeekWinningNumbers: List<Int> = emptyList()
     var bonusNumber: Int = 0
 
     fun run() {
-        buyLottoTickets()
+        val manualTickets = buyManualLottoTickets()
+        printLottoTickets(manualTickets)
         readWinningNumbers()
         runLottoMachine()
     }
 
-    fun buyLottoTickets() {
-        amountOfMoney = retryable { InputView.getPurchaseAmount() }
-        val printer = LottoPrinter(amountOfMoney)
-        bundleOfTicket = printer.bundleOfLottoTicket
+    fun buyManualLottoTickets(): List<LottoTicket> {
+        amountOfManualTicket = retryable { InputView.getNumberOfManualTickets(amountOfTicket) }
+        InputView.informForManualTicketNumbers()
+        val manualTickets = mutableListOf<LottoTicket>()
+        repeat((1..amountOfManualTicket).count()) {
+            val input = retryable { InputView.getLottoNumbers() }
+            val numbers = Numbers(input)
+            val ticket = LottoTicket(numbers)
+            manualTickets.add(ticket)
+        }
+        return manualTickets
+    }
 
-        ResultView.displayNumberOfTickets(printer.amountOfTicket)
-        ResultView.displayTickets(printer.bundleOfLottoTicket)
+    fun printLottoTickets(manualTickets: List<LottoTicket>) {
+        val printer = LottoPrinter(amountOfAutoTicket)
+        val tickets = mutableListOf<LottoTicket>()
+        tickets.addAll(manualTickets)
+        tickets.addAll(printer.bundleOfLottoTicket)
+        bundleOfTicket = tickets
+        ResultView.displayNumberOfTickets(amountOfManualTicket, amountOfAutoTicket)
+        ResultView.displayTickets(bundleOfTicket)
     }
 
     fun readWinningNumbers() {
@@ -34,7 +56,7 @@ class Controller {
     }
 
     fun runLottoMachine() {
-        val machine = LottoMachine(amountOfMoney, lastWeekWinningNumbers, bonusNumber)
+        val machine = LottoMachine(amountOfMoney, Numbers(lastWeekWinningNumbers), bonusNumber)
         machine.bundleOfLottoTicket = bundleOfTicket
         machine.writeResultTable()
 
