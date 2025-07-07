@@ -14,13 +14,7 @@ class LottoMachine(
     }
 
     fun filterTicket(ticket: LottoTicket) {
-        val rank = getRankOfTicket(ticket)
+        val rank = Rank.ofTicket(ticket, lastWeekWinningNumbers, bonusNumber)
         resultTable[rank] = resultTable.getOrDefault(rank, 0) + 1
-    }
-
-    private fun getRankOfTicket(ticket: LottoTicket): Rank {
-        val count = ticket.numbers.count { lastWeekWinningNumbers.contains(it) }
-        val hasBonusNumber = ticket.numbers.contains(bonusNumber)
-        return Rank.of(count, hasBonusNumber)
     }
 }
