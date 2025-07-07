@@ -19,7 +19,8 @@ Update the winning statistics to include the second prize category.
 - [x] lotto ticket each number should be between 1 and 45
 
 - [x] generate 6 unique, random, numbers in range 1 to 45
-- [x] machine issues lotto tickets
+- [x] machine issues lotto tickets with generated numbers
+- [ ] machine issues lotto tickets with manuel provided numbers 
 - [x] figure out winning tickets
 
 #### Input
