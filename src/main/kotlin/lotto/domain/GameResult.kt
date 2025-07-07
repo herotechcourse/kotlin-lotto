@@ -8,5 +8,4 @@ data class GameResult(
     val totalAmount: Int,
     val ranks: List<Rank>,
     val returnRate: Double
-) {
-}
+)

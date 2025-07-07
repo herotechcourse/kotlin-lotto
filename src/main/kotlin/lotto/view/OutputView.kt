@@ -1,9 +1,9 @@
 package lotto.view
 
+import lotto.domain.GameResult
 import lotto.domain.LottoTicket
 import lotto.domain.Rank
 import lotto.dto.IssuedTickets
-import lotto.domain.GameResult
 
 object OutputView {
 

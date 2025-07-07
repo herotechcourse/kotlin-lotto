@@ -1,11 +1,7 @@
 package lotto.controller
 
 
-import lotto.domain.LottoNumber
-import lotto.domain.LottoTicket
-import lotto.domain.RandomNumbers
-import lotto.domain.WinningCombination
-import lotto.domain.GameResult
+import lotto.domain.*
 import lotto.services.TicketIssuer
 import lotto.services.TicketsEvaluator
 import lotto.view.InputView
