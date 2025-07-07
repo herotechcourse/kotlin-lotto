@@ -26,6 +26,8 @@ Update the winning statistics to include the second prize category.
 - [x] get input of amount
 - [x] get the winning numbers
 - [x] get the bonus number
+- [ ] get number of manuel tickets
+- [ ] get numbers for manuel tickets
 
 #### Output result
 - [x] should print the number of purchased tickets
