@@ -7,11 +7,11 @@ import org.junit.jupiter.api.Test
 class StatisticsTest {
     @Test
     fun `Count number of matches between Lotto ticket and winning numbers`() {
-        val lotto = Lotto(listOf(3, 8, 27, 30, 35, 44))
-        val numbers = Lotto(listOf(3, 8, 27, 4, 5, 6))
-        val winningNumbers = WinningNumbers(numbers, 7)
+        val lotto = Lotto.from(listOf(3, 8, 27, 30, 35, 44))
+        val numbers = Lotto.from(listOf(3, 8, 27, 4, 5, 6))
+        val winningNumbers = WinningNumbers(numbers, LottoNumber.from(7))
 
-        val statistics = Statistics(mutableListOf<Lotto>(lotto), winningNumbers)
+        val statistics = Statistics(mutableListOf<Lotto>(lotto), 3000, winningNumbers)
         assertEquals(statistics.results.contains(Rank.FIFTH), true)
     }
 
@@ -20,16 +20,16 @@ class StatisticsTest {
         val tickets =
             mutableListOf(
                 // FIRST
-                Lotto(listOf(3, 8, 27, 4, 5, 6)),
+                Lotto.from(listOf(3, 8, 27, 4, 5, 6)),
                 // THIRD
-                Lotto(listOf(3, 8, 27, 4, 5, 43)),
-                Lotto(listOf(7, 11, 16, 35, 36, 44)),
-                Lotto(listOf(1, 8, 11, 31, 41, 42)),
-                Lotto(listOf(13, 14, 16, 38, 42, 45)),
+                Lotto.from(listOf(3, 8, 27, 4, 5, 43)),
+                Lotto.from(listOf(7, 11, 16, 35, 36, 44)),
+                Lotto.from(listOf(1, 8, 11, 31, 41, 42)),
+                Lotto.from(listOf(13, 14, 16, 38, 42, 45)),
             )
-        val numbers = Lotto(listOf(3, 8, 27, 4, 5, 6))
-        val winningNumbers = WinningNumbers(numbers, 7)
-        val statistics = Statistics(tickets, winningNumbers)
-        assertEquals(statistics.calculateReturnRate(5000), 400300f)
+        val numbers = Lotto.from(listOf(3, 8, 27, 4, 5, 6))
+        val winningNumbers = WinningNumbers(numbers, LottoNumber.from(7))
+        val statistics = Statistics(tickets, 5000, winningNumbers)
+        assertEquals(statistics.returnRate, 400300f)
     }
 }
