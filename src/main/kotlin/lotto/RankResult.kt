@@ -2,5 +2,11 @@ package lotto
 
 data class RankResult(
     val rank: Rank,
-    var ticketsCount: Int,
-)
+) {
+    var ticketsCount = 1
+        private set
+
+    fun increaseTicketsCount() {
+        ticketsCount++
+    }
+}

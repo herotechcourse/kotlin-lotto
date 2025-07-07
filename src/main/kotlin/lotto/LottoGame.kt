@@ -30,9 +30,9 @@ class LottoGame() {
     ) {
         val resultElement = results.find { it.rank == rank }
         if (resultElement != null) {
-            resultElement.ticketsCount++
+            resultElement.increaseTicketsCount()
         } else {
-            results.add(RankResult(rank, 1))
+            results.add(RankResult(rank))
         }
     }
 }
