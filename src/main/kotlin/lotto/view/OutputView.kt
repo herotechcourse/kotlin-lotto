@@ -1,30 +1,29 @@
 package lotto.view
 
-import lotto.domain.GameResult
 import lotto.domain.LottoTicket
 import lotto.domain.Rank
-import lotto.dto.IssuedTickets
+import lotto.dto.PurchaseResult
+import lotto.dto.RankedTickets
 
 object OutputView {
 
-    object Result {
-        fun purchase(manualTickets: IssuedTickets, randomTickets: IssuedTickets) {
-            val manualNumber = manualTickets.size()
-            val randomNumber = randomTickets.size()
-            val pluralized = pluralizeTicket(manualNumber + randomNumber)
-            println("Purchased $manualNumber manual and $randomNumber automatic $pluralized.")
+    object Print {
+        fun purchaseResult(purchaseResult: PurchaseResult) {
+            val pluralized = pluralizeTicket(purchaseResult.userPurchase.maxPurchasable)
+            println(
+                "Purchased ${purchaseResult.userPurchase.manualTicketsCount} manual " +
+                        "and ${purchaseResult.userPurchase.randomTicketsCount} automatic $pluralized."
+            )
+            purchaseResult.totalTickets.get().forEach { println("[$it]") }
+
         }
 
-        fun issuedTickets(tickets: IssuedTickets) {
-            tickets.get().forEach { println("[$it]") }
-        }
-
-        fun winningStatistics(gameResult: GameResult) {
+        fun winningStatistics(rankedTickets: RankedTickets) {
             Prompt.winningStatisticsTitle()
             Rank.entries.filter { it != Rank.MISS }.reversed().forEach {
-                eachRank(it, gameResult.ranks)
+                eachRank(it, rankedTickets.ranked)
             }
-            totalRate(gameResult.returnRate)
+            totalRate(rankedTickets)
         }
 
         private fun eachRank(
@@ -35,11 +34,17 @@ object OutputView {
             val hasBonus = if (entry.requiresBonus) " + Bonus Ball" else ""
             val winningMoney = "%,d".format(entry.winningMoney)
             val pluralizedTicket = pluralizeTicket(matchCount)
-            println("${entry.countOfMatch} Matches$hasBonus ($winningMoney ${LottoTicket.CURRENCY}) - $matchCount $pluralizedTicket")
+            println(
+                "${entry.countOfMatch} Matches" +
+                        "$hasBonus ($winningMoney ${LottoTicket.CURRENCY}) - $matchCount $pluralizedTicket"
+            )
         }
 
-        fun totalRate(totalRate: Double) {
+        private fun totalRate(rankedTickets: RankedTickets) {
             Prompt.totalReturnRate()
+            val totalPrize = rankedTickets.ranked.sumOf { it.winningMoney }
+            val totalSpent = rankedTickets.purchaseResult.userPurchase.amount
+            val totalRate = (totalPrize.toDouble() / totalSpent) * 100
             println("%.2f".format(totalRate))
         }
 
