@@ -66,6 +66,29 @@ ResultView
 - [x] msg. `Winning Statistics\n------------------\n`
 - [x] msg. `Total return rate is 0.N (A rate below 1 means a loss)`
 
+Controller
+- [ ] Controller manage direct request and response with `InputView` and `ResultView`
+- [ ] Controller interact with managers which are smaller controllers that will controller in separated responsibility
+
+TicketManager
+- [ ] manage tickets
+- [ ] consolidate manual and auto tickets
+
+ManualTicketManager
+- [ ] manage manual tickets
+- [ ] create manual tickets
+
+AutoTicketManager
+- [ ] manage auto tickets
+- [ ] create auto tickets
+
+WinnerManager
+- [ ] manage data related with winner numbers and bonus number
+
+StatisticsManager
+- [ ] manage data related with stats
+
+
 
 ## Remindable Ideas
 
