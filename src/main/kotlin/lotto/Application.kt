@@ -4,9 +4,9 @@ import view.InputView
 import view.ResultView
 
 fun main() {
-    val amountInput = InputView.getPurchaseAmount()
-    val purchaseAmount = Money(amountInput)
-    val lottoMachine = LottoMachine(purchaseAmount)
+    val purchaseAmount = Money(InputView.getPurchaseAmount())
+    val purchasedTicketNumber = PurchasedTicketsNumber(InputView.getNumberOfManuelTickets(), purchaseAmount)
+    val lottoMachine = LottoMachine(purchasedTicketNumber)
     val lottoTickets = lottoMachine.tickets
 
     ResultView.viewTicketsAmount(lottoTickets.size)
