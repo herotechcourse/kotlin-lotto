@@ -4,7 +4,7 @@ import view.InputView
 import view.ResultView
 
 fun main() {
-    val amountInput = InputView.getAmountInput()
+    val amountInput = InputView.getPurchaseAmount()
     val purchaseAmount = Money(amountInput)
     val lottoMachine = LottoMachine(purchaseAmount)
     val lottoTickets = lottoMachine.tickets
