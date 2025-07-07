@@ -7,10 +7,14 @@ data class LottoTicket(private val lottoNumbers: HashSet<LottoNumber>) {
 
     companion object {
         private const val SUFFICIENT_SIZE = 6
+        const val PRICE_OF_TICKET = 1000
+        const val CURRENCY = "KRW"
 
         fun from(requests: Set<Int>): LottoTicket {
             return LottoTicket(
-                requests.map { LottoNumber.from(it) }.toHashSet()
+                requests.sorted().map {
+                    LottoNumber.from(it)
+                }.toHashSet()
             )
         }
     }
