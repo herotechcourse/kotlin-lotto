@@ -3,7 +3,7 @@ package lotto
 object OutputView {
     fun displayTickets(tickets: List<Lotto>) {
         println("You have purchased ${tickets.size} tickets.")
-        tickets.forEach { println(it.numbers.joinToString(prefix = "[", postfix = "]")) }
+        tickets.forEach { println(it.toString()) }
         println()
     }
 

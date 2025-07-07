@@ -1,6 +1,6 @@
 package lotto
 
-class LottoNumber private constructor(private val number: Int) {
+class LottoNumber private constructor(val number: Int) {
     companion object {
         const val MIN = 1
         const val MAX = 45
