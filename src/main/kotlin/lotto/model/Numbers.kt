@@ -1,4 +1,4 @@
-package lotto
+package lotto.model
 
 data class Numbers(val numbers: List<Int>) : List<Int> {
     override val size: Int get() = numbers.size

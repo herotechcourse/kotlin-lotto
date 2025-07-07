@@ -1,4 +1,4 @@
-package lotto
+package lotto.util
 
 object RandomNumberGenerator {
     fun generateNumber(): List<Int> {

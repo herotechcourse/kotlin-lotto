@@ -1,4 +1,6 @@
-package lotto
+package lotto.view
+
+import lotto.model.LottoTicket
 
 object ResultView {
     fun displayNumberOfTickets(numberOfTickets: Int) {

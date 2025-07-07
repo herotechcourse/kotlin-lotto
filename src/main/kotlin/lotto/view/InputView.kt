@@ -1,4 +1,6 @@
-package lotto
+package lotto.view
+
+import lotto.model.LottoTicket
 
 object InputView {
     // TODO: Have to deal with the exception
@@ -18,8 +20,8 @@ object InputView {
         val usedInput = input.split(",") // -> ["1", " 2", " 3", " 4", " 5", " 6"]
         val userInput = usedInput.map { it.toIntOrNull() ?: throw IllegalArgumentException("This is not a number.") }
         userInput.forEach {
-            require(it >= LottoTicket.MIN_LOTTO_NUMBER) { Message.ERROR_MESSAGE_FOR_LOTTO_NUMBER }
-            require(it <= LottoTicket.MAX_LOTTO_NUMBER) { Message.ERROR_MESSAGE_FOR_LOTTO_NUMBER }
+            require(it >= LottoTicket.Companion.MIN_LOTTO_NUMBER) { Message.ERROR_MESSAGE_FOR_LOTTO_NUMBER }
+            require(it <= LottoTicket.Companion.MAX_LOTTO_NUMBER) { Message.ERROR_MESSAGE_FOR_LOTTO_NUMBER }
         }
         val finalInput = userInput.distinct()
         require(finalInput.size == 6) { "Invalid Input." }
@@ -30,13 +32,13 @@ object InputView {
         println("Please enter the bonus number.")
         val input = readln()
         val userInput = input.toIntOrNull() ?: throw IllegalArgumentException("This is not a number.")
-        require(userInput >= LottoTicket.MIN_LOTTO_NUMBER) { Message.ERROR_MESSAGE_FOR_LOTTO_NUMBER }
-        require(userInput <= LottoTicket.MAX_LOTTO_NUMBER) { Message.ERROR_MESSAGE_FOR_LOTTO_NUMBER }
+        require(userInput >= LottoTicket.Companion.MIN_LOTTO_NUMBER) { Message.ERROR_MESSAGE_FOR_LOTTO_NUMBER }
+        require(userInput <= LottoTicket.Companion.MAX_LOTTO_NUMBER) { Message.ERROR_MESSAGE_FOR_LOTTO_NUMBER }
         return userInput
     }
 
     object Message {
         const val ERROR_MESSAGE_FOR_LOTTO_NUMBER =
-            "You must provide a number between ${LottoTicket.MIN_LOTTO_NUMBER} and ${LottoTicket.MAX_LOTTO_NUMBER}."
+            "You must provide a number between ${LottoTicket.Companion.MIN_LOTTO_NUMBER} and ${LottoTicket.Companion.MAX_LOTTO_NUMBER}."
     }
 }

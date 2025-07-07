@@ -1,4 +1,4 @@
-package lotto
+package lotto.model
 
 class LottoMachine(
     val amountOfMoney: Int,

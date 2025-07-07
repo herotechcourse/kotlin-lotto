@@ -1,4 +1,6 @@
-package lotto
+package lotto.model
+
+import lotto.util.RandomNumberGenerator
 
 class LottoPrinter(amountOfMoney: Int) {
     val amountOfTicket: Int = amountOfMoney / LottoTicket.COST_OF_TICKET

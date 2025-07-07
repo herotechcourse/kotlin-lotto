@@ -1,4 +1,4 @@
-package lotto
+package lotto.model
 
 class WinningStatistics() {
     var winningMoney: Int = 0
@@ -16,8 +16,7 @@ class WinningStatistics() {
     }
 
     fun calculateReturnRate(amountOfMoney: Int): Double {
-        var result: Double = 0.0
-        result = winningMoney.toDouble() / amountOfMoney.toDouble()
+        val result: Double = winningMoney.toDouble() / amountOfMoney.toDouble()
         returnRate = result
         return result
     }
