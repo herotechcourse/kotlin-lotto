@@ -1,7 +1,7 @@
 package lotto.dto
 
+import lotto.controller.TicketIssuer
 import lotto.domain.LottoTicket
-import lotto.services.TicketIssuer
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test

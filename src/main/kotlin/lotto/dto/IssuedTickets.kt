@@ -3,9 +3,7 @@ package lotto.dto
 import lotto.domain.LottoTicket
 
 data class IssuedTickets(private val tickets: List<LottoTicket>) {
-
     fun size() = tickets.size
-
     fun get(): List<LottoTicket> = tickets
 
     operator fun plus(ticket: LottoTicket): IssuedTickets {

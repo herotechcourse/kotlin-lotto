@@ -1,4 +1,4 @@
-package lotto.services
+package lotto.controller
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
