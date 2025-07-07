@@ -16,12 +16,11 @@ object Lotto {
         machine.bundleOfLottoTicket = printer.bundleOfLottoTicket
         machine.writeResultTable()
 
-        val winStats = machine.winStat
-        winStats.calculateWinningMoney(machine.resultTable)
-        winStats.calculateReturnRate(machine.amountOfMoney)
+        val winningMoney = WinStatCalculator.calculateWinningMoney(machine.resultTable)
+        val returnRate = WinStatCalculator.calculateReturnRate(winningMoney, machine.amountOfMoney)
 
         ResultView.displayWinningStatistics(machine.resultTable)
-        ResultView.displayReturnRate(winStats.returnRate)
+        ResultView.displayReturnRate(returnRate)
     }
 
     private fun <T> retryable(inputMethod: () -> T): T {
