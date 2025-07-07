@@ -70,19 +70,18 @@
 - [ ] think/search about what `application` means, and refactor if needed
 
 ### Output View
-- [ ] collect `const` message and print logic
+- [x] collect `const` message and print logic
 
 ### Input View 
-- [ ] collect `const` message and print logic 
+- [x] collect read and retry logic
 
 #### Service
 - [ ] separate service logic clearly
 - [ ] think about why *those functions* should belong to the service layer, and implement a better structure if needed
 
 #### Utils
-- [ ] improve naming
-- [ ] merge into domain
-  - [ ] move to domain logic
+- [x] merge into domain
+  - [x] move to domain logic
 
 #### Refactor
 - [ ] fix and clarify condition: `(size == 0 || size == 1)`
@@ -97,7 +96,7 @@
 - [x] override `toString`
 
 ### LottoTicket
-- [ ] wrap `HashSet<LottoNumber>` to `LottoTicket`
+- [x] wrap `HashSet<LottoNumber>` to `LottoTicket`
 - [x] require: sufficient size, 6
 - [x] override `toString`
 
