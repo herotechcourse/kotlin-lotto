@@ -16,7 +16,7 @@ object OutputView {
         }
 
         fun issuedTickets(tickets: IssuedTickets) {
-            tickets.get().forEach { println("[${it.toString()}]") }
+            tickets.get().forEach { println("[$it]") }
         }
 
         fun winningStatistics(gameResult: GameResult) {
