@@ -1,11 +1,8 @@
-package lotto.services
+package lotto.domain
 
-import lotto.domain.LottoNumber
-import lotto.domain.LottoTicket
-import lotto.domain.Rank
-import lotto.domain.WinningCombination
-import lotto.view.OutputView
-import org.assertj.core.api.Assertions.assertThat
+import lotto.services.TicketIssuer
+import lotto.services.TicketsEvaluator
+import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 
@@ -33,7 +30,7 @@ class GameResultTest {
 
             val totalPrize = Rank.FIRST.winningMoney
             val shouldBe = (totalPrize.toDouble() / totalAmount) * 100.0
-            assertThat(result.returnRate).isEqualTo(shouldBe)
+            Assertions.assertThat(result.returnRate).isEqualTo(shouldBe)
         }
     }
 }

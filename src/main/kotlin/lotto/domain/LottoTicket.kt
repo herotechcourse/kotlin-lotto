@@ -12,7 +12,7 @@ data class LottoTicket(private val lottoNumbers: HashSet<LottoNumber>) {
     }
 
     fun getRank(winningCombination: WinningCombination): Rank {
-        val countOfMatch = lottoNumbers.count() { it in winningCombination.winningTicket.lottoNumbers }
+        val countOfMatch = lottoNumbers.count { it in winningCombination.winningTicket.lottoNumbers }
         val matchBonus = lottoNumbers.any { it == winningCombination.bonusNumber }
         return Rank.valueOf(countOfMatch, matchBonus)
     }

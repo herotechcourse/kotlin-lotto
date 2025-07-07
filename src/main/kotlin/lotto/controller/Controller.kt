@@ -1,11 +1,7 @@
 package lotto.controller
 
 
-import lotto.domain.LottoNumber
-import lotto.domain.LottoTicket
-import lotto.domain.WinningCombination
-import lotto.services.GameResult
-import lotto.domain.RandomNumbers
+import lotto.domain.*
 import lotto.services.TicketIssuer
 import lotto.services.TicketsEvaluator
 import lotto.view.InputView
@@ -86,7 +82,7 @@ object Controller {
     }
 
     private fun getRandomNumbersRaw(size: Int): List<Set<Int>> {
-        return List(size) { RandomNumbers.get() }
+        return List(size) { NumberGenerator.get() }
     }
 
     private fun askWinningNumbers(): Set<Int> {

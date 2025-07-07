@@ -9,6 +9,6 @@ data class WinningCombination(val winningTicket: LottoTicket, val bonusNumber: L
     init {
         require(
             !winningTicket.get().contains(bonusNumber)
-        ) { LottoException.InvalidBonusNumberException(bonusNumber.hashCode())}
+        ) { LottoException.InvalidBonusNumberException(bonusNumber.hashCode()) }
     }
 }

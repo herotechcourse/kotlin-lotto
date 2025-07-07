@@ -1,6 +1,6 @@
 package lotto.domain
 
-object RandomNumbers {
+object NumberGenerator {
     fun get(): Set<Int> {
         return (LottoNumber.MIN_RANGE_NUMBER..LottoNumber.MAX_RANGE_NUMBER)
             .shuffled()

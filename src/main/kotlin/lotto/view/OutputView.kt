@@ -1,9 +1,9 @@
 package lotto.view
 
+import lotto.domain.GameResult
 import lotto.domain.LottoTicket
 import lotto.domain.Rank
 import lotto.dto.IssuedTickets
-import lotto.services.GameResult
 
 object OutputView {
 
@@ -16,7 +16,7 @@ object OutputView {
         }
 
         fun issuedTickets(tickets: IssuedTickets) {
-            tickets.get().forEach { println("[${it.toString()}]") }
+            tickets.get().forEach { println("[$it]") }
         }
 
         fun winningStatistics(gameResult: GameResult) {
@@ -39,7 +39,8 @@ object OutputView {
         }
 
         fun totalRate(totalRate: Double) {
-            println("${Prompt.totalReturnRate()} ${"%.2f".format(totalRate)}")
+            Prompt.totalReturnRate()
+            println("%.2f".format(totalRate))
         }
 
         private fun pluralizeTicket(size: Int): String {

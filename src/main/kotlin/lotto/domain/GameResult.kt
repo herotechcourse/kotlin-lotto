@@ -1,7 +1,5 @@
-package lotto.services
+package lotto.domain
 
-import lotto.domain.Rank
-import lotto.domain.WinningCombination
 import lotto.dto.IssuedTickets
 
 data class GameResult(
@@ -10,5 +8,4 @@ data class GameResult(
     val totalAmount: Int,
     val ranks: List<Rank>,
     val returnRate: Double
-) {
-}
+)
