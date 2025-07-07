@@ -3,33 +3,31 @@ package lotto.view
 import lotto.exceptions.LottoException
 
 object InputView {
-    // TODO: separate to I/O get..() methods
-    fun getPurchaseAmount(): Int {
-        println(Constants.PURCHASE_PROMPT)
+    fun readUserAmount(): Int {
         val input = readln()
         return input.trim().toIntOrNull() ?: throw LottoException.InvalidAmountFormatException(input)
     }
 
-    fun getWinningNumbers(): List<Int> {
-        println(Constants.WINNING_NUMBERS_PROMPT)
+    fun readNumberOfManual(amount: Int): Int {
+        val input = readln()
+        val integerInput = input.trim().toIntOrNull() ?: throw IllegalArgumentException()
+        require(amount > 0 && integerInput <= amount)
+        return integerInput
+    }
+
+    fun readManualNumbers(): Set<Int> {
         val input = readln()
         return input
             .split(',')
             .map {
                 it.trim().toIntOrNull()
                     ?: throw LottoException.InvalidWinningNumbersFormatException(input)
-            }
+            }.toSet()
     }
 
-    fun getBonusNumber(): Int {
-        println(Constants.BONUS_NUMBER_PROMPT)
+    fun readBonusNumber(): Int {
         val input = readln()
         return input.trim().toIntOrNull() ?: throw LottoException.InvalidBonusNumberFormatException(input)
-    }
-
-    fun readUserAmount(): Int {
-        val input = readln()
-        return input.trim().toIntOrNull() ?: throw LottoException.InvalidAmountFormatException(input)
     }
 
     /**
