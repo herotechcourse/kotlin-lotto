@@ -10,7 +10,17 @@ object OutputView {
             println(PURCHASE_AMOUNT_PROMPT)
         }
 
+        fun numberOfManual() {
+            println(NUMBER_OF_MANUAL_PROMPT)
+        }
+
+        fun manualNumbers() {
+            println(MANUAL_TICKET_PROMPT)
+        }
+
         private const val PURCHASE_AMOUNT_PROMPT = "Please enter the purchase amount."
+        private const val NUMBER_OF_MANUAL_PROMPT = "Enter the number of manual tickets to purchase."
+        private const val MANUAL_TICKET_PROMPT = "Enter the numbers for manual tickets."
         private const val WINNING_NUMBERS_PROMPT = "Please enter last week’s winning numbers."
         private const val BONUS_NUMBER_PROMPT = "Please enter the bonus number."
         private const val TICKETS_NUMBERS_PROMPT = "You have purchased"
@@ -19,6 +29,7 @@ object OutputView {
     }
 
     // TODO: clean up print methods
+    /*
     fun printTickets(tickets: List<Lotto>) {
         val numberOfTickets = tickets.size
         println(
@@ -53,4 +64,5 @@ object OutputView {
     private fun pluralizeTicket(size: Int): String {
         return if (size == 1) "ticket" else "tickets"
     }
+    */
 }
