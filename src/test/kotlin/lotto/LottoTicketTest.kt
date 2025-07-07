@@ -17,7 +17,6 @@ class LottoTicketTest {
         assertEquals(LottoTicket.SIZE_OF_NUMBERS, ticket.numbers.size)
     }
 
-    // Lots of refactoring required
     @Test
     fun `Ticket number should be from 1-45`() {
         val ticket = LottoTicket()
@@ -27,7 +26,6 @@ class LottoTicketTest {
         }
     }
 
-    // Minor refactoring required
     @Test
     fun `Ticket numbers are not duplicated`() {
         val ticket = LottoTicket()
