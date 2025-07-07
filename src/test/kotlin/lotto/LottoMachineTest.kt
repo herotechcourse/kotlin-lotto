@@ -16,7 +16,7 @@ class LottoMachineTest {
     @Test
     fun `Change is calculated for the User`() {
         val machine = LottoMachine(1234)
-        assertEquals(machine.showChange(), 234)
+        assertEquals(machine.change, 234)
     }
 
     @ParameterizedTest
