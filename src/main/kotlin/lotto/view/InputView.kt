@@ -1,5 +1,6 @@
 package lotto.view
 
+import lotto.domain.LottoNumber
 import lotto.exceptions.LottoException
 
 object InputView {
@@ -8,36 +9,43 @@ object InputView {
         return input.trim().toIntOrNull() ?: throw LottoException.InvalidAmountFormatException(input)
     }
 
-    fun readNumberOfManual(amount: Int): Int {
+    fun readNumberOfManual(count: Int): Int {
         val input = readln()
-        val integerInput = input.trim().toIntOrNull() ?: throw IllegalArgumentException()
-        require(amount > 0 && integerInput <= amount)
-        return integerInput
+        val numberOfManual = input.trim().toIntOrNull() ?: throw IllegalArgumentException()
+        require(count > 0 && numberOfManual <= count)
+        return numberOfManual
     }
 
-    fun readManualNumbers(): Set<Int> {
+    fun readManualNumbers(count: Int): Set<Int> {
         val input = readln()
         return input
             .split(',')
             .map {
                 it.trim().toIntOrNull()
                     ?: throw LottoException.InvalidWinningNumbersFormatException(input)
-            }.toSet()
+            }.toSortedSet()
     }
 
-    fun readBonusNumber(): Int {
+    fun readBonusNumber(winningInput: Set<Int>): LottoNumber {
         val input = readln()
-        return input.trim().toIntOrNull() ?: throw LottoException.InvalidBonusNumberFormatException(input)
+        val bonusNumber = input.trim().toIntOrNull() ?: throw LottoException.InvalidWinningNumbersFormatException(input)
+        if (winningInput.contains(bonusNumber))
+            throw LottoException.InvalidWinningNumbersFormatException(input)
+        return LottoNumber.from(bonusNumber)
     }
 
     /**
      * Template function that accept a lambda
      * returns only in case of successfully
      */
-    private fun <T> retryUntilSuccess(block: () -> T): T {
+    fun <T> retryUntilSuccess(
+        prompt: () -> Unit,
+        read: () -> T
+    ): T {
         while (true) {
             try {
-                return block()
+                prompt()
+                return read()
             } catch (e: LottoException) {
                 println(e.message)
             }
