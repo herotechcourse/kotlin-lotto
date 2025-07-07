@@ -11,21 +11,19 @@ class LottoMachineTest {
     fun `LottoMachine correctly filters ranks`() {
         val machine =
             LottoMachine(
-                amountOfMoney = 2000,
                 lastWeekWinningNumbers = winningNumbers,
                 bonusNumber = bonusNumber,
             )
 
-        machine.bundleOfLottoTicket =
+        val tickets =
             listOf(
                 LottoTicket(listOf(1, 2, 3, 4, 5, 6)),
-                // second
                 LottoTicket(listOf(1, 2, 3, 4, 5, 7)),
             )
 
-        machine.writeResultTable()
+        val resultTable = machine.createResultTable(tickets)
 
-        assertEquals(1, machine.resultTable[Rank.FIRST])
-        assertEquals(1, machine.resultTable[Rank.SECOND])
+        assertEquals(1, resultTable[Rank.FIRST])
+        assertEquals(1, resultTable[Rank.SECOND])
     }
 }

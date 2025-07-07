@@ -20,17 +20,7 @@ object InputView {
         println("Enter the numbers for manual tickets.")
         return List(count) {
             val line = readln()
-            val numbers =
-                line.split(",")
-                    .map { it.trim().toIntOrNull() ?: throw IllegalArgumentException("Invalid number in ticket.") }
-
-            require(numbers.size == 6) { "Each ticket must have exactly 6 numbers." }
-            require(numbers.distinct().size == 6) { "Numbers must be unique." }
-            numbers.forEach {
-                require(it in 1..45) { "Number out of range (1-45)." }
-            }
-
-            LottoTicket(numbers.sorted())
+            ManualTicketParser.parse(line)
         }
     }
 
