@@ -3,7 +3,8 @@
 
 ### General
 - [ ] Wrap primitives
-  - [ ] LottoNumber class to wrap an Int
+  - [x] LottoNumber class to wrap an Int
+  - [x] Lotto class to wrap lotto numbers
 - [ ] Use First-Class-Collections
 
 ### Single Lotto Ticket
@@ -16,6 +17,10 @@
   - [x] Change is calculated for the User
   - [x] Minimum MIN, maximum MAX KRW
 - [x] Generates List of Lotto tickets
+  - [ ] manual tickets
+    - [ ] max purchase amount / TICKET_PRICE
+  - [ ] automatic tickets
+    - [ ] total ticket amount - number of manual tickets 
   - [x] Each ticket is a random set
   - [x] Number of tickets equals purchaseAmount / TICKET_PRICE
 
