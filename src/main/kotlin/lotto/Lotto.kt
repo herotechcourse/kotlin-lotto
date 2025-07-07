@@ -10,6 +10,8 @@ class Lotto(val numbers: List<LottoNumber>) {
         }
     }
 
+    constructor(numbers: List<Int>) : this(numbers.map { LottoNumber.from(it) })
+
     fun hasBonusNumber(bonusNumber: LottoNumber): Boolean {
         return numbers.contains(bonusNumber)
     }
