@@ -9,6 +9,31 @@ object InputView {
         return userInput
     }
 
+    fun getManualTicketCount(maxTicketCount: Int): Int {
+        println("Enter the number of manual tickets to purchase.")
+        val input = readln().toIntOrNull() ?: throw IllegalArgumentException("Invalid number.")
+        require(input in 0..maxTicketCount) { "You can enter between 0 and $maxTicketCount manual tickets." }
+        return input
+    }
+
+    fun getManualTickets(count: Int): List<LottoTicket> {
+        println("Enter the numbers for manual tickets.")
+        return List(count) {
+            val line = readln()
+            val numbers =
+                line.split(",")
+                    .map { it.trim().toIntOrNull() ?: throw IllegalArgumentException("Invalid number in ticket.") }
+
+            require(numbers.size == 6) { "Each ticket must have exactly 6 numbers." }
+            require(numbers.distinct().size == 6) { "Numbers must be unique." }
+            numbers.forEach {
+                require(it in 1..45) { "Number out of range (1-45)." }
+            }
+
+            LottoTicket(numbers.sorted())
+        }
+    }
+
     fun getLastWeekWinningNumbers(): List<Int> {
         println("Please enter last week’s winning numbers.")
         val input = readln() // -> "1,2,3,4,5,6"
