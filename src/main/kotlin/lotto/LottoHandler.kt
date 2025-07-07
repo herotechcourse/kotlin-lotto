@@ -7,12 +7,11 @@ object LottoHandler {
             val winningTicket = processWinningNumbers()
             val winningNumbers = processBonusNumbers(winningTicket)
 
-            val calculator = Calculator(machine.tickets, winningNumbers)
+            val calculator = Calculator(machine.tickets, machine.purchaseAmount, winningNumbers)
 
-            val returnRate = calculator.calculateReturnRate(machine.purchaseAmount)
             OutputView.displayWinnings(calculator.results)
-            OutputView.displayTotalWinningAmount(calculator.calculateTotalEarnings())
-            OutputView.displayReturnRate(returnRate)
+            OutputView.displayTotalWinningAmount(calculator.totalEarnings)
+            OutputView.displayReturnRate(calculator.returnRate)
         } catch (err: IllegalArgumentException) {
             println(err.message)
         }

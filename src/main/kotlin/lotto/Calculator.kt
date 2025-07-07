@@ -3,16 +3,15 @@ package lotto
 // here ticket is a constructor parameter, but not a property
 class Calculator(
     tickets: List<Lotto>,
+    purchaseAmount: Int,
     private val winningNumbers: WinningNumbers,
-    private var _results: MutableMap<Rank, Int> = emptyMap<Rank, Int>().toMutableMap(),
 ) {
-    init {
-        calculateResults(tickets)
-    }
-    val results: Map<Rank, Int>
-        get() = _results
+    val results: Map<Rank, Int> = calculateResults(tickets)
+    val totalEarnings: Int = results.entries.sumOf{ it.key.winningMoney * it.value }
+    val returnRate: Float = (totalEarnings.toFloat() / purchaseAmount.toFloat())
 
-    fun calculateResults(tickets: List<Lotto>) {
+    fun calculateResults(tickets: List<Lotto>): Map<Rank, Int> {
+        val table = mutableMapOf<Rank, Int>()
         tickets.forEach {
             val count = findMatches(it, winningNumbers.winningNumbers)
             val rank =
@@ -20,16 +19,9 @@ class Calculator(
                     count,
                     it.hasBonusNumber(winningNumbers.bonusNumber),
                 )
-            _results[rank] = _results.getOrDefault(rank, 0) + 1
+            table[rank] = table.getOrDefault(rank, 0) + 1
         }
-    }
-
-    fun calculateReturnRate(purchaseAmount: Int): Float {
-        return (calculateTotalEarnings() / purchaseAmount.toFloat())
-    }
-
-    fun calculateTotalEarnings(): Float {
-        return _results.entries.sumOf{ it.key.winningMoney * it.value }.toFloat()
+        return table
     }
 
     private fun findMatches(
