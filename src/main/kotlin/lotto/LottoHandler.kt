@@ -1,13 +1,15 @@
 package lotto
 
 object LottoHandler {
+    private val machine = LottoMachine()
+    private var tickets = listOf<Lotto>()
     fun start() {
         try {
-            val machine = buyTickets()
+            val purchase = buyTickets()
             val winningTicket = processWinningNumbers()
             val winningNumbers = processBonusNumbers(winningTicket)
 
-            val statistics = Statistics(machine.tickets, machine.purchase.amount, winningNumbers)
+            val statistics = Statistics(tickets, purchase.amount, winningNumbers)
 
             OutputView.displayWinnings(statistics.results)
             OutputView.displayTotalWinningAmount(statistics.totalEarnings)
@@ -17,14 +19,14 @@ object LottoHandler {
         }
     }
 
-    fun buyTickets(): LottoMachine {
+    fun buyTickets(): Purchase {
         repeat(MAX_ATTEMPT) {
             try {
                 val purchase = Purchase(InputView.readPurchaseAmount())
-                val machine = LottoMachine(purchase)
-                OutputView.displayTickets(machine.tickets)
+                tickets = machine.generateTickets(purchase.ticketCount)
+                OutputView.displayTickets(tickets)
                 OutputView.displayChange(purchase.change)
-                return machine
+                return purchase
             } catch (err: IllegalArgumentException) {
                 println(err.message)
             }

@@ -2,17 +2,13 @@ package lotto
 
 import kotlin.collections.shuffled
 
-class LottoMachine(val purchase: Purchase, val tickets: MutableList<Lotto> = mutableListOf<Lotto>()) {
-    private val ticketCount = purchase.ticketCount
-
-    init {
-        generateTickets()
-    }
-
-    fun generateTickets() {
+class LottoMachine() {
+    fun generateTickets(ticketCount: Int): List<Lotto> {
+        val tickets: MutableList<Lotto> = mutableListOf()
         repeat(ticketCount) {
             tickets.add(Lotto.from(generateRandomNumbers()))
         }
+        return tickets
     }
 
     private fun generateRandomNumbers(): List<Int> =
