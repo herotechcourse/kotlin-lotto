@@ -19,8 +19,25 @@ object InputView {
         return numbers
     }
 
+    fun readManualTickets(): List<Int> {
+        println("Please enter the numbers for the manual tickets.")
+        val numbers =
+            readln().split(",")
+                .map {
+                    it.trim().toIntOrNull() ?: throw IllegalArgumentException(INPUT_ERROR_MESSAGE)
+                }
+        return numbers
+    }
+
     fun readBonusNumber(): Int {
         println("Please enter the bonus number.")
+        val number = readln().toIntOrNull() ?: throw IllegalArgumentException(INPUT_ERROR_MESSAGE)
+        println()
+        return number
+    }
+
+    fun readNumberOfManualTickets(): Int {
+        println("Please enter the number of manual tickets to purchase.")
         val number = readln().toIntOrNull() ?: throw IllegalArgumentException(INPUT_ERROR_MESSAGE)
         println()
         return number
