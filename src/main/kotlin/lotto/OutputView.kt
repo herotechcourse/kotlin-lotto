@@ -7,6 +7,12 @@ object OutputView {
         println()
     }
 
+    fun displayCombinedTickets(tickets: List<Lotto>, manualCount: Int, automaticCount: Int) {
+        println("You have purchased $manualCount manual and $automaticCount automatic tickets.")
+        tickets.forEach { println(it.toString()) }
+        println()
+    }
+
     fun displayChange(change: Int) {
         println("Your change is $change KRW.")
         println()
