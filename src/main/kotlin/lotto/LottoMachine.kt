@@ -6,7 +6,7 @@ class LottoMachine() {
         manualTicketsQuantity: Int,
     ): List<Lotto> {
         val lottos = mutableListOf<Lotto>()
-        var ticketsToBeGenerated = totalPurchasedTickets - manualTicketsQuantity
+        val ticketsToBeGenerated = totalPurchasedTickets - manualTicketsQuantity
         var countGeneratedTickets = 0
         while (countGeneratedTickets < ticketsToBeGenerated) {
             lottos.add(Lotto.create())
