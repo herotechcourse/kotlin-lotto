@@ -1,4 +1,4 @@
-package lotto
+package lotto.service
 
 object AmountValidator {
     fun validate(amount: Int) {

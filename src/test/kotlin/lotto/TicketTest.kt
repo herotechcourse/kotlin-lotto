@@ -1,5 +1,8 @@
 package lotto
 
+import lotto.model.LottoNumber
+import lotto.model.Ticket
+import lotto.service.Constants
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
@@ -14,7 +17,7 @@ class TicketTest {
             assertThrows<IllegalArgumentException> {
                 Ticket(numberToLottoNumber(10, 2, 34, 5, 2, 15, 6))
             }
-        assertThat(exception.message).isEqualTo("Need ${Constants.NUMBER_COUNT} numbers")
+        assertThat(exception).hasMessage("Need ${Constants.NUMBER_COUNT} numbers")
     }
 
     @Test
@@ -32,7 +35,7 @@ class TicketTest {
             assertThrows<IllegalArgumentException> {
                 Ticket(numberToLottoNumber(1, 2, 34, 46, 4, 41))
             }
-        assertThat(exception.message).isEqualTo("Numbers must be between ${Constants.MINIMUM_NUMBER} and ${Constants.MAXIMUM_NUMBER}")
+        assertThat(exception).hasMessage("Numbers must be between ${Constants.MINIMUM_NUMBER} and ${Constants.MAXIMUM_NUMBER}")
     }
 
     @Test
@@ -50,7 +53,7 @@ class TicketTest {
             assertThrows<IllegalArgumentException> {
                 Ticket(numberToLottoNumber(1, 1, 2, 3, 4, 5))
             }
-        assertThat(exception.message).isEqualTo("Numbers have to be distinct")
+        assertThat(exception).hasMessage("Numbers have to be distinct")
     }
 
     @Test
@@ -68,6 +71,6 @@ class TicketTest {
             assertThrows<IllegalArgumentException> {
                 Ticket(emptyList())
             }
-        assertThat(exception.message).isEqualTo("Need ${Constants.NUMBER_COUNT} numbers")
+        assertThat(exception).hasMessage("Need ${Constants.NUMBER_COUNT} numbers")
     }
 }

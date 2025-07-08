@@ -1,4 +1,4 @@
-package lotto
+package lotto.model
 
 class LottoNumber private constructor(private val value: Int) {
     companion object {
@@ -11,7 +11,11 @@ class LottoNumber private constructor(private val value: Int) {
                 ?: throw IllegalArgumentException("Numbers must be between $MINIMUM_NUMBER and $MAXIMUM_NUMBER")
         }
 
-        fun allNumbers(): List<LottoNumber> = NUMBERS.values.toList()
+        private fun allNumbers(): List<LottoNumber> = NUMBERS.values.toList()
+
+        fun takeRandom(count: Int): List<LottoNumber> {
+            return (allNumbers()).shuffled().take(count).sortedBy { it.toInt() }
+        }
     }
 
     override fun equals(other: Any?): Boolean {

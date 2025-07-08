@@ -1,5 +1,7 @@
 package lotto
 
+import lotto.model.LottoNumber
+import lotto.service.Constants
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -17,7 +19,7 @@ class LottoNumberTest {
             assertThrows<IllegalArgumentException> {
                 LottoNumber.from(-1)
             }
-        assertThat(exception.message).contains("Numbers must be between")
+        assertThat(exception).hasMessage("Numbers must be between")
     }
 
     @Test
@@ -26,12 +28,6 @@ class LottoNumberTest {
             assertThrows<IllegalArgumentException> {
                 LottoNumber.from(100)
             }
-        assertThat(exception.message).contains("Numbers must be between")
-    }
-
-    @Test
-    fun `allNumbers returns full list of valid numbers`() {
-        val allValidNumbers = LottoNumber.allNumbers()
-        assertThat(allValidNumbers).hasSize(Constants.MAXIMUM_NUMBER)
+        assertThat(exception).hasMessage("Numbers must be between")
     }
 }

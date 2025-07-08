@@ -1,13 +1,16 @@
-package lotto
+package lotto.view
 
+import lotto.service.Rank
+import lotto.model.Ticket
 import java.text.NumberFormat
 
 object OutputView {
     fun displayTickets(
         ticketCount: Int,
         ticketsList: List<Ticket>,
+        manualTicketCount: Int,
     ) {
-        println("You have purchased $ticketCount tickets.")
+        println("\nPurchased $manualTicketCount manual and $ticketCount automatic tickets.")
         ticketsList.forEach { ticket ->
             println(ticket.numbers.joinToString(prefix = "[", postfix = "]", separator = ","))
         }
