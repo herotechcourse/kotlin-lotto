@@ -16,19 +16,6 @@ sealed class LottoException(msg: String) : IllegalArgumentException("[ERROR]: $m
     class InvalidWinningNumbersFormatException(input: String) :
         LottoException("Invalid winning numbers format: '$input'. Expected numbers separated by commas.")
 
-    class InvalidWinningNumbersException() :
-        LottoException(
-            "Invalid winning numbers: Expected ${LottoTicket.SUFFICIENT_SIZE} numbers in range + " +
-                    "${LottoNumber.MIN_RANGE_NUMBER} to ${LottoNumber.MAX_RANGE_NUMBER}\n",
-        )
-
-    class InvalidBonusNumberFormatException(input: String) :
-        LottoException(
-            "Invalid bonus number format: '$input'. " +
-                    "Expected a number in the range of ${LottoNumber.MIN_RANGE_NUMBER} " +
-                    "to ${LottoNumber.MAX_RANGE_NUMBER} and different to the winning numbers.",
-        )
-
     class InvalidBonusNumberException(bonusNumber: Int) :
         LottoException(
             "Invalid bonus number format: '$bonusNumber'. " +
