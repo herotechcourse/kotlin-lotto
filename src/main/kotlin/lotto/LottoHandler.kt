@@ -10,7 +10,7 @@ object LottoHandler {
         try {
             val purchase = pay()
             reserveManualTickets(purchase)
-            manualTickets = buyManualTickets(purchase.manualTicketsCount)
+            buyManualTickets(purchase.manualTicketsCount)
             buyTickets(purchase)
             val winningTicket = processWinningNumbers()
             val winningNumbers = processBonusNumbers(winningTicket)
@@ -48,7 +48,7 @@ object LottoHandler {
         throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
     }
 
-    fun buyManualTickets(ticketCount: Int): List<Lotto> {
+    fun buyManualTickets(ticketCount: Int) {
         repeat(MAX_ATTEMPT) {
             try {
                 val tickets = mutableListOf<Lotto>()
@@ -56,7 +56,8 @@ object LottoHandler {
                 for (i in 1 .. ticketCount) {
                     tickets.add(Lotto.from(InputView.readManualTickets()))
                 }
-                return tickets
+                manualTickets = tickets.toList()
+                return
             } catch (err: IllegalArgumentException) {
                 println(err.message)
             }
@@ -67,7 +68,7 @@ object LottoHandler {
     fun buyTickets(purchase: Purchase) {
         repeat(MAX_ATTEMPT) {
             try {
-                automaticTickets = machine.generateTickets(purchase.ticketCount)
+                automaticTickets = machine.generateTickets(purchase.automaticTicketsCount)
                 OutputView.displayCombinedTickets(tickets, purchase.manualTicketsCount, purchase.automaticTicketsCount)
                 OutputView.displayChange(purchase.change)
                 return
