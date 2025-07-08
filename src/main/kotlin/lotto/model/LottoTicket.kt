@@ -8,7 +8,7 @@ class LottoTicket(val lottoNumbers: Numbers) {
         require(cost == COST_OF_TICKET) { "Cost of Ticket should be $COST_OF_TICKET" }
         require(lottoNumbers.size == SIZE_OF_NUMBERS) { "Size of numbers should be $SIZE_OF_NUMBERS" }
         require(
-            lottoNumbers.all { it >= MIN_LOTTO_NUMBER && it <= MAX_LOTTO_NUMBER },
+            lottoNumbers.all { it in MIN_LOTTO_NUMBER..MAX_LOTTO_NUMBER },
         ) { "All numbers should be in the range [$MIN_LOTTO_NUMBER, $MAX_LOTTO_NUMBER]" }
     }
 
