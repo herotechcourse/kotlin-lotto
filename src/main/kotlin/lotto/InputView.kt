@@ -4,13 +4,13 @@ private const val INPUT_ERROR_MESSAGE = "[ERROR] Wrong input"
 
 object InputView {
     fun readPurchaseAmount(): Int {
-        println("Please enter the purchase amount.")
+        println("\nPlease enter the purchase amount.")
         val amount = readln().toIntOrNull() ?: throw IllegalArgumentException(INPUT_ERROR_MESSAGE)
         return amount
     }
 
     fun readWinningNumbers(): List<Int> {
-        println("Please enter last week’s winning numbers.")
+        println("\nPlease enter last week’s winning numbers.")
         val numbers =
             readln().split(",")
                 .map {
@@ -19,8 +19,9 @@ object InputView {
         return numbers
     }
 
+    fun promptForManualTickets() = println("\nPlease enter the numbers for the manual tickets.")
+
     fun readManualTickets(): List<Int> {
-        println("Please enter the numbers for the manual tickets.")
         val numbers =
             readln().split(",")
                 .map {
@@ -30,16 +31,14 @@ object InputView {
     }
 
     fun readBonusNumber(): Int {
-        println("Please enter the bonus number.")
+        println("\nPlease enter the bonus number.")
         val number = readln().toIntOrNull() ?: throw IllegalArgumentException(INPUT_ERROR_MESSAGE)
-        println()
         return number
     }
 
     fun readNumberOfManualTickets(): Int {
-        println("Please enter the number of manual tickets to purchase.")
+        println("\nPlease enter the number of manual tickets to purchase.")
         val number = readln().toIntOrNull() ?: throw IllegalArgumentException(INPUT_ERROR_MESSAGE)
-        println()
         return number
     }
 }

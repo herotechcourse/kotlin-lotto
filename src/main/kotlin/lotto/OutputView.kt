@@ -2,20 +2,17 @@ package lotto
 
 object OutputView {
     fun displayTickets(tickets: List<Lotto>) {
-        println("You have purchased ${tickets.size} tickets.")
+        println("\nYou have purchased ${tickets.size} tickets.")
         tickets.forEach { println(it.toString()) }
-        println()
     }
 
     fun displayCombinedTickets(tickets: List<Lotto>, manualCount: Int, automaticCount: Int) {
-        println("You have purchased $manualCount manual and $automaticCount automatic tickets.")
+        println("\nYou have purchased $manualCount manual and $automaticCount automatic tickets.")
         tickets.forEach { println(it.toString()) }
-        println()
     }
 
     fun displayChange(change: Int) {
-        println("Your change is $change KRW.")
-        println()
+        println("\nYour change is $change KRW.")
     }
 
     fun displayTotalWinningAmount(totalAmount: Int) {
@@ -26,7 +23,7 @@ object OutputView {
 
     private fun buildWinningsString(results: Map<Rank, Int>): String {
         val string = buildString {
-            appendLine("Winning Statistics")
+            appendLine("\nWinning Statistics")
             appendLine("------------------")
             Rank.entries
                 .filter { it != Rank.MISS }
