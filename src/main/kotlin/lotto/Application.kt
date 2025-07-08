@@ -20,7 +20,6 @@ fun main() {
         val winningCombination = LottoWinningCreator.fromUserInput()
         val rankedTickets = RankedTickets(purchaseResult, winningCombination)
         OutputView.Print.winningStatistics(rankedTickets)
-
     } catch (exception: Exception) {
         OutputView.Prompt.error(exception)
         exitProcess(1)
