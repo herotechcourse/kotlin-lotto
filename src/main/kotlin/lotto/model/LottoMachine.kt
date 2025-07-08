@@ -15,7 +15,7 @@ class LottoMachine(
         bundleOfLottoTicket.forEach { filterTicket(it) }
     }
 
-    fun filterTicket(ticket: LottoTicket) {
+    private fun filterTicket(ticket: LottoTicket) {
         when (getRankOfTicket(ticket)) {
             Rank.FIRST -> resultTable[1]++
             Rank.SECOND -> resultTable[2]++
