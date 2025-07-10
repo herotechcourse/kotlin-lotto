@@ -17,8 +17,8 @@ class Calculator(
         }
     }
 
-    fun calculateReturnRate(purchaseAmount: Int): Float {
-        return (calculateTotalEarnings() / purchaseAmount.toFloat())
+    fun calculateReturnRate(purchaseAmount: PurchaseAmount): Float {
+        return (calculateTotalEarnings() / purchaseAmount.amount.toFloat())
     }
 
     fun calculateTotalEarnings(): Float {

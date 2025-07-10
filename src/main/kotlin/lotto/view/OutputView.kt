@@ -1,11 +1,24 @@
-package lotto
+package lotto.view
+
+import lotto.EnteredTicketCount
+import lotto.Lotto
+import lotto.LottoNumber
+import lotto.Rank
 
 object OutputView {
+    fun printTicketCount(
+        enteredTicketCount: EnteredTicketCount,
+        generatedTicketCount: Int,
+    ) {
+        println(
+            "\nPurchased ${enteredTicketCount.count} manual and $generatedTicketCount automatic tickets.",
+        )
+    }
+
     fun displayTickets(tickets: List<Lotto>) {
-        println("You have purchased ${tickets.size} tickets.")
         val textByTicket =
             tickets
-                .map { it -> it.sortedList() }
+                .map(OutputView::sortedLottoTicket)
                 .joinToString("\n")
 
         println(textByTicket)
@@ -42,11 +55,17 @@ object OutputView {
     }
 
     fun displayReturnRate(returnRate: Float) {
-        println("Total return rate is $returnRate% (A rate below 1 means a loss).")
+        println("Total return rate is ${"%.2f".format(returnRate)} (A rate below 1 means a loss).")
     }
 
     fun displayError(errorMessage: String?) {
         println("[Error]::${errorMessage ?: ""}")
+    }
+
+    private fun sortedLottoTicket(ticket: Lotto): List<Int> {
+        return ticket.numbers
+            .map(LottoNumber::value)
+            .sorted()
     }
 
     private fun Rank.toText(count: Int): String =

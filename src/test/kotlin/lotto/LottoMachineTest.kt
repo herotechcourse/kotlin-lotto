@@ -7,22 +7,53 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
 class LottoMachineTest {
+    @Test
+    fun `Change is calculated for the User`() {
+        val purchaseAmount = PurchaseAmount(9876)
+        val enteredTicketCount = EnteredTicketCount(0)
+
+        val machine = LottoMachine(purchaseAmount, enteredTicketCount)
+        assertEquals(machine.change, 876)
+    }
+
     @ParameterizedTest
-    @ValueSource(ints = [-1000, 0, 999, 20_001, 21_000])
-    fun `Purchase amount should be minimum 1_000 and (maximum 20_000 KRW)`(number: Int) {
-        assertThrows<IllegalArgumentException> { LottoMachine(number) }
+    @ValueSource(ints = [20_000])
+    fun `Generates correct number of tickets as a list`(amount: Int) {
+        val purchaseAmount = PurchaseAmount(amount)
+        val enteredTicketCount = EnteredTicketCount(0)
+
+        val machine = LottoMachine(purchaseAmount, enteredTicketCount)
+
+        assertEquals(machine.tickets.size, amount / LottoMachine.TICKET_PRICE)
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = [0, 4, 9])
+    fun `Entered Ticket count is less than equal too Purchasable tickets`(number: Int) {
+        val purchaseAmount = PurchaseAmount(9876)
+        val enteredTicketCount = EnteredTicketCount(number)
+        assertEquals(
+            LottoMachine(purchaseAmount, enteredTicketCount).purchaseAmount,
+            purchaseAmount,
+        )
     }
 
     @Test
-    fun `Change is calculated for the User`() {
-        val machine = LottoMachine(1234)
-        assertEquals(machine.showChange(), 234)
+    fun `Entered Ticket count should be less than Purchasable tickets`() {
+        val purchaseAmount = PurchaseAmount(9876)
+        val enteredTicketCount = EnteredTicketCount(10)
+        assertThrows<IllegalArgumentException> {
+            LottoMachine(purchaseAmount, enteredTicketCount).purchaseAmount
+        }
     }
 
-    @ParameterizedTest
-    @ValueSource(ints = [1_000, 20_000])
-    fun `Generates correct number of tickets as a list`(amount: Int) {
-        val machine = LottoMachine(amount)
-        assertEquals(machine.tickets.size, amount / LottoMachine.TICKET_PRICE)
+    @Test
+    fun `Generated ticket count is correct`() {
+        val purchaseAmount = PurchaseAmount(9876)
+        val enteredTicketCount = EnteredTicketCount(4)
+        assertEquals(
+            LottoMachine(purchaseAmount, enteredTicketCount).generatedTicketCount,
+            5,
+        )
     }
 }

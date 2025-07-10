@@ -1,13 +1,11 @@
 package lotto
 
-class Lotto(val numbers: List<LottoNumber>) {
-    init {
-        require(numbers.size == LOTTO_SIZE)
-        require(numbers.distinct().size == LOTTO_SIZE)
-    }
+class Lotto(numbers: List<LottoNumber>) {
+    val numbers = numbers.toSet()
 
-    fun sortedList(): List<Int> {
-        return numbers.map { it -> it.value }.sorted()
+    init {
+        require(numbers.size == LOTTO_SIZE) { "List should have exactly 6 numbers" }
+        require(this.numbers.size == numbers.size) { "All the numbers in the list must be unique" }
     }
 
     companion object {

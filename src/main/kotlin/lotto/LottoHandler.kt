@@ -1,11 +1,33 @@
 package lotto
 
+import lotto.view.InputView
+import lotto.view.OutputView
+
 object LottoHandler {
     fun start() {
         try {
-            val machine = buyTickets()
-            val winningTicket = processWinningNumbers()
-            val winningNumbers = processBonusNumbers(winningTicket)
+            val purchaseAmount = processPurchaseAmount()
+            val enteredTicketCount = processTicketCount()
+
+            val machine =
+                LottoMachine(
+                    purchaseAmount,
+                    enteredTicketCount,
+                )
+
+            val manualTickets = readManualTickets(machine.manualTicketCount)
+            machine.appendManualTickets(manualTickets)
+
+            OutputView.printTicketCount(
+                machine.enteredTicketCount,
+                machine.generatedTicketCount,
+            )
+            OutputView.displayTickets(machine.tickets)
+            OutputView.displayChange(machine.change)
+
+            val winningTicket = readTicket()
+            val bonusNumber = readBonusNumbers()
+            val winningNumbers = WinningNumbers(winningTicket, bonusNumber)
 
             val calculator = Calculator(machine.tickets, winningNumbers)
 
@@ -18,14 +40,10 @@ object LottoHandler {
         }
     }
 
-    private fun buyTickets(): LottoMachine {
+    private fun <T> readInput(block: () -> T): T {
         repeat(MAX_ATTEMPT) {
             try {
-                val purchaseAmount = InputView.readPurchaseAmount()
-                val machine = LottoMachine(purchaseAmount)
-                OutputView.displayTickets(machine.tickets)
-                OutputView.displayChange(machine.showChange())
-                return machine
+                return block()
             } catch (err: IllegalArgumentException) {
                 OutputView.displayError(err.message)
             }
@@ -33,30 +51,43 @@ object LottoHandler {
         throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
     }
 
-    private fun processWinningNumbers(): Lotto {
-        repeat(MAX_ATTEMPT) {
-            try {
-                val winningNumbers = InputView.readWinningNumbers().map { it -> LottoNumber.from(it) }
-                return Lotto(winningNumbers)
-            } catch (err: IllegalArgumentException) {
-                OutputView.displayError(err.message)
-            }
+    private fun processPurchaseAmount(): PurchaseAmount {
+        return readInput {
+            val purchaseAmount = InputView.readPurchaseAmount()
+            PurchaseAmount(purchaseAmount)
         }
-        throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
     }
 
-    private fun processBonusNumbers(winningTicket: Lotto): WinningNumbers {
-        repeat(MAX_ATTEMPT) {
-            try {
-                val number = InputView.readBonusNumber()
-                val bonusNumber = LottoNumber.from(number)
-                val winningNumbers = WinningNumbers(winningTicket, bonusNumber)
-                return winningNumbers
-            } catch (err: IllegalArgumentException) {
-                OutputView.displayError(err.message)
-            }
+    private fun processTicketCount(): EnteredTicketCount {
+        return readInput {
+            EnteredTicketCount(InputView.readManualTicketCount())
         }
-        throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
+    }
+
+    private fun readTicket(): Lotto {
+        return readInput {
+            val winningNumbers = convertLottoNumbers(InputView.readWinningTicket())
+            Lotto(winningNumbers)
+        }
+    }
+
+    private fun readBonusNumbers(): LottoNumber {
+        return readInput {
+            val number = InputView.readBonusNumber()
+            LottoNumber.from(number)
+        }
+    }
+
+    private fun readManualTickets(count: Int): List<Lotto> {
+        val tickets = mutableListOf<Lotto>()
+        repeat(count) {
+            tickets.add(Lotto(convertLottoNumbers(InputView.readManualTicket())))
+        }
+        return tickets
+    }
+
+    private fun convertLottoNumbers(numbers: List<Int>): List<LottoNumber> {
+        return numbers.map(LottoNumber::from)
     }
 
     private const val MAX_ATTEMPT = 5

@@ -41,7 +41,7 @@ class CalculatorTest {
                 LottoNumber.from(7),
             )
         val calculator = Calculator(tickets, winningNumbers)
-        assertEquals(calculator.calculateReturnRate(5000), 400300f)
+        assertEquals(calculator.calculateReturnRate(PurchaseAmount(5000)), 400300f)
     }
 
     fun createListLottoNumber(numbers: List<Int>): List<LottoNumber> = numbers.map { it -> LottoNumber.from(it) }
