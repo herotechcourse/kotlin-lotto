@@ -2,17 +2,12 @@ package lotto.model
 
 class Tickets(private val ticketList: List<Ticket>) {
     companion object {
-        fun generate(amount: Int): Tickets {
-            val ticketCount = amount / Const.PRICE
-            val list =
-                List(ticketCount) {
-                    Ticket(Numbers(generateTicketNumbers()))
-                }
-            return Tickets(list)
-        }
-
-        private fun generateTicketNumbers(): List<Int> {
-            return (Const.MIN..Const.MAX).shuffled().take(Const.NUMBER_COUNT).sorted()
+        fun generate(
+            amount: Int,
+            manualTicketsNumbers: List<Numbers> = emptyList(),
+        ): Tickets {
+            val generator = TicketGenerator(amount, manualTicketsNumbers)
+            return Tickets(generator.generateTickets())
         }
     }
 
@@ -28,16 +23,30 @@ class Tickets(private val ticketList: List<Ticket>) {
             )
 
         for (ticket in ticketList) {
-            val match = ticket.numbers.countMatches(winningTicket.winningNumbers)
-            val rank =
-                if (match == 5 && ticket.numbers.contains(winningTicket.bonusNumber)) {
-                    Rank.SECOND
-                } else {
-                    Rank.valueOf(match, false)
-                }
+            val rank = determineRank(ticket, winningTicket)
             winStats[rank] = winStats[rank]!! + 1
         }
         return winStats
+    }
+
+    private fun determineRank(
+        ticket: Ticket,
+        winningTicket: WinningTicket,
+    ): Rank {
+        val matchCount = ticket.numbers.countMatches(winningTicket.winningNumbers)
+        return if (isSecondRank(matchCount, ticket, winningTicket)) {
+            Rank.SECOND
+        } else {
+            Rank.valueOf(matchCount, false)
+        }
+    }
+
+    private fun isSecondRank(
+        matchCount: Int,
+        ticket: Ticket,
+        winningTicket: WinningTicket,
+    ): Boolean {
+        return matchCount == 5 && ticket.numbers.contains(winningTicket.bonusNumber)
     }
 
     fun calculateReturnRate(
