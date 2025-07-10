@@ -5,14 +5,14 @@ class LottoMachine(
     val lastWeekWinningNumbers: Numbers,
     val bonusNumber: Int,
 ) {
-    var bundleOfLottoTicket: List<LottoTicket> = emptyList()
+    var bundleOfLottoTicket = Tickets()
     val resultTable: MutableList<Int> = MutableList(6) { 0 }
 
     // TODO: might have to update resultTable before initiating winStat
     val winStat: WinningStatistics = WinningStatistics()
 
     fun writeResultTable() {
-        bundleOfLottoTicket.forEach { filterTicket(it) }
+        bundleOfLottoTicket.tickets.forEach { filterTicket(it) }
     }
 
     private fun filterTicket(ticket: LottoTicket) {

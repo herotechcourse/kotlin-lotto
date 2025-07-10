@@ -10,6 +10,6 @@ class LottoPrinterTest {
     @ValueSource(ints = [1, 2, 3, 14, 25, 35])
     fun `LottoPrinter generate auto-numbered lotto tickets based on the number of tickets as a input`(candidate: Int) {
         val printer = LottoPrinter(candidate)
-        assertEquals(candidate, printer.bundleOfLottoTicket.size)
+        assertEquals(candidate, printer.bundleOfLottoTicket.asList().size)
     }
 }

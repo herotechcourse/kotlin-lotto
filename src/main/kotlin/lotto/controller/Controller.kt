@@ -4,6 +4,7 @@ import lotto.model.LottoMachine
 import lotto.model.LottoPrinter
 import lotto.model.LottoTicket
 import lotto.model.Numbers
+import lotto.model.Tickets
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -15,7 +16,7 @@ class Controller {
         get() {
             return amountOfTicket - amountOfManualTicket
         }
-    private var bundleOfTicket: List<LottoTicket> = emptyList()
+    private var bundleOfTicket: Tickets = Tickets(emptyList())
     private var lastWeekWinningNumbers: List<Int> = emptyList()
     private var bonusNumber: Int = 0
 
@@ -26,25 +27,25 @@ class Controller {
         runLottoMachine()
     }
 
-    private fun buyManualLottoTickets(): List<LottoTicket> {
+    private fun buyManualLottoTickets(): Tickets {
         amountOfManualTicket = retryable { InputView.getNumberOfManualTickets(amountOfTicket) }
         InputView.informForManualTicketNumbers()
-        val manualTickets = mutableListOf<LottoTicket>()
+        val manualTickets = Tickets().asList().toMutableList()
         repeat((1..amountOfManualTicket).count()) {
             val input = retryable { InputView.getLottoNumbers() }
             val numbers = Numbers(input)
             val ticket = LottoTicket(numbers)
             manualTickets.add(ticket)
         }
-        return manualTickets
+        return Tickets(manualTickets)
     }
 
-    private fun printLottoTickets(manualTickets: List<LottoTicket>) {
+    private fun printLottoTickets(manualTickets: Tickets) {
         val printer = LottoPrinter(amountOfAutoTicket)
-        val tickets = mutableListOf<LottoTicket>()
-        tickets.addAll(manualTickets)
-        tickets.addAll(printer.bundleOfLottoTicket)
-        bundleOfTicket = tickets
+        val tickets = Tickets().asList().toMutableList()
+        tickets.addAll(manualTickets.asList())
+        tickets.addAll(printer.bundleOfLottoTicket.asList())
+        bundleOfTicket = Tickets(tickets)
         ResultView.displayNumberOfTickets(amountOfManualTicket, amountOfAutoTicket)
         ResultView.displayTickets(bundleOfTicket)
     }

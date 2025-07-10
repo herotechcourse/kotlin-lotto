@@ -1,6 +1,6 @@
 package lotto.view
 
-import lotto.model.LottoTicket
+import lotto.model.Tickets
 
 object ResultView {
     fun displayNumberOfTickets(
@@ -10,8 +10,8 @@ object ResultView {
         println("\nPurchased $numberOfManualTickets manual and $numberOfAutoTickets automatic tickets.")
     }
 
-    fun displayTickets(bundleOfLottoTicket: List<LottoTicket>) {
-        bundleOfLottoTicket.forEach { ticket ->
+    fun displayTickets(bundleOfLottoTicket: Tickets) {
+        bundleOfLottoTicket.tickets.forEach { ticket ->
             println(ticket.lottoNumbers.numbers.toString())
         }
     }
