@@ -8,10 +8,10 @@ import lotto.view.InputView
 import lotto.view.ResultView
 
 class Controller {
-    val amountOfMoney: Int = retryable { InputView.getPurchaseAmount() }
-    val amountOfTicket: Int = amountOfMoney / LottoTicket.COST_OF_TICKET
+    private val amountOfMoney: Int = retryable { InputView.getPurchaseAmount() }
+    private val amountOfTicket: Int = amountOfMoney / LottoTicket.COST_OF_TICKET
     private var amountOfManualTicket = 0
-    val amountOfAutoTicket: Int
+    private val amountOfAutoTicket: Int
         get() {
             return amountOfTicket - amountOfManualTicket
         }

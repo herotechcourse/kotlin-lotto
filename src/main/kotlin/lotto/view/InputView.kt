@@ -47,7 +47,7 @@ object InputView {
         return userInput
     }
 
-    fun minMaxNumberValidator(inputNumber: Int): Boolean {
+    private fun minMaxNumberValidator(inputNumber: Int): Boolean {
         require(inputNumber >= LottoTicket.Companion.MIN_LOTTO_NUMBER) { Message.ERROR_MESSAGE_FOR_LOTTO_NUMBER }
         require(inputNumber <= LottoTicket.Companion.MAX_LOTTO_NUMBER) { Message.ERROR_MESSAGE_FOR_LOTTO_NUMBER }
         return true
