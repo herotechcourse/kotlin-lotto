@@ -8,8 +8,10 @@ import lotto.model.Tickets
 import lotto.view.InputView
 import lotto.view.ResultView
 
-class Controller {
-    private val amountOfMoney: Int = retryable { InputView.getPurchaseAmount() }
+object Controller {
+    val inputView = InputView
+    val resultView = ResultView
+    private val amountOfMoney: Int = inputView.retryable { InputView.getPurchaseAmount() }
     private val amountOfTicket: Int = amountOfMoney / LottoTicket.COST_OF_TICKET
     private var amountOfManualTicket = 0
     private val amountOfAutoTicket: Int
@@ -22,37 +24,33 @@ class Controller {
 
     fun run() {
         val manualTickets = buyManualLottoTickets()
-        printLottoTickets(manualTickets)
+        val autoTickets = LottoPrinter.generateAutoLottoTickets(amountOfAutoTicket)
+        printLottoTickets(manualTickets, autoTickets)
         readWinningNumbers()
         runLottoMachine()
     }
 
     private fun buyManualLottoTickets(): Tickets {
-        amountOfManualTicket = retryable { InputView.getNumberOfManualTickets(amountOfTicket) }
-        InputView.informForManualTicketNumbers()
-        val manualTickets = Tickets().asList().toMutableList()
-        repeat((1..amountOfManualTicket).count()) {
-            val input = retryable { InputView.getLottoNumbers() }
-            val numbers = Numbers(input)
-            val ticket = LottoTicket(numbers)
-            manualTickets.add(ticket)
-        }
-        return Tickets(manualTickets)
+        amountOfManualTicket = inputView.retryable { inputView.getNumberOfManualTickets(amountOfTicket) }
+        inputView.informForManualTicketNumbers()
+        return LottoPrinter.generateManualLottoTicket(amountOfManualTicket)
     }
 
-    private fun printLottoTickets(manualTickets: Tickets) {
-        val printer = LottoPrinter(amountOfAutoTicket)
+    private fun printLottoTickets(
+        manualTickets: Tickets,
+        autoTickets: Tickets,
+    ) {
         val tickets = Tickets().asList().toMutableList()
         tickets.addAll(manualTickets.asList())
-        tickets.addAll(printer.bundleOfLottoTicket.asList())
+        tickets.addAll(autoTickets.asList())
         bundleOfTicket = Tickets(tickets)
-        ResultView.displayNumberOfTickets(amountOfManualTicket, amountOfAutoTicket)
-        ResultView.displayTickets(bundleOfTicket)
+        resultView.displayNumberOfTickets(amountOfManualTicket, amountOfAutoTicket)
+        resultView.displayTickets(bundleOfTicket)
     }
 
     private fun readWinningNumbers() {
-        lastWeekWinningNumbers = retryable { InputView.getLastWeekWinningNumbers() }
-        bonusNumber = retryable { InputView.getBonusNumber() }
+        lastWeekWinningNumbers = inputView.retryable { inputView.getLastWeekWinningNumbers() }
+        bonusNumber = inputView.retryable { InputView.getBonusNumber() }
         println()
     }
 
@@ -65,17 +63,7 @@ class Controller {
         winStats.calculateWinningMoney(machine.resultTable)
         winStats.calculateReturnRate(machine.amountOfMoney)
 
-        ResultView.displayWinningStatistics(machine.resultTable)
-        ResultView.displayReturnRate(winStats.returnRate)
-    }
-
-    private fun <T> retryable(inputMethod: () -> T): T {
-        while (true) {
-            try {
-                return inputMethod()
-            } catch (err: IllegalArgumentException) {
-                println("${err.message}")
-            }
-        }
+        resultView.displayWinningStatistics(machine.resultTable)
+        resultView.displayReturnRate(winStats.returnRate)
     }
 }

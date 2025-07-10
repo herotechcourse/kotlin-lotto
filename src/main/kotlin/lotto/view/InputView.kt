@@ -53,6 +53,16 @@ object InputView {
         return true
     }
 
+    fun <T> retryable(inputMethod: () -> T): T {
+        while (true) {
+            try {
+                return inputMethod()
+            } catch (err: IllegalArgumentException) {
+                println("${err.message}")
+            }
+        }
+    }
+
     object Message {
         const val ERROR_MESSAGE_FOR_LOTTO_NUMBER =
             "You must provide a number between ${LottoTicket.Companion.MIN_LOTTO_NUMBER} and ${LottoTicket.Companion.MAX_LOTTO_NUMBER}."
