@@ -71,23 +71,31 @@ Controller
 - [ ] Controller interact with managers which are smaller controllers that will controller in separated responsibility
 
 TicketManager
-- [ ] manage tickets
-- [ ] consolidate manual and auto tickets
+- [x] manage tickets
+- [x] consolidate manual and auto tickets
 
-ManualTicketManager
-- [ ] manage manual tickets
-- [ ] create manual tickets
+[//]: # (ManualTicketManager)
 
-AutoTicketManager
-- [ ] manage auto tickets
-- [ ] create auto tickets
+[//]: # (- [ ] manage manual tickets)
 
-WinnerManager
-- [ ] manage data related with winner numbers and bonus number
+[//]: # (- [ ] create manual tickets)
 
-StatisticsManager
-- [ ] manage data related with stats
+[//]: # ()
+[//]: # (AutoTicketManager)
 
+[//]: # (- [ ] manage auto tickets)
+
+[//]: # (- [ ] create auto tickets)
+
+[//]: # ()
+[//]: # (WinnerManager)
+
+[//]: # (- [ ] manage data related with winner numbers and bonus number)
+
+[//]: # ()
+[//]: # (StatisticsManager)
+
+[//]: # (- [ ] manage data related with stats)
 
 
 ## Remindable Ideas
