@@ -1,34 +1,42 @@
 package lotto.view
 
-import lotto.model.Lotto
+import lotto.model.LottoResults
+import lotto.model.LottoTickets
 import lotto.model.Rank
 
 class ResultView() {
-    fun printLottos(lottos: List<Lotto>) {
-        println("You have purchased ${lottos.count()} tickets.")
-        lottos.forEach { lotto ->
-            val lottoNumbers = lotto.lottoNumbers
-            println(lottoNumbers.joinToString(",", "[", "]"))
+    fun printLottos(lottos: LottoTickets) {
+        println("You have purchased ${lottos.tickets.count()} tickets.")
+        lottos.tickets.forEach { lotto ->
+            println(lotto.lottoNumbers.joinToString(",", "[", "]"))
         }
     }
 
-    fun printResult(results: MutableMap<Rank, Int>) {
+    fun printResult(
+        results: LottoResults,
+        returnRate: Double,
+    ) {
         println()
-        println(PRESENT_WINNING)
-        println(SEPARATOR)
+        printResultTickets(results)
+        printReturnRate(returnRate)
+    }
+
+    fun printResultTickets(results: LottoResults) {
         println(
             """
-        3 Matches (${ "%,d".format(Rank.FIFTH.winningMoney) } KRW) - ${results.getValue(Rank.FIFTH)} tickets
-        4 Matches (${ "%,d".format(Rank.FOURTH.winningMoney) } KRW) - ${results.getValue(Rank.FOURTH)} tickets
-        5 Matches (${ "%,d".format(Rank.THIRD.winningMoney) } KRW) - ${results.getValue(Rank.THIRD)} tickets
-        5 Matches + Bonus Ball (${ "%,d".format(Rank.SECOND.winningMoney) } KRW) - ${results.getValue(Rank.SECOND)} tickets
-        6 Matches (${ "%,d".format(Rank.FIRST.winningMoney) } KRW) - ${results.getValue(Rank.FIRST)} tickets
-        """.trimIndent()
+            $PRESENT_WINNING
+            $SEPARATOR
+            3 Matches (${"%,d".format(Rank.FIFTH.winningMoney)} KRW) - ${results.obtainWinsForRank(Rank.FIFTH)} tickets
+            4 Matches (${"%,d".format(Rank.FOURTH.winningMoney)} KRW) - ${results.obtainWinsForRank(Rank.FOURTH)} tickets
+            5 Matches (${"%,d".format(Rank.THIRD.winningMoney)} KRW) - ${results.obtainWinsForRank(Rank.THIRD)} tickets
+            5 Matches + Bonus Ball (${"%,d".format(Rank.SECOND.winningMoney)} KRW) - ${results.obtainWinsForRank(Rank.SECOND)} tickets
+            6 Matches (${"%,d".format(Rank.FIRST.winningMoney)} KRW) - ${results.obtainWinsForRank(Rank.FIRST)} tickets
+            """.trimIndent(),
         )
     }
 
-    fun printReturnRate(rate: Double) {
-        val formattedRate = String.format("%.1f", rate).replace(',', '.')
+    fun printReturnRate(returnRate: Double) {
+        val formattedRate = String.format("%.1f", returnRate).replace(',', '.')
         println("Total return rate is $formattedRate")
     }
 

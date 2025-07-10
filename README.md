@@ -3,11 +3,17 @@
 # lotto Features:
 
 - Validate User input Amount:
-- [x] ask user input
+- [x] Ask user input
 - [x] Ticket purchase should be multiple of 1000
 
-- Generate Tickets:
-- [x] Calculate number of tickets
+- User can create custom tickets
+- [x] Calculate total of tickets to be generated
+- [x] Define how many tickets are custom-generated
+- [x] Ask user numbers to be included in tickets
+- [x] Create tickets
+
+- Generate Random Tickets:
+- [x] Use remaining number to create random tickets
 - [x] Generate 6 ticket numbers
 - [x] Create tickets with generated numbers
 
