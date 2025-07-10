@@ -5,6 +5,7 @@ import lotto.model.LottoPrinter
 import lotto.model.LottoTicket
 import lotto.model.Numbers
 import lotto.model.Tickets
+import lotto.util.RandomNumberGenerator
 import lotto.view.InputView
 import lotto.view.ResultView
 
@@ -23,17 +24,23 @@ object Controller {
     private var bonusNumber: Int = 0
 
     fun run() {
-        val manualTickets = buyManualLottoTickets()
-        val autoTickets = LottoPrinter.generateAutoLottoTickets(amountOfAutoTicket)
+        updateAmountOfManualTicket()
+        val manualTickets =
+            LottoPrinter.generateLottoTickets(amountOfManualTicket) {
+                inputView.retryable { inputView.getLottoNumbers() }
+            }
+        val autoTickets =
+            LottoPrinter.generateLottoTickets(amountOfAutoTicket) {
+                RandomNumberGenerator.generateNumber()
+            }
         printLottoTickets(manualTickets, autoTickets)
         readWinningNumbers()
         runLottoMachine()
     }
 
-    private fun buyManualLottoTickets(): Tickets {
+    private fun updateAmountOfManualTicket() {
         amountOfManualTicket = inputView.retryable { inputView.getNumberOfManualTickets(amountOfTicket) }
         inputView.informForManualTicketNumbers()
-        return LottoPrinter.generateManualLottoTicket(amountOfManualTicket)
     }
 
     private fun printLottoTickets(
