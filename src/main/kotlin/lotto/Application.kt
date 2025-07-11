@@ -7,12 +7,12 @@ fun main() {
     val purchaseAmount = Money(InputView.getPurchaseAmount())
     val purchasedTicketNumber = PurchasedTicketsNumber(InputView.getNumberOfManuelTickets(), purchaseAmount)
     val lottoMachine = LottoMachine(purchasedTicketNumber)
-    val lottoTickets = lottoMachine.tickets
+    val lottoTickets = lottoMachine.issueTickets()
 
     ResultView.viewTicketsAmount(lottoTickets.size)
     ResultView.viewTickets(lottoTickets)
 
-    val winningNumbers = Lotto(InputView.getWinningNumbers())
+    val winningNumbers = Lotto(InputView.getWinningNumbers().map { LottoNumber.from(it) })
     val bonusNumber = LottoNumber.from(InputView.getBonusNumber())
 
     val game = LottoGame()

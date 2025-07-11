@@ -3,8 +3,6 @@ package lotto
 import view.InputView
 
 class LottoMachine(val ticketsNumber: PurchasedTicketsNumber) {
-    val tickets: List<Lotto> = issueTickets()
-
     fun issueTickets(): List<Lotto> {
         val tickets = mutableListOf<Lotto>()
 
