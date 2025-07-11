@@ -1,17 +1,17 @@
 package lotto
 
 object LottoHandler {
-    private val machine = LottoMachine()
-    private val tickets: List<Lotto>
-        get() = manualTickets + automaticTickets
-    private var manualTickets = listOf<Lotto>()
-    private var automaticTickets = listOf<Lotto>()
     fun start() {
         try {
             val purchase = pay()
+
             reserveManualTickets(purchase)
-            buyManualTickets(purchase.manualTicketsCount)
-            buyTickets(purchase)
+
+            val manualTickets = buyManualTickets(purchase.manualTicketsCount)
+            val automaticTickets = buyAutomaticTickets(purchase)
+            val tickets: List<Lotto> = manualTickets + automaticTickets
+            displayTicketsAndChange(tickets, purchase)
+
             val winningTicket = processWinningNumbers()
             val winningNumbers = processBonusNumbers(winningTicket)
 
@@ -48,16 +48,15 @@ object LottoHandler {
         throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
     }
 
-    fun buyManualTickets(ticketCount: Int) {
+    fun buyManualTickets(ticketCount: Int): List<Lotto> {
         repeat(MAX_ATTEMPT) {
             try {
                 val tickets = mutableListOf<Lotto>()
                 InputView.promptForManualTickets()
-                for (i in 1 .. ticketCount) {
+                repeat(ticketCount) {
                     tickets.add(Lotto.from(InputView.readManualTickets()))
                 }
-                manualTickets = tickets.toList()
-                return
+                return tickets.toList()
             } catch (err: IllegalArgumentException) {
                 println(err.message)
             }
@@ -65,13 +64,17 @@ object LottoHandler {
         throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
     }
 
-    fun buyTickets(purchase: Purchase) {
+    fun displayTicketsAndChange(tickets: List<Lotto>, purchase: Purchase) {
+        OutputView.displayCombinedTickets(tickets, purchase.manualTicketsCount, purchase.automaticTicketsCount)
+        OutputView.displayChange(purchase.change)
+    }
+
+    fun buyAutomaticTickets(purchase: Purchase): List<Lotto> {
+        val machine = LottoMachine()
         repeat(MAX_ATTEMPT) {
             try {
-                automaticTickets = machine.generateTickets(purchase.automaticTicketsCount)
-                OutputView.displayCombinedTickets(tickets, purchase.manualTicketsCount, purchase.automaticTicketsCount)
-                OutputView.displayChange(purchase.change)
-                return
+                val automaticTickets = machine.generateTickets(purchase.automaticTicketsCount)
+                return automaticTickets
             } catch (err: IllegalArgumentException) {
                 println(err.message)
             }
