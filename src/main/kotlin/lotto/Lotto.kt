@@ -19,8 +19,8 @@ object Lotto {
         val winningNumbers = retryable { InputView.getLastWeekWinningNumbers() }
         val bonusNumber = retryable { InputView.getBonusNumber() }
 
-        val machine = LottoMachine(winningNumbers, bonusNumber)
-        val resultTable = machine.createResultTable(allTickets)
+        val machine: LottoMachine = LottoMachine(winningNumbers, bonusNumber)
+        val resultTable: Map<Rank, Int> = machine.createResultTable(allTickets)
 
         val winningMoney = WinStatCalculator.calculateWinningMoney(resultTable)
         val returnRate = WinStatCalculator.calculateReturnRate(winningMoney, amountOfMoney)
