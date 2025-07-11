@@ -17,8 +17,8 @@ object OutputView {
         println("\nYour change is ${change.value} KRW.")
     }
 
-    fun displayTotalWinningAmount(totalAmount: Int) {
-        println("Total earnings: %,d KRW.".format(totalAmount))
+    fun displayTotalWinningAmount(totalAmount: Money) {
+        println("Total earnings: %,d KRW.".format(totalAmount.value))
     }
 
     private fun Map<Rank, Int>.count(rank: Rank) = getOrDefault(rank, 0)
