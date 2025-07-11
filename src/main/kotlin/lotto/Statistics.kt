@@ -3,8 +3,9 @@ package lotto
 class Statistics(
     private val winningNumbers: WinningNumbers,
 ) {
-    fun calculateTotalEarnings(results: Map<Rank, Int>): Money {
+    fun calculateTotalEarnings(results: Result): Money {
         val earnings = results
+            .value
             .entries
             .sumOf { it.key.winningMoney * it.value }
         return Money(earnings)
@@ -14,7 +15,7 @@ class Statistics(
         return (totalEarnings.value.toFloat() / purchaseAmount.value.toFloat())
     }
 
-    fun calculateResults(tickets: List<Lotto>): Map<Rank, Int> {
+    fun calculateResults(tickets: List<Lotto>): Result {
         val table = mutableMapOf<Rank, Int>()
         tickets.forEach {
             val count = findMatches(it, winningNumbers.winningNumbers)
@@ -25,7 +26,7 @@ class Statistics(
                 )
             table[rank] = table.getOrDefault(rank, 0) + 1
         }
-        return table
+        return Result(table)
     }
 
     private fun findMatches(

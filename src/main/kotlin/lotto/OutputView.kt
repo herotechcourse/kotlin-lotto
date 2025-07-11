@@ -23,7 +23,7 @@ object OutputView {
 
     private fun Map<Rank, Int>.count(rank: Rank) = getOrDefault(rank, 0)
 
-    private fun buildWinningsString(results: Map<Rank, Int>): String {
+    private fun buildWinningsString(results: Result): String {
         val string = buildString {
             appendLine("\nWinning Statistics")
             appendLine("------------------")
@@ -31,7 +31,7 @@ object OutputView {
                 .filter { it != Rank.MISS }
                 .reversed()
                 .forEach {
-                    val count = results.count(it)
+                    val count = results.value.count(it)
                     append("${it.countOfMatch} Matches")
                     if (it == Rank.SECOND)
                         append(" + Bonus Ball")
@@ -41,7 +41,7 @@ object OutputView {
         return string
     }
 
-    fun displayWinnings(results: Map<Rank, Int>) {
+    fun displayWinnings(results: Result) {
         val string = buildWinningsString(results)
         println(string)
     }
