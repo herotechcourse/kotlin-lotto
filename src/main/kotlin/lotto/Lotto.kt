@@ -25,8 +25,7 @@ object Lotto {
         val winningMoney = WinStatCalculator.calculateWinningMoney(resultTable)
         val returnRate = WinStatCalculator.calculateReturnRate(winningMoney, amountOfMoney)
 
-        ResultView.displayWinningStatistics(resultTable)
-        ResultView.displayReturnRate(returnRate)
+        ResultView.displayFinalResults(resultTable, returnRate)
     }
 
     private fun <T> retryable(inputMethod: () -> T): T {

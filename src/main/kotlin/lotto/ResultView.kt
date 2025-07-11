@@ -28,4 +28,12 @@ object ResultView {
     fun displayReturnRate(returnRate: Double) {
         println("The total rate of return is ${"%.1f".format(returnRate)}%.")
     }
+
+    fun displayFinalResults(
+        resultTable: Map<Rank, Int>,
+        returnRate: Double,
+    ) {
+        displayWinningStatistics(resultTable)
+        displayReturnRate(returnRate)
+    }
 }
