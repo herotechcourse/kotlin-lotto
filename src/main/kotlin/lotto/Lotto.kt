@@ -2,9 +2,7 @@ package lotto
 
 private const val NUMBERS_SIZE = 6
 
-class Lotto(numbersList: List<Int>) {
-    val numbers = numbersList.map { LottoNumber.from(it) }
-
+class Lotto(val numbers: List<LottoNumber>) {
     init {
         require(numbers.size == NUMBERS_SIZE) {
             "Size of numbers should be equal $NUMBERS_SIZE"

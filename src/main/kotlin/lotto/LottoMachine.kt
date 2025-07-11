@@ -10,13 +10,13 @@ class LottoMachine(val ticketsNumber: PurchasedTicketsNumber) {
 
         tickets.addAll(
             (1..ticketsNumber.getManuelTicketsNumber()).map {
-                Lotto(manuelInputNumbers())
+                Lotto(manuelInputNumbers().map { LottoNumber.from(it) })
             },
         )
 
         tickets.addAll(
             (ticketsNumber.getManuelTicketsNumber() + 1..ticketsNumber.getTotalTicketsCount()).map {
-                Lotto(generateRandomNumber())
+                Lotto(generateRandomNumber().map { LottoNumber.from(it) })
             },
         )
 
