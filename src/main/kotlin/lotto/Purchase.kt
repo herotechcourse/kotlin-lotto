@@ -1,21 +1,25 @@
 package lotto
 
-class Purchase(val amount: Int) {
+class Purchase(val amount: Money) {
+    val change: Money
+    val ticketCount: Int
     init {
-        require(amount in MIN..MAX) {
+        require(amount.value in MIN..MAX) {
             "[ERROR] Max purchase amount allowed is $MIN-$MAX."
         }
+        change = Money(amount.value % TICKET_PRICE)
+        ticketCount = amount.value / TICKET_PRICE
     }
 
-    val change = amount % TICKET_PRICE
-    val ticketCount = amount / TICKET_PRICE
-    var manualTicketsCount: Int = 0
-        set(value) {
-            require(value in 0..ticketCount) { "Number of manual tickets cannot exceed $ticketCount." }
-            field = value
+    fun calculateAutomaticTicketsCount(manualTicketsCount: Int): Int {
+        return ticketCount - manualTicketsCount
+    }
+
+    fun checkManualTicketsCount(count: Int) {
+        require(count in 0..ticketCount) {
+            "Number of manual tickets cannot exceed $ticketCount."
         }
-    val automaticTicketsCount: Int
-        get() = ticketCount - manualTicketsCount
+    }
 
     companion object {
         private const val MIN = 1_000

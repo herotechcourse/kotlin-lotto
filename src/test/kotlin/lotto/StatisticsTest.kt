@@ -11,7 +11,7 @@ class StatisticsTest {
         val numbers = Lotto.from(listOf(3, 8, 27, 4, 5, 6))
         val winningNumbers = WinningNumbers(numbers, LottoNumber.from(7))
 
-        val statistics = Statistics(mutableListOf<Lotto>(lotto), 3000, winningNumbers)
+        val statistics = Statistics(mutableListOf<Lotto>(lotto), Money(3000), winningNumbers)
         assertEquals(statistics.results.contains(Rank.FIFTH), true)
     }
 
@@ -29,7 +29,7 @@ class StatisticsTest {
             )
         val numbers = Lotto.from(listOf(3, 8, 27, 4, 5, 6))
         val winningNumbers = WinningNumbers(numbers, LottoNumber.from(7))
-        val statistics = Statistics(tickets, 5000, winningNumbers)
+        val statistics = Statistics(tickets, Money(5000), winningNumbers)
         assertEquals(statistics.returnRate, 400300f)
     }
 }

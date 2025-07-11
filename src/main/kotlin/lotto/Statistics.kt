@@ -3,12 +3,12 @@ package lotto
 // here ticket is a constructor parameter, but not a property
 class Statistics(
     tickets: List<Lotto>,
-    purchaseAmount: Int,
+    purchaseAmount: Money,
     private val winningNumbers: WinningNumbers,
 ) {
     val results: Map<Rank, Int> = calculateResults(tickets)
     val totalEarnings: Int = results.entries.sumOf{ it.key.winningMoney * it.value }
-    val returnRate: Float = (totalEarnings.toFloat() / purchaseAmount.toFloat())
+    val returnRate: Float = (totalEarnings.toFloat() / purchaseAmount.value.toFloat())
 
     fun calculateResults(tickets: List<Lotto>): Map<Rank, Int> {
         val table = mutableMapOf<Rank, Int>()

@@ -13,8 +13,8 @@ object OutputView {
         }
     }
 
-    fun displayChange(change: Int) {
-        println("\nYour change is $change KRW.")
+    fun displayChange(change: Money) {
+        println("\nYour change is ${change.value} KRW.")
     }
 
     fun displayTotalWinningAmount(totalAmount: Int) {
