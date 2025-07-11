@@ -1,6 +1,6 @@
 package lotto
 
-data class Purchase(val amount: Int) {
+class Purchase(val amount: Int) {
     init {
         require(amount in MIN..MAX) {
             "[ERROR] Max purchase amount allowed is $MIN-$MAX."
