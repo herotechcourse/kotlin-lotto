@@ -16,12 +16,12 @@ class LottoGame() {
         return results.toList()
     }
 
-    fun countWinningAmount(results: List<RankResult>): Int {
+    fun countWinningAmount(results: List<RankResult>): Money {
         var amount = 0
         for (result in results) {
             amount += result.rank.prizeAmount * result.ticketsCount
         }
-        return amount
+        return Money(amount)
     }
 
     private fun updateRankResultList(
