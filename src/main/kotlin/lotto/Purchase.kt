@@ -9,7 +9,6 @@ data class Purchase(val amount: Int) {
 
     val change = amount % TICKET_PRICE
     val ticketCount = amount / TICKET_PRICE
-    // TODO maybe put manualTicketCount into a value class?
     var manualTicketsCount: Int = 0
         set(value) {
             require(value in 0..ticketCount) { "Number of manual tickets cannot exceed $ticketCount." }
