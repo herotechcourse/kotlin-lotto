@@ -5,26 +5,12 @@ object LottoHandler {
         try {
             val purchase = pay()
 
-            val manualTicketsCount = reserveManualTickets(purchase)
-            val automaticTicketsCount = purchase.calculateAutomaticTicketsCount(manualTicketsCount)
-
-            val manualTickets = buyManualTickets(manualTicketsCount)
-            val automaticTickets = buyAutomaticTickets(automaticTicketsCount)
-            val tickets: List<Lotto> = manualTickets + automaticTickets
-            OutputView.displayCombinedTickets(tickets, manualTicketsCount, automaticTicketsCount)
-            OutputView.displayChange(purchase.change)
+            val tickets = buyTickets(purchase)
 
             val winningTicket = processWinningNumbers()
             val winningNumbers = processBonusNumbers(winningTicket)
 
-            val statistics = Statistics(winningNumbers)
-            val results = statistics.calculateResults(tickets)
-            val totalEarnings = statistics.calculateTotalEarnings(results)
-            val returnRate = statistics.calculateReturnRate(totalEarnings, purchase.amount)
-
-            OutputView.displayWinnings(results)
-            OutputView.displayTotalWinningAmount(totalEarnings)
-            OutputView.displayReturnRate(returnRate)
+            doStatistics(winningNumbers, tickets, purchase)
         } catch (err: IllegalArgumentException) {
             println(err.message)
         }
@@ -83,6 +69,18 @@ object LottoHandler {
         throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
     }
 
+    fun buyTickets(purchase: Purchase): List<Lotto> {
+        val manualTicketsCount = reserveManualTickets(purchase)
+        val automaticTicketsCount = purchase.calculateAutomaticTicketsCount(manualTicketsCount)
+
+        val manualTickets = buyManualTickets(manualTicketsCount)
+        val automaticTickets = buyAutomaticTickets(automaticTicketsCount)
+        val tickets: List<Lotto> = manualTickets + automaticTickets
+        OutputView.displayCombinedTickets(tickets, manualTicketsCount, automaticTicketsCount)
+        OutputView.displayChange(purchase.change)
+        return tickets
+    }
+
     fun processWinningNumbers(): Lotto {
         repeat(MAX_ATTEMPT) {
             try {
@@ -106,6 +104,17 @@ object LottoHandler {
             }
         }
         throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
+    }
+
+    fun doStatistics(winningNumbers: WinningNumbers, tickets: List<Lotto>, purchase: Purchase) {
+        val statistics = Statistics(winningNumbers)
+        val results = statistics.calculateResults(tickets)
+        val totalEarnings = statistics.calculateTotalEarnings(results)
+        val returnRate = statistics.calculateReturnRate(totalEarnings, purchase.amount)
+
+        OutputView.displayWinnings(results)
+        OutputView.displayTotalWinningAmount(totalEarnings)
+        OutputView.displayReturnRate(returnRate)
     }
 
     private const val MAX_ATTEMPT = 5
