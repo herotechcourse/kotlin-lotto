@@ -8,7 +8,9 @@ object OutputView {
 
     fun displayCombinedTickets(tickets: List<Lotto>, manualCount: Int, automaticCount: Int) {
         println("\nYou have purchased $manualCount manual and $automaticCount automatic tickets.")
-        tickets.forEach { println(it.toString()) }
+        tickets.forEach {
+                println(it.sortedNumbers.joinToString(prefix = "[", postfix = "]"))
+        }
     }
 
     fun displayChange(change: Int) {

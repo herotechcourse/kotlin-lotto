@@ -11,4 +11,8 @@ class LottoNumber private constructor(val number: Int) {
             return NUMBERS[number] ?: throw IllegalArgumentException("Invalid number. Required range: $MIN..$MAX")
         }
     }
+
+    override fun toString(): String {
+        return "$number"
+    }
 }

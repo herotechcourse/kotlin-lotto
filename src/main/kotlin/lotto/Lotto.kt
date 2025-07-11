@@ -11,10 +11,6 @@ class Lotto(val numbers: List<LottoNumber>) {
     }
     val sortedNumbers = numbers.sortedBy { it.number }
 
-    override fun toString(): String {
-        return sortedNumbers.joinToString(prefix = "[", postfix = "]") { it.number.toString() }
-    }
-
     fun hasBonusNumber(bonusNumber: LottoNumber): Boolean {
         return numbers.contains(bonusNumber)
     }
