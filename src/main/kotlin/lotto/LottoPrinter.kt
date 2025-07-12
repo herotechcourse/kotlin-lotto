@@ -1,6 +1,6 @@
 package lotto
 
-object LottoPrinter {
+class LottoPrinter {
     fun generateLottoTickets(amount: Int): List<LottoTicket> {
         return List(amount) {
             LottoTicket(RandomNumberGenerator.generateNumber())

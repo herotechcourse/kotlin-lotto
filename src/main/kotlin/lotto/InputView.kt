@@ -24,7 +24,7 @@ object InputView {
         }
     }
 
-    fun getLastWeekWinningNumbers(): WinningNumbers  {
+    fun getLastWeekWinningNumbers(): WinningNumbers {
         println("Please enter last week’s winning numbers.")
         val input = readln() // -> "1,2,3,4,5,6"
         val usedInput = input.split(",") // -> ["1", " 2", " 3", " 4", " 5", " 6"]

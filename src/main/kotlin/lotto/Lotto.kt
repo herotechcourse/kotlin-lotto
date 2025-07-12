@@ -9,7 +9,9 @@ object Lotto {
         val manualTickets = retryable { InputView.getManualTickets(manualCount) }
 
         val autoCount = totalTickets - manualCount
-        val autoTickets = LottoPrinter.generateLottoTickets(autoCount)
+
+        val lottoPrinter = LottoPrinter()
+        val autoTickets = lottoPrinter.generateLottoTickets(autoCount)
 
         val allTickets = manualTickets + autoTickets
 
