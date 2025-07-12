@@ -1,17 +1,19 @@
 package lotto.view
 
-import lotto.model.LottoTicket
+import lotto.model.Tickets
 
 object ResultView {
-    fun displayNumberOfTickets(numberOfTickets: Int) {
-        println("You have purchased $numberOfTickets tickets.")
+    fun displayNumberOfTickets(
+        numberOfManualTickets: Int,
+        numberOfAutoTickets: Int,
+    ) {
+        println("\nPurchased $numberOfManualTickets manual and $numberOfAutoTickets automatic tickets.")
     }
 
-    fun displayTickets(bundleOfLottoTicket: List<LottoTicket>) {
-        bundleOfLottoTicket.forEach { ticket ->
-            println(ticket.numbers)
+    fun displayTickets(bundleOfLottoTicket: Tickets) {
+        bundleOfLottoTicket.tickets.forEach { ticket ->
+            println(ticket.lottoNumbers.numbers.toString())
         }
-        println()
     }
 
     fun displayWinningStatistics(resultTable: MutableList<Int>) {

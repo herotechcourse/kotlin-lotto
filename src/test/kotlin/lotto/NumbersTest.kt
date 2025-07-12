@@ -5,7 +5,11 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 class NumbersTest {
-    // Minor refactoring required
+    @Test
+    fun `Throws an exception if numbers list is empty`() {
+        assertThrows<IllegalArgumentException> { Numbers(emptyList()) }
+    }
+
     @Test
     fun `Throws an exception if numbers contain duplicates`() {
         assertThrows<IllegalArgumentException> {

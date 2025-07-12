@@ -15,11 +15,13 @@ Lotto Machine
 - [x] e. Need input from user for the amount of money
 - [x] e. Need input from user for last week's winning numbers
 - [x] e. Need input from user for a bonus number
-- [x] e. Has amount of ticket
-- [x] m. calculate amount of ticket from the amount of money
+- [x] ~~e. Has amount of ticket~~
+- [x] ~~m. calculate amount of ticket from the amount of money~~
 - [x] e. Has bundle of tickets
-- [x] em. generate LottoTicket objects
+- [x] ~~em. generate LottoTicket objects~~
 - [x] em. generate WinningStatistics object
+- [x] e. has count of match --> resultTable
+- [x] m. calculate winning ticket(s)
 
 Lotto Ticket
 - [x] e. Ticket has attribute named cost 1,000 KRW
@@ -27,18 +29,18 @@ Lotto Ticket
 - [x] e. Ticket has 6 int numbers in array
 - [x] Ticket number should be from 1-45
 - [x] numbers are not duplicated
-- [x] m. numbers are generated randomly
+
+Lotto Printer
+- [x] m. numbers in lotto ticket are generated randomly
+- [x] Lotto Printer generates auto-numbered lotto tickets
 
 RandomNumberGenerator
 - [x] Use `shuffled()` to generate random numbers
 - [x] Use `sorted()` to sort numbers in array
 
 WinningStatistics
-- [ ] e. has count of match --> resultTable in LottoMachine
 - [x] e. winning money
 - [x] m. calculate winning money
-- [ ] e. winning ticket(s) --> LottoMachine
-- [ ] m. calculate winning ticket(s) --> LottoMachine
 - [x] e. return rate
 - [x] m. calculate return rate
 
@@ -52,13 +54,48 @@ Rank
 InputView
 - [x] User input is dividable by 1000
 - [x] msg. `Please enter the purchase amount.`
+- [x] msg. `Enter the number of manual tickets to purchase.`
+- [x] msg. `Enter the numbers for manual tickets.`
 - [x] msg. `Please enter last week’s winning numbers.`
 - [x] msg. `Please enter the bonus number.`
+- [x] m. Add re-prompt logic to avoid runtime errors and provide alternative option to user
 
 ResultView
-- [x] msg. `You have purchased N tickets.`
+- [x] ~~msg. `You have purchased N tickets.`~~
+- [x] msg. `Purchased M manual and N automatic tickets.`
 - [x] msg. `Winning Statistics\n------------------\n`
 - [x] msg. `Total return rate is 0.N (A rate below 1 means a loss)`
+
+Controller
+- [ ] Controller manage direct request and response with `InputView` and `ResultView`
+- [ ] Controller interact with managers which are smaller controllers that will controller in separated responsibility
+
+TicketManager
+- [x] manage tickets
+- [x] consolidate manual and auto tickets
+
+[//]: # (ManualTicketManager)
+
+[//]: # (- [ ] manage manual tickets)
+
+[//]: # (- [ ] create manual tickets)
+
+[//]: # ()
+[//]: # (AutoTicketManager)
+
+[//]: # (- [ ] manage auto tickets)
+
+[//]: # (- [ ] create auto tickets)
+
+[//]: # ()
+[//]: # (WinnerManager)
+
+[//]: # (- [ ] manage data related with winner numbers and bonus number)
+
+[//]: # ()
+[//]: # (StatisticsManager)
+
+[//]: # (- [ ] manage data related with stats)
 
 
 ## Remindable Ideas

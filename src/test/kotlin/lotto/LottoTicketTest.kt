@@ -17,13 +17,13 @@ class LottoTicketTest {
     @Test
     fun `Ticket has 6 Int numbers in array`() {
         val ticket = LottoTicket(testNumbers)
-        assertEquals(LottoTicket.SIZE_OF_NUMBERS, ticket.numbers.size)
+        assertEquals(LottoTicket.SIZE_OF_NUMBERS, ticket.lottoNumbers.size)
     }
 
     @Test
     fun `Ticket number should be from 1-45`() {
         val ticket = LottoTicket(testNumbers)
-        ticket.numbers.forEach {
+        ticket.lottoNumbers.forEach {
             require(it >= LottoTicket.MIN_LOTTO_NUMBER)
             require(it <= LottoTicket.MAX_LOTTO_NUMBER)
         }
