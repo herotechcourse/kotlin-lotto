@@ -4,15 +4,12 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class LottoMachineTest {
-    private val winningNumbers = listOf(1, 2, 3, 4, 5, 6)
-    private val bonusNumber = 7
-
     @Test
     fun `LottoMachine correctly filters ranks`() {
         val machine =
             LottoMachine(
-                lastWeekWinningNumbers = winningNumbers,
-                bonusNumber = bonusNumber,
+                winningNumbers = WinningNumbers(listOf(1, 2, 3, 4, 5, 6)),
+                bonusNumber = BonusNumber(7),
             )
 
         val tickets =
