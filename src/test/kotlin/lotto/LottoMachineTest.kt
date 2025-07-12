@@ -20,7 +20,7 @@ class LottoMachineTest {
 
         val resultTable = machine.createResultTable(tickets)
 
-        assertEquals(1, resultTable[Rank.FIRST])
-        assertEquals(1, resultTable[Rank.SECOND])
+        assertEquals(1, resultTable.countOf(Rank.FIRST))
+        assertEquals(1, resultTable.countOf(Rank.SECOND))
     }
 }

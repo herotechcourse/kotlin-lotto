@@ -14,13 +14,13 @@ object ResultView {
         }
     }
 
-    fun displayWinningStatistics(resultTable: Map<Rank, Int>) {
+    fun displayWinningStatistics(statistics: WinningStatistics) {
         println("\nWinning Statistics")
         println("------------------")
         Rank.entries
             .filter { it != Rank.MISS }
             .forEach { rank ->
-                val count = resultTable[rank] ?: 0
+                val count = statistics.countOf(rank)
                 println("${rank.matchCount} numbers matched${if (rank.hasBonus) " + bonus ball" else ""} (${rank.prize}₩) - $count times")
             }
     }
@@ -30,10 +30,10 @@ object ResultView {
     }
 
     fun displayFinalResults(
-        resultTable: Map<Rank, Int>,
+        statistics: WinningStatistics,
         returnRate: Double,
     ) {
-        displayWinningStatistics(resultTable)
+        displayWinningStatistics(statistics)
         displayReturnRate(returnRate)
     }
 }
