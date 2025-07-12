@@ -1,6 +1,6 @@
 package lotto
 
-object WinStatCalculator {
+class WinStatCalculator {
     fun calculateWinningMoney(statistics: WinningStatistics): Int {
         return Rank.entries
             .filter { it != Rank.MISS }

@@ -1,4 +1,3 @@
 package lotto
 
-@JvmInline
-value class WinningNumbers(val numbers: List<Int>)
+data class WinningNumbers(val numbers: List<Int>)

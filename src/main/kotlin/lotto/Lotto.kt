@@ -1,6 +1,6 @@
 package lotto
 
-object Lotto {
+class Lotto {
     fun run() {
         val amountOfMoney = retryable { InputView.getPurchaseAmount() }
         val totalTickets = amountOfMoney / LottoTicket.COST_OF_TICKET
@@ -10,8 +10,7 @@ object Lotto {
 
         val autoCount = totalTickets - manualCount
 
-        val lottoPrinter = LottoPrinter()
-        val autoTickets = lottoPrinter.generateLottoTickets(autoCount)
+        val autoTickets = LottoPrinter().generateLottoTickets(autoCount)
 
         val allTickets = manualTickets + autoTickets
 
@@ -21,11 +20,12 @@ object Lotto {
         val winningNumbers = retryable { InputView.getLastWeekWinningNumbers() }
         val bonusNumber = retryable { InputView.getBonusNumber() }
 
-        val machine: LottoMachine = LottoMachine(winningNumbers, bonusNumber)
+        val machine = LottoMachine(winningNumbers, bonusNumber)
         val resultTable = machine.createResultTable(allTickets)
 
-        val winningMoney = WinStatCalculator.calculateWinningMoney(resultTable)
-        val returnRate = WinStatCalculator.calculateReturnRate(winningMoney, amountOfMoney)
+        val winStatCalculator = WinStatCalculator()
+        val winningMoney = winStatCalculator.calculateWinningMoney(resultTable)
+        val returnRate = winStatCalculator.calculateReturnRate(winningMoney, amountOfMoney)
 
         ResultView.displayFinalResults(resultTable, returnRate)
     }

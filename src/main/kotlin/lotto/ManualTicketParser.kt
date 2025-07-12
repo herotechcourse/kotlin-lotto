@@ -1,6 +1,6 @@
 package lotto
 
-object ManualTicketParser {
+class ManualTicketParser {
     fun parse(line: String): LottoTicket {
         val numbers =
             line.split(",")

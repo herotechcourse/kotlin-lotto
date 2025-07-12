@@ -1,6 +1,6 @@
 package lotto
 
-object RandomNumberGenerator {
+class RandomNumberGenerator {
     fun generateNumber(): List<Int> {
         val roughNumbers = (1..45).toList().shuffled()
         val generatedNumbers = roughNumbers.subList(0, 6)

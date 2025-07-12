@@ -20,7 +20,7 @@ object InputView {
         println("Enter the numbers for manual tickets.")
         return List(count) {
             val line = readln()
-            ManualTicketParser.parse(line)
+            ManualTicketParser().parse(line)
         }
     }
 

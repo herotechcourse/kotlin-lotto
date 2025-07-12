@@ -1,4 +1,3 @@
 package lotto
 
-@JvmInline
-value class BonusNumber(val value: Int)
+data class BonusNumber(val value: Int)
