@@ -5,9 +5,16 @@ import view.ResultView
 
 fun main() {
     val purchaseAmount = Money(InputView.getPurchaseAmount())
-    val purchasedTicketNumber = PurchasedTicketsNumber(InputView.getNumberOfManuelTickets(), purchaseAmount)
-    val lottoMachine = LottoMachine(purchasedTicketNumber)
-    val lottoTickets = lottoMachine.issueTickets()
+    val lottoMachine = LottoMachine()
+    val manuelTicketsNumber = InputView.getNumberOfManuelTickets()
+    val totalTicketsNumber = purchaseAmount.value / TICKET_PRICE
+    val lottoTickets =
+        lottoMachine.issueTickets(manuelTicketsNumber) {
+            InputView.getNumbersForTicket()
+        } +
+            lottoMachine.issueTickets(totalTicketsNumber - manuelTicketsNumber) {
+                Generator.randomNumber()
+            }
 
     ResultView.viewTicketsAmount(lottoTickets.size)
     ResultView.viewTickets(lottoTickets)
