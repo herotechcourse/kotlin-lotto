@@ -43,12 +43,10 @@ object LottoHandler {
     fun buyManualTickets(ticketCount: Int): List<Lotto> {
         repeat(MAX_ATTEMPT) {
             try {
-                val tickets = mutableListOf<Lotto>()
                 InputView.promptForManualTickets()
-                repeat(ticketCount) {
-                    tickets.add(Lotto.from(InputView.readManualTickets()))
+                return List(ticketCount) {
+                    Lotto.from(InputView.readManualTickets())
                 }
-                return tickets.toList()
             } catch (err: IllegalArgumentException) {
                 println(err.message)
             }
@@ -60,8 +58,7 @@ object LottoHandler {
         val machine = LottoMachine()
         repeat(MAX_ATTEMPT) {
             try {
-                val automaticTickets = machine.generateTickets(count)
-                return automaticTickets
+                return machine.generateTickets(count)
             } catch (err: IllegalArgumentException) {
                 println(err.message)
             }
