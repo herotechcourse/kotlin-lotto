@@ -1,21 +1,23 @@
 package lotto
 
-class Purchase(val amount: Money) {
-    val change: Money
-    val ticketCount: Int
+@JvmInline
+value class Purchase(val amount: Money) {
     init {
         require(amount.value in MIN..MAX) {
             "[ERROR] Max purchase amount allowed is $MIN-$MAX."
         }
-        change = Money(amount.value % TICKET_PRICE)
-        ticketCount = amount.value / TICKET_PRICE
     }
 
+    fun calculateChange(): Money = Money(amount.value % TICKET_PRICE)
+
+    fun calculateTicketCount(): Int = amount.value / TICKET_PRICE
+
     fun calculateAutomaticTicketsCount(manualTicketsCount: Int): Int {
-        return ticketCount - manualTicketsCount
+        return calculateTicketCount() - manualTicketsCount
     }
 
     fun checkManualTicketsCount(count: Int) {
+        val ticketCount = calculateTicketCount()
         require(count in 0..ticketCount) {
             "Number of manual tickets cannot exceed $ticketCount."
         }

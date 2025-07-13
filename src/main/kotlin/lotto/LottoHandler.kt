@@ -74,7 +74,7 @@ object LottoHandler {
         val automaticTickets = buyAutomaticTickets(automaticTicketsCount)
         val tickets: List<Lotto> = manualTickets + automaticTickets
         OutputView.displayCombinedTickets(tickets, manualTicketsCount, automaticTicketsCount)
-        OutputView.displayChange(purchase.change)
+        OutputView.displayChange(purchase.calculateChange())
         return tickets
     }
 
