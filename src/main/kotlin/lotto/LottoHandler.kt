@@ -16,7 +16,7 @@ object LottoHandler {
         }
     }
 
-    fun pay(): Purchase {
+    private fun pay(): Purchase {
         repeat(MAX_ATTEMPT) {
             try {
                 return Purchase(Money(InputView.readPurchaseAmount()))
@@ -27,7 +27,7 @@ object LottoHandler {
         throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
     }
 
-    fun reserveManualTickets(purchase: Purchase): Int {
+    private fun reserveManualTickets(purchase: Purchase): Int {
         repeat(MAX_ATTEMPT) {
             try {
                 val manualTicketsCount = InputView.readNumberOfManualTickets()
@@ -40,7 +40,7 @@ object LottoHandler {
         throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
     }
 
-    fun buyManualTickets(ticketCount: Int): List<Lotto> {
+    private fun buyManualTickets(ticketCount: Int): List<Lotto> {
         repeat(MAX_ATTEMPT) {
             try {
                 InputView.promptForManualTickets()
@@ -54,7 +54,7 @@ object LottoHandler {
         throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
     }
 
-    fun buyAutomaticTickets(count: Int): List<Lotto> {
+    private fun buyAutomaticTickets(count: Int): List<Lotto> {
         val machine = LottoMachine()
         repeat(MAX_ATTEMPT) {
             try {
@@ -66,7 +66,7 @@ object LottoHandler {
         throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
     }
 
-    fun buyTickets(purchase: Purchase): List<Lotto> {
+    private fun buyTickets(purchase: Purchase): List<Lotto> {
         val manualTicketsCount = reserveManualTickets(purchase)
         val automaticTicketsCount = purchase.calculateAutomaticTicketsCount(manualTicketsCount)
 
@@ -78,7 +78,7 @@ object LottoHandler {
         return tickets
     }
 
-    fun processWinningNumbers(): Lotto {
+    private fun processWinningNumbers(): Lotto {
         repeat(MAX_ATTEMPT) {
             try {
                 val winningNumbers = InputView.readWinningNumbers()
@@ -90,7 +90,7 @@ object LottoHandler {
         throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
     }
 
-    fun processBonusNumbers(winningTicket: Lotto): WinningNumbers {
+    private fun processBonusNumbers(winningTicket: Lotto): WinningNumbers {
         repeat(MAX_ATTEMPT) {
             try {
                 val bonusNumber = LottoNumber.from(InputView.readBonusNumber())
@@ -103,7 +103,7 @@ object LottoHandler {
         throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
     }
 
-    fun doStatistics(winningNumbers: WinningNumbers, tickets: List<Lotto>, purchase: Purchase) {
+    private fun doStatistics(winningNumbers: WinningNumbers, tickets: List<Lotto>, purchase: Purchase) {
         val statistics = Statistics(winningNumbers)
         val results = statistics.calculateResults(tickets)
         val totalEarnings = statistics.calculateTotalEarnings(results)
