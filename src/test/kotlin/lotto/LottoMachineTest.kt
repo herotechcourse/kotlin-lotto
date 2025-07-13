@@ -6,13 +6,11 @@ import org.junit.jupiter.api.Test
 class LottoMachineTest {
     @Test
     fun `machine should issue 2 tickets`() {
-        val lottoMachine =
-            LottoMachine(
-                PurchasedTicketsNumber(
-                    0,
-                    Money(2000),
-                ),
-            )
-        assertTrue(lottoMachine.tickets.size == 2000 / TICKET_PRICE)
+        val tickets = LottoMachine().issueTickets(1) { getListOfNumbers() }
+        assertTrue(tickets.size == 1)
+    }
+
+    private fun getListOfNumbers(): List<Int> {
+        return listOf(1, 2, 3, 4, 5, 6)
     }
 }

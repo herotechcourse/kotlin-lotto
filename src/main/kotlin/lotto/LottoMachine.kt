@@ -1,29 +1,12 @@
 package lotto
 
-import view.InputView
-
-class LottoMachine(val ticketsNumber: PurchasedTicketsNumber) {
-    fun issueTickets(): List<Lotto> {
-        val tickets = mutableListOf<Lotto>()
-
-        tickets.addAll(
-            (1..ticketsNumber.getManuelTicketsNumber()).map {
-                Lotto(manuelInputNumbers().map { LottoNumber.from(it) })
-            },
-        )
-
-        tickets.addAll(
-            (ticketsNumber.getManuelTicketsNumber() + 1..ticketsNumber.getTotalTicketsCount()).map {
-                Lotto(generateRandomNumber().map { LottoNumber.from(it) })
-            },
-        )
-
-        return tickets.toList()
+class LottoMachine() {
+    fun issueTickets(
+        quantity: Int,
+        numberGenerator: () -> List<Int>,
+    ): List<Lotto> {
+        return (1..quantity).map {
+            Lotto(numberGenerator().map { LottoNumber.from(it) })
+        }
     }
-
-    private fun generateRandomNumber(): List<Int> {
-        return (LottoNumber.MINIMUM_NUMBER..LottoNumber.MAXIMUM_NUMBER).shuffled().take(6)
-    }
-
-    private fun manuelInputNumbers(): List<Int> = InputView.getNumbersForTicket()
 }
