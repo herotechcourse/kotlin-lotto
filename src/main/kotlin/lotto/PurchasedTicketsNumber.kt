@@ -1,7 +1,7 @@
 package lotto
 
 class PurchasedTicketsNumber(private val manuelTicketsNumber: Int, purchasedAmount: Money) {
-    private val totalTickets = purchasedAmount.getValue() / TICKET_PRICE
+    private val totalTickets = purchasedAmount.value / TICKET_PRICE
 
     init {
         require(manuelTicketsNumber >= MINIMUM_NUMBER && manuelTicketsNumber <= totalTickets) {
