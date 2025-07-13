@@ -16,13 +16,13 @@ class PurchaseTest {
     @Test
     fun `Change is calculated for the User`() {
         val purchase = Purchase(Money(1234))
-        assertEquals(purchase.change.value, 234)
+        assertEquals(purchase.calculateChange().value, 234)
     }
 
     @ParameterizedTest
     @ValueSource(ints = [1_000, 20_000])
     fun `Generates correct number of tickets as a list`(amount: Int) {
         val purchase = Purchase(Money(amount))
-        assertEquals(purchase.ticketCount, amount / Purchase.TICKET_PRICE)
+        assertEquals(purchase.calculateTicketCount(), amount / Purchase.TICKET_PRICE)
     }
 }
