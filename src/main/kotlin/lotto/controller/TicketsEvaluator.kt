@@ -13,12 +13,4 @@ object TicketsEvaluator {
             it.getRank(winningCombination)
         }
     }
-
-    fun getTotalRate(
-        ranks: List<Rank>,
-        totalAmount: Int,
-    ): Double {
-        val totalPrize = ranks.sumOf { it.winningMoney }
-        return if (totalPrize == 0) 0.0 else (totalPrize.toDouble() / totalAmount) * 100.0
-    }
 }

@@ -40,10 +40,7 @@ object OutputView {
 
         private fun totalRate(rankedTickets: RankedTickets) {
             Prompt.totalReturnRate()
-            val totalPrize = rankedTickets.ranked.sumOf { it.winningMoney }
-            val totalSpent = rankedTickets.purchaseResult.userPurchase.amount
-            val totalRate = totalPrize.toDouble() / totalSpent
-            println("%.2f".format(totalRate))
+            println("%.2f".format(rankedTickets.totalRate))
         }
 
         private fun pluralizeTicket(size: Int): String {
