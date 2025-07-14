@@ -1,20 +1,23 @@
 package lotto.domain
 
-data class LottoTicket(private val lottoNumbers: HashSet<LottoNumber>) {
+import lotto.exceptions.ExceptionMessage
+
+@JvmInline
+value class LottoTicket(private val lottoNumbers: HashSet<LottoNumber>) {
     init {
-        require(lottoNumbers.size == SUFFICIENT_SIZE)
+        require(lottoNumbers.size == SUFFICIENT_SIZE) to ExceptionMessage.NOT_SUFFICIENT_SIZE
+    }
+
+    override fun toString(): String {
+        return lottoNumbers.joinToString(", ")
     }
 
     fun toRawSet(): Set<Int> {
         return lottoNumbers.map { it.hashCode() }.toSet()
     }
 
-    fun contains(lottoNumber: LottoNumber): Boolean {
-        return toRawSet().contains(lottoNumber.hashCode())
-    }
-
-    override fun toString(): String {
-        return lottoNumbers.joinToString(", ")
+    fun doesNotContains(lottoNumber: LottoNumber): Boolean {
+        return lottoNumber.hashCode() !in toRawSet()
     }
 
     fun getRank(winningCombination: WinningCombination): Rank {
@@ -37,7 +40,6 @@ data class LottoTicket(private val lottoNumbers: HashSet<LottoNumber>) {
                 requests.map {
                     LottoNumber.from(it)
                 }.toCollection(linkedSetOf())
-                // TODO: find better way to figure out, set but also as has order
             )
         }
     }
