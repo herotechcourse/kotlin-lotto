@@ -54,33 +54,19 @@ object OutputView {
     }
 
     object Prompt {
-        fun amount() {
-            println(PURCHASE_AMOUNT_PROMPT)
-        }
+        fun amount() = println(PURCHASE_AMOUNT_PROMPT)
 
-        fun numberOfManual() {
-            println(NUMBER_OF_MANUAL_PROMPT)
-        }
+        fun numberOfManual() = println(NUMBER_OF_MANUAL_PROMPT)
 
-        fun manualNumbers() {
-            println(MANUAL_TICKET_PROMPT)
-        }
+        fun manualNumbers() = println(MANUAL_TICKET_PROMPT)
 
-        fun winningNumbers() {
-            println(WINNING_NUMBERS_PROMPT)
-        }
+        fun winningNumbers() = println(WINNING_NUMBERS_PROMPT)
 
-        fun bonusNumber() {
-            println(BONUS_NUMBER_PROMPT)
-        }
+        fun bonusNumber() = println(BONUS_NUMBER_PROMPT)
 
-        fun winningStatisticsTitle() {
-            println(TITLE_OF_RESULT_PROMPT)
-        }
+        fun winningStatisticsTitle() = println(TITLE_OF_RESULT_PROMPT)
 
-        fun totalReturnRate() {
-            print(TOTAL_RETURN_PROMPT)
-        }
+        fun totalReturnRate() = print(TOTAL_RETURN_PROMPT)
 
         fun error(exception: Exception) {
             val msg = exception.message ?: "Unexpected error occurred."
