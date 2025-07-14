@@ -7,6 +7,6 @@ import lotto.exceptions.ExceptionMessage
  */
 data class WinningCombination(val winningTicket: LottoTicket, val bonusNumber: LottoNumber) {
     init {
-        require(winningTicket.doesNotContains(bonusNumber)) to ExceptionMessage.DUPLICATE
+        require(winningTicket.doesNotContains(bonusNumber)) { ExceptionMessage.DUPLICATE }
     }
 }
