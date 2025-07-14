@@ -4,7 +4,7 @@ class ResultView() {
     fun printLottos(lottos: List<Lotto>) {
         println("You have purchased ${lottos.count()} tickets.")
         lottos.forEach { lotto ->
-            val lottoNumbers = lotto.getLottoNumbersAsInt()
+            val lottoNumbers = lotto.lottoNumbersAsInt
             println(lottoNumbers.joinToString(",", "[", "]"))
         }
     }

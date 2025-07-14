@@ -8,10 +8,10 @@ class LottoMachineTest {
     fun `ticket should contain 6 numbers`() {
         val lottoMachine = LottoMachine()
         val tickets = lottoMachine.createGeneratedTickets(1, 0)
-        val numbersInTicket = tickets[0].getLottoNumbersAsInt()
+        val numbersInTicket = tickets[0].lottoNumbersAsInt
         assertEquals(
-            6,
             numbersInTicket.count(),
+            6,
             "Ticket numbers aren't 6",
         )
     }
@@ -20,8 +20,8 @@ class LottoMachineTest {
     fun `amount of tickets were generated`() {
         val lottoMachine = LottoMachine()
         assertEquals(
-            2,
             lottoMachine.createGeneratedTickets(4, 2).count(),
+            2,
             "Amount of tickets is different then expected",
         )
     }
@@ -33,8 +33,8 @@ class LottoMachineTest {
         results[Rank.FIFTH] = 1
         val amount = 3000
         assertEquals(
+            2.toBigDecimal(),
             lottoMachine.calculateReturnRate(results, amount),
-            1.6666666666666667,
             "Rate result is different than expected",
         )
     }
@@ -48,8 +48,8 @@ class LottoMachineTest {
                 LottoNumber(2),
                 LottoNumber(3),
                 LottoNumber(4),
-                LottoNumber(44),
-                LottoNumber(45),
+                LottoNumber(5),
+                LottoNumber(6),
             )
 
         val results =
@@ -73,8 +73,8 @@ class LottoMachineTest {
             )
 
         assertEquals(
+            1333333.toBigDecimal(),
             lottoMachine.calculateReturnRate(results, 3000),
-            1.6666666666666667,
             "Rate result is different than expected",
         )
     }

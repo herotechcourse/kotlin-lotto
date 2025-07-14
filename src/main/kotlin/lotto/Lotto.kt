@@ -9,9 +9,7 @@ class Lotto(val lottoNumbers: List<LottoNumber>) {
         require(isNotDuplicated(lottoNumbers))
     }
 
-    fun getLottoNumbersAsInt(): List<Int> {
-        return lottoNumbers.map { it.value }
-    }
+    val lottoNumbersAsInt: List<Int> get() = lottoNumbers.map { it.value }
 
     private fun isNotDuplicated(lottoNumbers: List<LottoNumber>): Boolean {
         return lottoNumbers.count() == lottoNumbers.map { it.value }.toSet().count()
@@ -33,7 +31,7 @@ class Lotto(val lottoNumbers: List<LottoNumber>) {
     private fun compareToWinningNumbers(winningNumbers: List<String>): Int {
         var countMatches = 0
         winningNumbers.forEach { number ->
-            if (number.toInt() in getLottoNumbersAsInt()) {
+            if (number.toInt() in lottoNumbersAsInt) {
                 countMatches++
             }
         }
@@ -41,7 +39,7 @@ class Lotto(val lottoNumbers: List<LottoNumber>) {
     }
 
     private fun compareToBonusNumber(bonusNumber: Int): Boolean {
-        return bonusNumber in getLottoNumbersAsInt()
+        return bonusNumber in lottoNumbersAsInt
     }
 
     companion object {
