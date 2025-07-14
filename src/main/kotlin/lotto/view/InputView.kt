@@ -21,12 +21,13 @@ object InputView {
 
     fun readManualNumbers(): Set<Int> {
         val input = readln()
-        val numbers = input
-            .split(',')
-            .map {
-                it.trim().toIntOrNull()
-                    ?: throw IllegalArgumentException(ExceptionMessage.CONVERTED_NULL)
-            }.toSortedSet()
+        val numbers =
+            input
+                .split(',')
+                .map {
+                    it.trim().toIntOrNull()
+                        ?: throw IllegalArgumentException(ExceptionMessage.CONVERTED_NULL)
+                }.toSortedSet()
         Validator.numbers(numbers)
         return numbers
     }

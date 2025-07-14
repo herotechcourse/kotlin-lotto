@@ -5,14 +5,14 @@ import lotto.domain.NumberGenerator
 import lotto.dto.IssuedTickets
 
 object TicketIssuer {
-
     /**
      * @param pendingTickets raw data
      */
     fun with(pendingTickets: List<Set<Int>>): IssuedTickets {
-        val lottoTickets = pendingTickets.map {
-            LottoTicket.from(it)
-        }
+        val lottoTickets =
+            pendingTickets.map {
+                LottoTicket.from(it)
+            }
         return IssuedTickets(lottoTickets)
     }
 

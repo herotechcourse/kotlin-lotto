@@ -1,7 +1,6 @@
 package lotto.domain
 
 data class LottoNumber private constructor(private val value: Int) {
-
     companion object {
         internal const val MIN_RANGE_NUMBER = 1
         internal const val MAX_RANGE_NUMBER = 45

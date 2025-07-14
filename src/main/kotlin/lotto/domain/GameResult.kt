@@ -7,5 +7,5 @@ data class GameResult(
     val winningCombination: WinningCombination,
     val totalAmount: Int,
     val ranks: List<Rank>,
-    val returnRate: Double
+    val returnRate: Double,
 )

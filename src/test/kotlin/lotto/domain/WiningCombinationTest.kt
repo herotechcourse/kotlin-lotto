@@ -13,7 +13,6 @@ class WiningCombinationTest {
         }
     }
 
-
     @Test
     fun `throw if bonus number is not unique`() {
         assertThrows<IllegalArgumentException> {

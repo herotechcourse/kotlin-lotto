@@ -1,6 +1,5 @@
 package lotto.controller
 
-
 import lotto.dto.PurchaseResult
 import lotto.dto.UserPurchase
 

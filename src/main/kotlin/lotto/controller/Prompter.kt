@@ -34,15 +34,14 @@ object Prompter {
     fun askWinningNumbers(): Set<Int> {
         return InputView.retriable(
             prompt = { OutputView.Prompt.winningNumbers() },
-            read = { InputView.readManualNumbers() }
+            read = { InputView.readManualNumbers() },
         )
     }
 
     fun askBonusNumber(winningTicket: LottoTicket): LottoNumber {
         return InputView.retriable(
             prompt = { OutputView.Prompt.bonusNumber() },
-            read = { InputView.readBonusNumber(winningTicket.toRawSet()) }
+            read = { InputView.readBonusNumber(winningTicket.toRawSet()) },
         )
     }
-
 }

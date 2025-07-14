@@ -39,7 +39,7 @@ value class LottoTicket(private val lottoNumbers: HashSet<LottoNumber>) {
             return LottoTicket(
                 requests.map {
                     LottoNumber.from(it)
-                }.toCollection(linkedSetOf())
+                }.toCollection(linkedSetOf()),
             )
         }
     }

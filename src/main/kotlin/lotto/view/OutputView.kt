@@ -6,16 +6,14 @@ import lotto.dto.PurchaseResult
 import lotto.dto.RankedTickets
 
 object OutputView {
-
     object Print {
         fun purchaseResult(purchaseResult: PurchaseResult) {
             val pluralized = pluralizeTicket(purchaseResult.userPurchase.maxPurchasable)
             println(
                 "Purchased ${purchaseResult.userPurchase.manualTicketsCount} manual " +
-                        "and ${purchaseResult.userPurchase.randomTicketsCount} automatic $pluralized."
+                    "and ${purchaseResult.userPurchase.randomTicketsCount} automatic $pluralized.",
             )
             purchaseResult.totalTickets.get().forEach { println("[$it]") }
-
         }
 
         fun winningStatistics(rankedTickets: RankedTickets) {
@@ -36,7 +34,7 @@ object OutputView {
             val pluralizedTicket = pluralizeTicket(matchCount)
             println(
                 "${entry.countOfMatch} Matches" +
-                        "$hasBonus ($winningMoney ${LottoTicket.CURRENCY}) - $matchCount $pluralizedTicket"
+                    "$hasBonus ($winningMoney ${LottoTicket.CURRENCY}) - $matchCount $pluralizedTicket",
             )
         }
 
