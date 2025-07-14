@@ -12,7 +12,6 @@ fun main() {
     val userManualTicketNumbers = inputView.takeUserManualTicketNumbers(manualTicketsQuantity)
 
     val manualTickets = lottoMachine.createManualTickets(userManualTicketNumbers)
-    println(manualTickets)
     val autoTickets = lottoMachine.createGeneratedTickets(totalPurchasedTickets, manualTicketsQuantity)
     val tickets = manualTickets + autoTickets
     resultView.printLottos(tickets)
