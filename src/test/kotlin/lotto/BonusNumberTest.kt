@@ -1,15 +1,15 @@
 package lotto
 
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import kotlin.test.assertEquals
 
 class BonusNumberTest {
     @Test
     fun `should create BonusNumber when number in range and not in lotto numbers`() {
         val primaryNumbers = setOf(1, 2, 3, 4, 5, 6)
         val bonus = BonusNumber.of(7, primaryNumbers)
-        assertEquals(7, bonus.number)
+        assertThat(bonus.number).isEqualTo(7)
     }
 
     @Test

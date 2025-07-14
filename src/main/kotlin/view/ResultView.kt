@@ -9,7 +9,12 @@ object ResultView {
         println("You have purchased $ticketsAmount tickets")
     }
 
-    fun viewTickets(tickets: List<Lotto>) {
+    fun viewTickets(
+        tickets: List<Lotto>,
+        manuelTicketsNumber: Int,
+        automaticTicketsNumber: Int,
+    ) {
+        println("Purchased $manuelTicketsNumber manual and $automaticTicketsNumber automatic tickets.")
         tickets.forEach {
             println(it.numbers.numbers.toString())
         }
@@ -34,6 +39,7 @@ object ResultView {
         purchaseAmount: Int,
     ) {
         val rate = Calculator.division(winningAmount, purchaseAmount)
-        println("Total return rate is $rate (A rate below 1 means a loss)")
+        val roundedRate = String.format("%.2f", rate)
+        println("Total return rate is $roundedRate (A rate below 1 means a loss)")
     }
 }

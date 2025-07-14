@@ -1,15 +1,15 @@
 package lotto
 
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import kotlin.test.assertEquals
 
 class LottoNumbersTest {
     @Test
     fun `it should create LottoNumbers with 6 unique numbers in range`() {
         val numbers = listOf(1, 5, 12, 23, 34, 45)
         val lottoNumbers = LottoNumbers.of(numbers)
-        assertEquals(numbers.toSet(), lottoNumbers.numbers)
+        assertThat(numbers.toSet()).isEqualTo(lottoNumbers.numbers)
     }
 
     @Test
