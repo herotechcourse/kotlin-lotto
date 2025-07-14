@@ -16,7 +16,7 @@ object Prompter {
     fun askManualTicketsNumbers(amount: Int): Int {
         return InputView.retriable(
             prompt = { OutputView.Prompt.numberOfManual() },
-            read = { InputView.readNumberOfManual(amount) },
+            read = { InputView.readManualSize(amount) },
         )
     }
 
@@ -25,7 +25,7 @@ object Prompter {
             prompt = { OutputView.Prompt.manualNumbers() },
             read = {
                 List(size) {
-                    InputView.readManualNumbers(size)
+                    InputView.readManualNumbers()
                 }
             },
         )
@@ -34,7 +34,7 @@ object Prompter {
     fun askWinningNumbers(): Set<Int> {
         return InputView.retriable(
             prompt = { OutputView.Prompt.winningNumbers() },
-            read = { InputView.readManualNumbers(1) }
+            read = { InputView.readManualNumbers() }
         )
     }
 

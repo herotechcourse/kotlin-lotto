@@ -9,14 +9,14 @@ object InputView {
         return input.trim().toIntOrNull() ?: throw LottoException.InvalidAmountFormatException(input)
     }
 
-    fun readNumberOfManual(count: Int): Int {
+    fun readManualSize(amount: Int): Int {
         val input = readln()
         val numberOfManual = input.trim().toIntOrNull() ?: throw IllegalArgumentException()
         require(count > 0 && numberOfManual <= count)
         return numberOfManual
     }
 
-    fun readManualNumbers(count: Int): Set<Int> {
+    fun readManualNumbers(): Set<Int> {
         val input = readln()
         return input
             .split(',')
@@ -26,7 +26,7 @@ object InputView {
             }.toSortedSet()
     }
 
-    fun readBonusNumber(winningInput: Set<Int>): LottoNumber {
+    fun readBonusNumber(winningNumbers: Set<Int>): LottoNumber {
         val input = readln()
         val bonusNumber = input.trim().toIntOrNull() ?: throw LottoException.InvalidWinningNumbersFormatException(input)
         if (winningInput.contains(bonusNumber))
@@ -38,16 +38,16 @@ object InputView {
      * Template function that accept a lambda
      * returns only in case of successfully
      */
-    fun <T> retryUntilSuccess(
+    fun <T> retriable(
         prompt: () -> Unit,
-        read: () -> T
+        read: () -> T,
     ): T {
         while (true) {
             try {
                 prompt()
                 return read()
-            } catch (e: LottoException) {
-                println(e.message)
+            } catch (e: IllegalArgumentException) {
+                println("[Error]: ${e.message}")
             }
         }
     }
