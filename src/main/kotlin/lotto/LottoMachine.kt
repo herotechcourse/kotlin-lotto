@@ -1,20 +1,21 @@
 package lotto
 
-class LottoMachine() {
-    fun createTickets(userAmount: Int): List<Lotto> {
-        val lottos = mutableListOf<Lotto>()
-        val amountOfTickets = calculateTickets(userAmount)
-        var count = 0
-        while (count < amountOfTickets) {
-            lottos.add(Lotto.create())
-            count++
-        }
-        return lottos
-    }
+import java.math.BigDecimal
 
-    private fun calculateTickets(userAmount: Int): Int {
-        val numberOfTickets = userAmount / LOTTO_PRICE
-        return numberOfTickets
+class LottoMachine() {
+    fun createGeneratedTickets(
+        totalPurchasedTickets: Int,
+        manualTicketsQuantity: Int,
+    ): List<Lotto> {
+        val lottos = mutableListOf<Lotto>()
+        val ticketsToBeGenerated = totalPurchasedTickets - manualTicketsQuantity
+        var countGeneratedTickets = 0
+        while (countGeneratedTickets < ticketsToBeGenerated) {
+            lottos.add(Lotto.create())
+            countGeneratedTickets++
+        }
+
+        return lottos
     }
 
     fun compareTickets(
@@ -42,17 +43,22 @@ class LottoMachine() {
     fun calculateReturnRate(
         results: MutableMap<Rank, Int>,
         userAmount: Int,
-    ): Double {
+    ): BigDecimal {
         val totalPrize = calculateTotalPrize(results)
-        return (totalPrize.toDouble() / userAmount.toDouble())
+        val rate = (totalPrize / userAmount.toBigDecimal())
+        return rate
     }
 
-    private fun calculateTotalPrize(results: MutableMap<Rank, Int>): Int {
-        var totalPrize = 0
+    private fun calculateTotalPrize(results: MutableMap<Rank, Int>): BigDecimal {
+        var totalPrize = 0.toBigDecimal()
         results.forEach { (key, value) ->
-            totalPrize += key.winningMoney * value
+            totalPrize += key.winningMoney.toBigDecimal() * value.toBigDecimal()
         }
         return totalPrize
+    }
+
+    fun createManualTickets(userManualTicketNumbers: List<List<Int>>): List<Lotto> {
+        return userManualTicketNumbers.map { ticket -> Lotto(ticket.map { number -> LottoNumber(number) }) }
     }
 
     companion object {

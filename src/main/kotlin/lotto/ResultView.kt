@@ -1,10 +1,12 @@
 package lotto
 
+import java.math.BigDecimal
+
 class ResultView() {
     fun printLottos(lottos: List<Lotto>) {
         println("You have purchased ${lottos.count()} tickets.")
         lottos.forEach { lotto ->
-            val lottoNumbers = lotto.getLottoNumbersAsInt()
+            val lottoNumbers = lotto.lottoNumbersAsInt
             println(lottoNumbers.joinToString(",", "[", "]"))
         }
     }
@@ -24,7 +26,7 @@ class ResultView() {
         )
     }
 
-    fun printReturnRate(rate: Double) {
+    fun printReturnRate(rate: BigDecimal) {
         val formattedRate = String.format("%.1f", rate).replace(',', '.')
         println(PRESENT_RATE.format(formattedRate))
     }
