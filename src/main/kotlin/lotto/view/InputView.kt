@@ -1,36 +1,40 @@
 package lotto.view
 
 import lotto.domain.LottoNumber
-import lotto.exceptions.LottoException
+import lotto.exceptions.ExceptionMessage
+import lotto.exceptions.Validator
 
 object InputView {
     fun readUserAmount(): Int {
         val input = readln()
-        return input.trim().toIntOrNull() ?: throw LottoException.InvalidAmountFormatException(input)
+        val amount = input.trim().toIntOrNull() ?: throw IllegalArgumentException(ExceptionMessage.CONVERTED_NULL)
+        Validator.amount(amount)
+        return amount
     }
 
     fun readManualSize(amount: Int): Int {
         val input = readln()
-        val numberOfManual = input.trim().toIntOrNull() ?: throw IllegalArgumentException()
-        require(count > 0 && numberOfManual <= count)
-        return numberOfManual
+        val size = input.trim().toIntOrNull() ?: throw IllegalArgumentException(ExceptionMessage.CONVERTED_NULL)
+        Validator.purchase(amount, size)
+        return size
     }
 
     fun readManualNumbers(): Set<Int> {
         val input = readln()
-        return input
+        val numbers = input
             .split(',')
             .map {
                 it.trim().toIntOrNull()
-                    ?: throw LottoException.InvalidWinningNumbersFormatException(input)
+                    ?: throw IllegalArgumentException(ExceptionMessage.CONVERTED_NULL)
             }.toSortedSet()
+        Validator.numbers(numbers)
+        return numbers
     }
 
     fun readBonusNumber(winningNumbers: Set<Int>): LottoNumber {
         val input = readln()
-        val bonusNumber = input.trim().toIntOrNull() ?: throw LottoException.InvalidWinningNumbersFormatException(input)
-        if (winningInput.contains(bonusNumber))
-            throw LottoException.InvalidWinningNumbersFormatException(input)
+        val bonusNumber = input.trim().toIntOrNull() ?: throw IllegalArgumentException(ExceptionMessage.CONVERTED_NULL)
+        Validator.bonusNumber(bonusNumber, winningNumbers)
         return LottoNumber.from(bonusNumber)
     }
 
