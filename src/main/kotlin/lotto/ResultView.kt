@@ -1,5 +1,7 @@
 package lotto
 
+import java.math.BigDecimal
+
 class ResultView() {
     fun printLottos(lottos: List<Lotto>) {
         println("You have purchased ${lottos.count()} tickets.")
@@ -24,7 +26,7 @@ class ResultView() {
         )
     }
 
-    fun printReturnRate(rate: Long) {
+    fun printReturnRate(rate: BigDecimal) {
         val formattedRate = String.format("%.1f", rate).replace(',', '.')
         println(PRESENT_RATE.format(formattedRate))
     }

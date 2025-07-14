@@ -1,5 +1,7 @@
 package lotto
 
+import java.math.BigDecimal
+
 class LottoMachine() {
     fun createGeneratedTickets(
         totalPurchasedTickets: Int,
@@ -41,15 +43,16 @@ class LottoMachine() {
     fun calculateReturnRate(
         results: MutableMap<Rank, Int>,
         userAmount: Int,
-    ): Long {
+    ): BigDecimal {
         val totalPrize = calculateTotalPrize(results)
-        return (totalPrize.toLong() / userAmount)
+        val rate = (totalPrize / userAmount.toBigDecimal())
+        return rate
     }
 
-    private fun calculateTotalPrize(results: MutableMap<Rank, Int>): Int {
-        var totalPrize = 0
+    private fun calculateTotalPrize(results: MutableMap<Rank, Int>): BigDecimal {
+        var totalPrize = 0.toBigDecimal()
         results.forEach { (key, value) ->
-            totalPrize += key.winningMoney * value
+            totalPrize += key.winningMoney.toBigDecimal() * value.toBigDecimal()
         }
         return totalPrize
     }
