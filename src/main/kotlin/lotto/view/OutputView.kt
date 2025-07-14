@@ -42,7 +42,7 @@ object OutputView {
             Prompt.totalReturnRate()
             val totalPrize = rankedTickets.ranked.sumOf { it.winningMoney }
             val totalSpent = rankedTickets.purchaseResult.userPurchase.amount
-            val totalRate = (totalPrize.toDouble() / totalSpent) * 100
+            val totalRate = totalPrize.toDouble() / totalSpent
             println("%.2f".format(totalRate))
         }
 
