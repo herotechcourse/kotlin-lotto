@@ -1,5 +1,12 @@
 # kotlin-lotto
 ## Features
+
+### General
+- [x] Wrap primitives
+  - [x] LottoNumber class to wrap an Int
+  - [x] Lotto class to wrap lotto numbers
+- [x] Use First-Class-Collections
+
 ### Single Lotto Ticket
 - [x] List of size SIZE
 - [x] Numbers should be between MIN and MAX
@@ -10,6 +17,10 @@
   - [x] Change is calculated for the User
   - [x] Minimum MIN, maximum MAX KRW
 - [x] Generates List of Lotto tickets
+  - [x] manual tickets
+    - [x] max purchase amount / TICKET_PRICE
+  - [x] automatic tickets
+    - [x] total ticket amount - number of manual tickets 
   - [x] Each ticket is a random set
   - [x] Number of tickets equals purchaseAmount / TICKET_PRICE
 

@@ -1,36 +1,23 @@
 package lotto
 
-class LottoMachine(val purchaseAmount: Int, val tickets: MutableList<Lotto> = emptyList<Lotto>().toMutableList()) {
-    private val numberList = (Lotto.MIN..Lotto.MAX)
-    private var _change = 0
-    val change: Int
-        get() = _change
-    private var ticketCount = 0
+import kotlin.collections.shuffled
 
-    init {
-        require(purchaseAmount in MIN..MAX) {
-            "[ERROR] Max purchase amount allowed is $MIN-$MAX."
-        }
-        _change = purchaseAmount % TICKET_PRICE
-        ticketCount = (purchaseAmount - _change) / TICKET_PRICE
-        generateTickets()
-    }
-
-    fun showChange() = _change
-
-    fun generateTickets() {
+class LottoMachine() {
+    fun generateTickets(ticketCount: Int): List<Lotto> {
+        val tickets: MutableList<Lotto> = mutableListOf()
         repeat(ticketCount) {
-            tickets.add(Lotto(generateNumbers()))
+            tickets.add(Lotto.from(generateRandomNumbers()))
         }
+        return tickets
     }
 
-    private fun generateNumbers(): List<Int> {
-        return numberList.shuffled().subList(0, Lotto.LOTTO_SIZE)
-    }
+    private fun generateRandomNumbers(): List<Int> =
+        (LottoNumber.MIN..LottoNumber.MAX)
+            .shuffled()
+            .subList(0, Lotto.LOTTO_SIZE)
+            .sorted()
 
     companion object {
-        private const val MIN = 1_000
-        private const val MAX = 20_000
-        const val TICKET_PRICE = 1_000
+
     }
 }
