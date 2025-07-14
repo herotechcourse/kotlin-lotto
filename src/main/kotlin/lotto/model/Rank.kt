@@ -14,13 +14,14 @@ enum class Rank(val countOfMatch: Int, val winningMoney: Int, val matchBonus: Bo
             countOfMatch: Int,
             matchBonus: Boolean,
         ): Rank {
-            return entries.find {
-                it.countOfMatch == countOfMatch && it.matchBonus == matchBonus
-            } ?: MISS
+            return when {
+                countOfMatch == FIRST.countOfMatch -> FIRST
+                countOfMatch == SECOND.countOfMatch && matchBonus -> SECOND
+                countOfMatch == THIRD.countOfMatch -> THIRD
+                countOfMatch == FOURTH.countOfMatch -> FOURTH
+                countOfMatch == FIFTH.countOfMatch -> FIFTH
+                else -> MISS
+            }
         }
-    }
-
-    fun display(): String {
-        return "${this.countOfMatch} Matches (${this.winningMoney})"
     }
 }

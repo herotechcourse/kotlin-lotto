@@ -9,12 +9,12 @@ object TicketFactory {
         return purchaseAmount / 1000
     }
 
-    fun generateTickets(numberOfTickets: Int): List<Lotto> {
-        val listOfTickets = mutableListOf<Lotto>()
-        repeat(numberOfTickets) {
-            val lotto = Lotto(Random.generateListOfSixRandomNumbers())
-            listOfTickets.add(lotto)
-        }
-        return listOfTickets
+    fun handleTicketGeneration(
+        manualTicketsList: List<Set<Int>>,
+        automaticTicketsNumber: Int,
+    ): List<Lotto> {
+        val automaticTickets = TicketGenerator.generateAutomaticTickets(automaticTicketsNumber)
+        val manualTickets = TicketGenerator.generateManualTickets(manualTicketsList)
+        return automaticTickets.plus(manualTickets)
     }
 }

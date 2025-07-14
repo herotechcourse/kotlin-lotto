@@ -42,7 +42,7 @@ class RankTest {
     @Test
     fun `value of fifth rank`() {
         val matchCount = 3
-        val matchBonus = false
+        val matchBonus = true
         val rank = Rank.valueOf(matchCount, matchBonus)
         assertThat(rank).isEqualTo(Rank.FIFTH)
     }

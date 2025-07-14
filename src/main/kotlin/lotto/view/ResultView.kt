@@ -1,31 +1,42 @@
 package lotto.view
 
 import lotto.model.Lotto
+import lotto.model.LottoResult
 import lotto.model.Rank
 
 object ResultView {
-    fun displayNumberOfTickets(numberOfTickets: Int) {
-        println("You have purchased $numberOfTickets tickets.")
-    }
-
     fun displayTickets(tickets: List<Lotto>) {
         tickets.forEach {
-            println(it.displayLotto())
+            println(it.lottoNumbers.joinToString(",", prefix = "[", postfix = "]"))
         }
     }
 
-    fun displayWinningRanks(mapOfResult: Map<Rank, Int>) {
+    fun displayWinningStatistics(lottoResult: LottoResult) {
+        displayWinningRanks(lottoResult)
+        displayWinningRate(lottoResult.calculateProfitRate())
+    }
+
+    fun displayWinningRanks(lottoResult: LottoResult) {
         println()
         println("Winning Statistics")
         println("-----------------------")
         val rankList = listOf<Rank>(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.FIFTH)
 
-        rankList.forEach {
-            println("${it.display()} - ${mapOfResult.getOrDefault(it, 0)} tickets")
+        rankList.forEach { prize ->
+            val count = lottoResult.count(prize)
+            println("${prize.countOfMatch} Matches (${prize.winningMoney}) – $count tickets")
         }
     }
 
     fun displayWinningRate(rate: Double) {
         println("Total return rate is " + String.format("%.2f", rate) + " (A rate below 1 means a loss)")
+    }
+
+    fun displayNumberOfTicketsInput(
+        manualTicketsNumber: Int,
+        automaticTicketsNumber: Int,
+    ) {
+        println()
+        println("Purchased $manualTicketsNumber manual and $automaticTicketsNumber automatic tickets.")
     }
 }

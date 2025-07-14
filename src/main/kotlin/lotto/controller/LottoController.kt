@@ -1,7 +1,7 @@
 package lotto.controller
 
 import lotto.model.Lotto
-import lotto.model.Statistics
+import lotto.model.LottoNumber
 import lotto.model.TicketFactory
 import lotto.model.WinningLogic
 import lotto.model.WinningLotto
@@ -14,29 +14,30 @@ class LottoController(
     private val resultView: ResultView,
     private val ticketFactory: TicketFactory,
     private val winningLotto: WinningLottoFactory,
+    private val winningLogic: WinningLogic,
 ) {
     fun run() {
         val purchaseAmount = inputView.purchaseAmountInput()
         val tickets = handlePurchase(purchaseAmount)
         val winningLotto = handleWinningLotto()
-        val result = WinningLogic(tickets, winningLotto).determineWinningTickets()
-        val statistics = Statistics(result, tickets.size)
-        resultView.displayWinningRanks(result)
-        resultView.displayWinningRate(statistics.calculateRate())
+        val result = winningLogic.determineWinningTickets(tickets, winningLotto)
+        resultView.displayWinningStatistics(result)
     }
 
-    fun handlePurchase(purchaseAmount: Int): List<Lotto> {
+    private fun handlePurchase(purchaseAmount: Int): List<Lotto> {
         val numberOfTickets = ticketFactory.calculateNumberOfTickets(purchaseAmount)
-        val tickets = ticketFactory.generateTickets(numberOfTickets)
-        resultView.displayNumberOfTickets(numberOfTickets)
+        val manualTicketsNumber = inputView.getManualTicketsNumber(numberOfTickets)
+        val automaticTicketsNumber = numberOfTickets - manualTicketsNumber
+        val manualTicketsList = inputView.getManualTickets(manualTicketsNumber)
+        resultView.displayNumberOfTicketsInput(manualTicketsNumber, automaticTicketsNumber)
+        val tickets = ticketFactory.handleTicketGeneration(manualTicketsList, automaticTicketsNumber)
         resultView.displayTickets(tickets)
-
         return tickets
     }
 
-    fun handleWinningLotto(): WinningLotto {
+    private fun handleWinningLotto(): WinningLotto {
         val winningLottoList = inputView.winningNumbersInput()
-        val bonusNumber = inputView.bonusNumberInput(winningLottoList)
+        val bonusNumber = LottoNumber.from(inputView.bonusNumberInput(winningLottoList))
         val winningLotto = winningLotto.from(winningLottoList, bonusNumber)
         return winningLotto
     }

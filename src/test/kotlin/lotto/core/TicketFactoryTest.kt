@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource
 class TicketFactoryTest {
     val ticketFactory = TicketFactory
 
+    //  calculate number of tickets
     @ParameterizedTest
     @ValueSource(ints = [1000, 2000, 3000, 4000])
     fun `calculate the right number of tickets`(purchaseAmounts: Int) {
@@ -23,20 +24,6 @@ class TicketFactoryTest {
         val purchaseAmount = -10
         assertThrows<IllegalArgumentException> {
             ticketFactory.calculateNumberOfTickets(purchaseAmount)
-        }
-    }
-
-    @Test
-    fun `generate the right number of tickets`() {
-        val numberOfTickets = 6
-        val tickets = ticketFactory.generateTickets(numberOfTickets)
-        assertThat(tickets).hasSize(numberOfTickets)
-    }
-
-    companion object {
-        @JvmStatic
-        fun purchaseAmount(): List<Int> {
-            return listOf(1000, 2000, 3000)
         }
     }
 }
