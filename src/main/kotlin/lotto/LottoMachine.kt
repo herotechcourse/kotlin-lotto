@@ -1,15 +1,12 @@
 package lotto
 
-class LottoMachine(val money: Money) {
-    val tickets: List<Lotto> = issueTickets()
-
-    fun issueTickets(): List<Lotto> {
-        val ticketCount: Int = money.value / TICKET_PRICE
-
-        return (1..ticketCount).map {
-            Lotto(generateRandomNumber())
+class LottoMachine() {
+    fun issueTickets(
+        quantity: Int,
+        numberGenerator: () -> List<Int>,
+    ): List<Lotto> {
+        return (1..quantity).map {
+            Lotto(numberGenerator().map { LottoNumber.from(it) })
         }
     }
-
-    private fun generateRandomNumber() = (1..45).shuffled().take(6).sorted()
 }

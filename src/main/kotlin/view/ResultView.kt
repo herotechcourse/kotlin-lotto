@@ -11,7 +11,7 @@ object ResultView {
 
     fun viewTickets(tickets: List<Lotto>) {
         tickets.forEach {
-            println(it.numbers.toString())
+            println(it.numbers.sorted().toString())
         }
     }
 

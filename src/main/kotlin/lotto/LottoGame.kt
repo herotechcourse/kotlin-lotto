@@ -4,7 +4,7 @@ class LottoGame() {
     fun play(
         playersTickets: List<Lotto>,
         winningNumbers: Lotto,
-        bonusNumber: Int,
+        bonusNumber: LottoNumber,
     ): List<RankResult> {
         val results: MutableList<RankResult> = mutableListOf()
         for (ticket in playersTickets) {
@@ -16,12 +16,12 @@ class LottoGame() {
         return results.toList()
     }
 
-    fun countWinningAmount(results: List<RankResult>): Int {
+    fun countWinningAmount(results: List<RankResult>): Money {
         var amount = 0
         for (result in results) {
             amount += result.rank.prizeAmount * result.ticketsCount
         }
-        return amount
+        return Money(amount)
     }
 
     private fun updateRankResultList(
@@ -30,9 +30,9 @@ class LottoGame() {
     ) {
         val resultElement = results.find { it.rank == rank }
         if (resultElement != null) {
-            resultElement.ticketsCount++
+            resultElement.increaseTicketsCount()
         } else {
-            results.add(RankResult(rank, 1))
+            results.add(RankResult(rank))
         }
     }
 }
