@@ -1,7 +1,7 @@
 package lotto.domain
 
-import lotto.services.TicketIssuer
-import lotto.services.TicketsEvaluator
+import lotto.controller.TicketIssuer
+import lotto.controller.TicketsEvaluator
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
