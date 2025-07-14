@@ -6,16 +6,10 @@ class InputView {
     val inputValidator = InputValidator()
 
     fun takePurchaseInput(): Int {
-        while (true) {
-            try {
-                println(ASK_AMOUNT)
-                val input = readln().trim()
-                inputValidator.validateAmount(input)
-                return input.toInt()
-            } catch (e: IllegalArgumentException) {
-                println(e.message)
-            }
-        }
+        println(ASK_AMOUNT)
+        val input = readln().trim()
+        inputValidator.validateAmount(input)
+        return input.toInt()
     }
 
     fun takeQuantityOfManualTickets(totalPurchasedTickets: Int): Int? {
@@ -44,31 +38,19 @@ class InputView {
     }
 
     fun takeWinningNumbers(): List<String> {
-        while (true) {
-            try {
-                println()
-                println(ASK_WINNING_NUMBERS)
-                val input = readln().split(",")
-                input.forEach { item -> item.trim() }
-                inputValidator.validateWinningNumbers(input)
-                return input
-            } catch (e: IllegalArgumentException) {
-                println(e.message)
-            }
-        }
+        println()
+        println(ASK_WINNING_NUMBERS)
+        val input = readln().split(",")
+        input.forEach { item -> item.trim() }
+        inputValidator.validateWinningNumbers(input)
+        return input
     }
 
     fun takeBonusNumber(winningNumbers: List<String>): Int {
-        while (true) {
-            try {
-                println(ASK_BONUS_NUMBER)
-                val bonusInput = readln()
-                inputValidator.validateBonusNumber(bonusInput, winningNumbers)
-                return bonusInput.toInt()
-            } catch (e: IllegalArgumentException) {
-                println(e.message)
-            }
-        }
+        println(ASK_BONUS_NUMBER)
+        val bonusInput = readln()
+        inputValidator.validateBonusNumber(bonusInput, winningNumbers)
+        return bonusInput.toInt()
     }
 
     companion object {
