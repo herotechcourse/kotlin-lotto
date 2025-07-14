@@ -12,8 +12,7 @@ class Controller {
         outputView: OutputView,
     ) {
         val lotto = handleLottoPurchase(inputView, outputView)
-        val (mainNumbers, bonusNumber) = handleWinningNumbers(inputView, outputView)
-        val winningNumbers = WinningNumbers(mainNumbers, bonusNumber)
+        val winningNumbers = handleWinningNumbers(inputView, outputView)
         handleResultDisplay(lotto, winningNumbers, outputView)
     }
 
@@ -22,10 +21,14 @@ class Controller {
         outputView: OutputView,
     ): Lotto {
         val purchaseAmount = inputView.getPurchaseAmount()
-        val lotto = Lotto(purchaseAmount)
-        outputView.displayPurchaseAmount(lotto)
-        outputView.displayNumberOfLottoTickets(lotto)
-        lotto.generateTickets()
+        outputView.displayAmount(purchaseAmount)
+        val manualTicketsAmount = inputView.getManualTicketsAmount()
+        outputView.displayAmount(manualTicketsAmount.value)
+        val manualTickets = inputView.getManualTickets(manualTicketsAmount)
+        outputView.displayManualTickets(manualTickets)
+        val lotto = Lotto(purchaseAmount, manualTickets)
+        outputView.displayNumberOfLottoTickets(lotto, manualTicketsAmount)
+        lotto.generateTickets(manualTicketsAmount)
         outputView.displayTickets(lotto)
         return lotto
     }
@@ -33,12 +36,12 @@ class Controller {
     private fun handleWinningNumbers(
         inputView: InputView,
         outputView: OutputView,
-    ): Pair<List<Int>, Int> {
+    ): WinningNumbers {
         val userMainNumbers = inputView.getWinningNumbers()
-        outputView.displayWinningNumbers(userMainNumbers.numbers)
+        outputView.displayTicketNumbers(userMainNumbers.numbers)
         val bonusNumber = inputView.getBonusNumber(userMainNumbers)
         outputView.displayBonusNumber(bonusNumber)
-        return Pair(userMainNumbers.numbers, bonusNumber)
+        return WinningNumbers(userMainNumbers, bonusNumber)
     }
 
     private fun handleResultDisplay(
