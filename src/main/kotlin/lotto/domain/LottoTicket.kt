@@ -5,7 +5,7 @@ import lotto.exceptions.ExceptionMessage
 @JvmInline
 value class LottoTicket(private val lottoNumbers: HashSet<LottoNumber>) {
     init {
-        require(lottoNumbers.size == SUFFICIENT_SIZE) to ExceptionMessage.NOT_SUFFICIENT_SIZE
+        require(lottoNumbers.size == SUFFICIENT_SIZE) { ExceptionMessage.NOT_SUFFICIENT_SIZE }
     }
 
     override fun toString(): String {
