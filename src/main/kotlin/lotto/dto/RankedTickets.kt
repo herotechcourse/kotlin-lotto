@@ -5,11 +5,11 @@ import lotto.domain.WinningCombination
 
 data class RankedTickets(val purchaseResult: PurchaseResult, val winningCombination: WinningCombination) {
     val ranked = TicketsEvaluator.runWith(purchaseResult.totalTickets, winningCombination)
-    val totalRate = getTotalRate()
+    val totalRate = calculateTotalRate()
 
-    private fun getTotalRate(): Double {
+    private fun calculateTotalRate(): Double {
         val totalPrize = ranked.sumOf { it.winningMoney }
         val totalSpent = purchaseResult.userPurchase.amount
-        return totalPrize.toDouble() / totalSpent
+        return (totalPrize / totalSpent).toDouble()
     }
 }
