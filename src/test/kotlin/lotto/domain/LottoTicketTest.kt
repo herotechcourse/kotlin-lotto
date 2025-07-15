@@ -71,4 +71,21 @@ class LottoTicketTest {
         val rankFirstLottoTicket = LottoTicket.from(setOf(1, 2, 3, 4, 5, 6))
         assertThat(rankFirstLottoTicket.getRank(winningCombination)).isEqualTo(Rank.FIRST)
     }
+
+    @Test
+    fun `throw exception message, when lotto ticket has not enough or duplicate numbers`() {
+        val exception =
+            assertThrows<IllegalArgumentException> {
+                LottoTicket(
+                    hashSetOf(
+                        LottoNumber.from(1),
+                        LottoNumber.from(2),
+                        LottoNumber.from(3),
+                        LottoNumber.from(4),
+                        LottoNumber.from(5),
+                    ),
+                )
+            }
+        assertThat(exception.message).isEqualTo("lotto ticket has not sufficient size")
+    }
 }
