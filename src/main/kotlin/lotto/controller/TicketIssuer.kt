@@ -21,7 +21,7 @@ object TicketIssuer {
     }
 
     fun issueRandom(count: Int): IssuedTickets {
-        return issue(count) { size -> List(size) { NumberGenerator.get() } }
+        return issue(count) { size -> List(size) { NumberGenerator.shuffledRandomNumbers() } }
     }
 
     private fun issue(
