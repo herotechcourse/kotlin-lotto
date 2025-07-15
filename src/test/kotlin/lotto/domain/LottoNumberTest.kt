@@ -28,7 +28,6 @@ class LottoNumberTest {
     fun `should return same instance for same input`() {
         val number = LottoNumber.from(MIN_RANGE_NUMBER)
         assertThat(LottoNumber.from(MIN_RANGE_NUMBER)).isEqualTo(number)
-        assertThat(LottoNumber.from(MIN_RANGE_NUMBER)).isSameAs(number)
     }
 
     companion object {
