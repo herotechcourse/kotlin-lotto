@@ -6,7 +6,9 @@ import lotto.dto.UserPurchase
 object PurchasesController {
     fun getPurchaseResult(): PurchaseResult {
         val userPurchase = getUserPurchases()
-        return PurchaseResult(userPurchase)
+        val totalTickets = TicketIssuer.issueManual(userPurchase.manualTicketsCount) +
+                TicketIssuer.issueRandom(userPurchase.randomTicketsCount)
+        return PurchaseResult(userPurchase, totalTickets)
     }
 
     private fun getUserPurchases(): UserPurchase {
