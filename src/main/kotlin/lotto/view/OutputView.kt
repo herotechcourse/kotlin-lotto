@@ -28,7 +28,7 @@ object OutputView {
             entry: Rank,
             results: List<Rank>,
         ) {
-            val matchCount = results.count { it.countOfMatch == entry.countOfMatch }
+            val matchCount = results.count { it == entry }
             val hasBonus = if (entry.requiresBonus) " + Bonus Ball" else ""
             val winningMoney = "%,d".format(entry.winningMoney)
             val pluralizedTicket = pluralizeTicket(matchCount)
