@@ -13,7 +13,7 @@ value class LottoTicket(private val lottoNumbers: HashSet<LottoNumber>) {
     }
 
     fun toRawSet(): Set<Int> {
-        return lottoNumbers.map { it.hashCode() }.toSet()
+        return lottoNumbers.map { it.getValue() }.toSet()
     }
 
     fun doesNotContains(lottoNumber: LottoNumber): Boolean {
