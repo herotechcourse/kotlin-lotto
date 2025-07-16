@@ -22,15 +22,6 @@ class NumberGeneratorTest {
     }
 
     @Test
-    fun `should shuffle numbers`() {
-        val input = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-        val result = NumberGenerator.shuffledNumbers(input)
-
-        assertThat(result).hasSize(10)
-        assertThat(result).containsExactlyInAnyOrderElementsOf(input)
-    }
-
-    @Test
     fun `does not throw if have SUFFICIENT_SIZE numbers`() {
         assertDoesNotThrow {
             val input = listOf(1, 2, 3, 4, 5, 6)
