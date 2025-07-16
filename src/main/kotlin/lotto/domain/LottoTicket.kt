@@ -3,7 +3,7 @@ package lotto.domain
 import lotto.exceptions.ExceptionMessage
 
 @JvmInline
-value class LottoTicket(private val lottoNumbers: HashSet<LottoNumber>) {
+value class LottoTicket(private val lottoNumbers: Set<LottoNumber>) {
     init {
         require(lottoNumbers.size == SUFFICIENT_SIZE) { ExceptionMessage.NOT_SUFFICIENT_SIZE }
     }
