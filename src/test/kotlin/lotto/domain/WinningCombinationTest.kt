@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions.assertDoesNotThrow
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
-class WiningCombinationTest {
+class WinningCombinationTest {
     @Test
     fun `throw if bonus number is not in range`() {
         assertThrows<IllegalArgumentException> {
