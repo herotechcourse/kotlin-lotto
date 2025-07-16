@@ -2,6 +2,10 @@ package lotto.domain
 
 @JvmInline
 value class LottoNumber(private val value: Int) {
+    fun getValue(): Int = value
+
+    override fun toString(): String = value.toString()
+
     companion object {
         internal const val MIN_RANGE_NUMBER = 1
         internal const val MAX_RANGE_NUMBER = 45
@@ -11,6 +15,4 @@ value class LottoNumber(private val value: Int) {
             return LOTTO_NUMBERS[request] ?: throw IllegalArgumentException()
         }
     }
-
-    override fun toString(): String = value.toString()
 }
