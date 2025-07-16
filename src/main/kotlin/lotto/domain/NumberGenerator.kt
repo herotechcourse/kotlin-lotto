@@ -11,8 +11,6 @@ object NumberGenerator {
     }
 
     internal fun sufficientSizeNumbers(numbers: List<Int>): Set<Int> {
-        require(numbers.size == LottoTicket.SUFFICIENT_SIZE)
-        require(numbers.distinct().size == LottoTicket.SUFFICIENT_SIZE)
         return numbers
             .distinct()
             .take(LottoTicket.SUFFICIENT_SIZE)
