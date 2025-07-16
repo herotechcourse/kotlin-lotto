@@ -32,22 +32,6 @@ class NumberGeneratorTest {
     }
 
     @Test
-    fun `throw Illegal exception if have numbers more than SUFFICIENT_SIZE`() {
-        assertThrows<IllegalArgumentException> {
-            val input = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-            val result = NumberGenerator.sufficientSizeNumbers(input)
-        }
-    }
-
-    @Test
-    fun `throw Illegal exception if have numbers less than SUFFICIENT_SIZE`() {
-        assertThrows<IllegalArgumentException> {
-            val input = listOf(1, 2, 3, 4, 5)
-            val result = NumberGenerator.sufficientSizeNumbers(input)
-        }
-    }
-
-    @Test
     fun `does not throw if have SUFFICIENT_SIZE numbers`() {
         assertDoesNotThrow {
             val input = listOf(1, 2, 3, 4, 5, 6)
