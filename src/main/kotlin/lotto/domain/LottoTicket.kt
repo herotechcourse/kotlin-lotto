@@ -17,7 +17,7 @@ value class LottoTicket(private val lottoNumbers: HashSet<LottoNumber>) {
     }
 
     fun doesNotContains(lottoNumber: LottoNumber): Boolean {
-        return lottoNumber.hashCode() !in toRawSet()
+        return lottoNumber.getValue() !in toRawSet()
     }
 
     fun getRank(winningCombination: WinningCombination): Rank {
