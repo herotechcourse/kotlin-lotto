@@ -10,6 +10,6 @@ data class RankedTickets(val purchaseResult: PurchaseResult, val winningCombinat
     private fun calculateTotalRate(): Double {
         val totalPrize = ranked.sumOf { it.winningMoney }
         val totalSpent = purchaseResult.userPurchase.amount
-        return (totalPrize / totalSpent).toDouble()
+        return totalPrize.toDouble() / totalSpent
     }
 }
