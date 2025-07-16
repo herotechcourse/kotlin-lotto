@@ -2,32 +2,26 @@ package lotto.domain
 
 object NumberGenerator {
     fun shuffledRandomNumbers(): Set<Int> {
-        val shuffled =
+        val numbers =
             createNumbers(
                 LottoNumber.MIN_RANGE_NUMBER,
                 LottoNumber.MAX_RANGE_NUMBER,
             ).shuffled()
-        return sufficientSizeNumbers(shuffled)
+        return sufficientSizeNumbers(numbers)
     }
 
     internal fun sufficientSizeNumbers(numbers: List<Int>): Set<Int> {
         return numbers
-            .distinct()
             .take(LottoTicket.SUFFICIENT_SIZE)
             .sorted()
             .toCollection(linkedSetOf())
-    }
-
-    internal fun shuffledNumbers(numbers: List<Int>): List<Int> {
-        return numbers.shuffled()
     }
 
     internal fun createNumbers(
         min: Int,
         max: Int,
     ): List<Int> {
-        val numbers = (min..max).distinct()
-        require(max - min >= 0) { "max must be greater than min" }
-        return numbers
+        require(max - min >= 0) { "max must be greater than or equal to min" }
+        return (min..max).toList()
     }
 }
