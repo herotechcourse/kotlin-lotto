@@ -1,15 +1,10 @@
 package lotto.view
 
-interface InputView {
-    fun readPurchaseAmount(): Int
+import lotto.model.ManualTicket
+import lotto.model.WinningNumbers
 
-    fun readWinningNumbers(): List<Int>
-
-    fun readBonusNumber(): Int
-}
-
-class InputViewImpl : InputView {
-    override fun readPurchaseAmount(): Int {
+class InputView {
+    fun readPurchaseAmount(): Int {
         println("Please enter the purchase amount.")
         return try {
             readln().toIntOrNull() ?: throw IllegalArgumentException("Input can not be empty.")
@@ -18,20 +13,55 @@ class InputViewImpl : InputView {
         }
     }
 
-    override fun readWinningNumbers(): List<Int> {
+    fun readManualNumberOfTickets(): Int {
+        println("Enter the number of manual tickets to purchase.")
+        return try {
+            readln().toIntOrNull() ?: throw IllegalArgumentException("Input can not be empty.")
+        } catch (e: NumberFormatException) {
+            throw IllegalArgumentException("The number of manual tickets must be a number.")
+        }
+    }
+
+    fun readManualTickets(numberOfManualTickets: Int): List<ManualTicket> {
+        println("Enter the numbers for manual tickets.")
+        val manualTickets = mutableListOf<ManualTicket>()
+
+        repeat(numberOfManualTickets) {
+            try {
+                val ticket =
+                    readlnOrNull()
+                        ?.split(",")
+                        ?.map {
+                            it.trim().toInt()
+                        } ?: throw IllegalArgumentException("Input cannot be empty.")
+
+                manualTickets.add(
+                    ManualTicket(ticket),
+                )
+            } catch (e: NumberFormatException) {
+                throw IllegalArgumentException("Manual tickets must contain only integer numbers separated by commas.")
+            }
+        }
+
+        return manualTickets
+    }
+
+    fun readWinningNumbers(): WinningNumbers {
         println("Please enter last week’s winning numbers.")
         return try {
-            readlnOrNull()
-                ?.split(",")
-                ?.map {
-                    it.toInt()
-                } ?: throw IllegalArgumentException("Input can not be empty.")
+            val winningNumbers =
+                readlnOrNull()
+                    ?.split(",")
+                    ?.map {
+                        it.toInt()
+                    } ?: throw IllegalArgumentException("Input can not be empty.")
+            WinningNumbers(winningNumbers)
         } catch (e: NumberFormatException) {
             throw IllegalArgumentException("Winning numbers must contain only integer numbers separated by comma.")
         }
     }
 
-    override fun readBonusNumber(): Int {
+    fun readBonusNumber(): Int {
         println("Please enter the bonus number.")
         return try {
             readln().toIntOrNull() ?: throw IllegalArgumentException("Input can not be empty.")
