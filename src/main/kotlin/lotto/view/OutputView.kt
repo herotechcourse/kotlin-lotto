@@ -1,52 +1,46 @@
 package lotto.view
 
-import lotto.domain.GameResult
 import lotto.domain.LottoTicket
 import lotto.domain.Rank
-import lotto.dto.IssuedTickets
+import lotto.dto.PurchaseResult
+import lotto.dto.RankedTickets
 
 object OutputView {
-
-    object Result {
-        fun purchase(manualTickets: IssuedTickets, randomTickets: IssuedTickets) {
-            val manualNumber = manualTickets.size()
-            val randomNumber = randomTickets.size()
-            val pluralized = pluralizeTicket(manualNumber + randomNumber)
-            println("Purchased $manualNumber manual and $randomNumber automatic $pluralized.")
+    object Print {
+        fun purchaseResult(purchaseResult: PurchaseResult) {
+            val pluralized = pluralizeTicket(purchaseResult.userPurchase.maxPurchasable)
+            println(
+                "Purchased ${purchaseResult.userPurchase.manualTicketsCount} manual " +
+                    "and ${purchaseResult.userPurchase.randomTicketsCount} automatic $pluralized.",
+            )
+            purchaseResult.totalTickets.get().forEach { println("[$it]") }
         }
 
-        fun purchase(randomTickets: IssuedTickets) {
-            val randomTicketsCount = randomTickets.size()
-            val pluralized = pluralizeTicket(randomTicketsCount)
-            println("You have purchased $randomTicketsCount $pluralized.")
-        }
-
-        fun issuedTickets(tickets: IssuedTickets) {
-            tickets.get().forEach { println("[$it]") }
-        }
-
-        fun winningStatistics(gameResult: GameResult) {
+        fun winningStatistics(rankedTickets: RankedTickets) {
             Prompt.winningStatisticsTitle()
             Rank.entries.filter { it != Rank.MISS }.reversed().forEach {
-                eachRank(it, gameResult.ranks)
+                eachRank(it, rankedTickets.ranked)
             }
-            totalRate(gameResult)
+            totalRate(rankedTickets)
         }
 
         private fun eachRank(
             entry: Rank,
             results: List<Rank>,
         ) {
-            val matchCount = results.count { it.countOfMatch == entry.countOfMatch }
+            val matchCount = results.count { it == entry }
             val hasBonus = if (entry.requiresBonus) " + Bonus Ball" else ""
             val winningMoney = "%,d".format(entry.winningMoney)
             val pluralizedTicket = pluralizeTicket(matchCount)
-            println("${entry.countOfMatch} Matches$hasBonus ($winningMoney ${LottoTicket.CURRENCY}) - $matchCount $pluralizedTicket")
+            println(
+                "${entry.countOfMatch} Matches" +
+                    "$hasBonus ($winningMoney ${LottoTicket.CURRENCY}) - $matchCount $pluralizedTicket",
+            )
         }
 
-        fun totalRate(result: GameResult) {
+        private fun totalRate(rankedTickets: RankedTickets) {
             Prompt.totalReturnRate()
-            println("%.2f".format(result.returnRate))
+            println("%.2f".format(rankedTickets.totalRate))
         }
 
         private fun pluralizeTicket(size: Int): String {
@@ -55,33 +49,19 @@ object OutputView {
     }
 
     object Prompt {
-        fun amount() {
-            println(PURCHASE_AMOUNT_PROMPT)
-        }
+        fun amount() = println(PURCHASE_AMOUNT_PROMPT)
 
-        fun numberOfManual() {
-            println(NUMBER_OF_MANUAL_PROMPT)
-        }
+        fun numberOfManual() = println(NUMBER_OF_MANUAL_PROMPT)
 
-        fun manualNumbers() {
-            println(MANUAL_TICKET_PROMPT)
-        }
+        fun manualNumbers() = println(MANUAL_TICKET_PROMPT)
 
-        fun winningNumbers() {
-            println(WINNING_NUMBERS_PROMPT)
-        }
+        fun winningNumbers() = println(WINNING_NUMBERS_PROMPT)
 
-        fun bonusNumber() {
-            println(BONUS_NUMBER_PROMPT)
-        }
+        fun bonusNumber() = println(BONUS_NUMBER_PROMPT)
 
-        fun winningStatisticsTitle() {
-            println(TITLE_OF_RESULT_PROMPT)
-        }
+        fun winningStatisticsTitle() = println(TITLE_OF_RESULT_PROMPT)
 
-        fun totalReturnRate() {
-            print(TOTAL_RETURN_PROMPT)
-        }
+        fun totalReturnRate() = print(TOTAL_RETURN_PROMPT)
 
         fun error(exception: Exception) {
             val msg = exception.message ?: "Unexpected error occurred."

@@ -67,17 +67,13 @@
 
 #### Application
 - [x] separate `println()` into `OutputView`
-- [ ] think/search about what `application` means, and refactor if needed
+- [x] refactor if needed
 
 ### Output View
 - [x] collect `const` message and print logic
 
 ### Input View 
 - [x] collect read and retry logic
-
-#### Service
-- [x] separate service logic clearly
-- [ ] think about why *those functions* should belong to the service layer, and implement a better structure if needed
 
 #### Utils
 - [x] merge into domain
@@ -86,7 +82,7 @@
 #### Refactor
 - [x] fix and clarify condition: `(size == 0 || size == 1)`
 
-### LottoNumber !! still need to understand it
+### LottoNumber
 - [x] wrap `Int` to `LottoNumber`
 - [x] validate itself
   - [x] require: in range (1 ~ 45)
@@ -114,6 +110,6 @@
 - [ ] add **E2E test**
 
 ### todo
-- [ ] issue 2 different types:
-  - [ ] manual
-  - [ ] random
+- [x] issue 2 different types:
+  - [x] manual
+  - [x] random

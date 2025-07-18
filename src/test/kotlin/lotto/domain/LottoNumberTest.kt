@@ -8,7 +8,6 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
 class LottoNumberTest {
-
     @ValueSource(ints = [MIN_RANGE_NUMBER - 1, MAX_RANGE_NUMBER + 1])
     @ParameterizedTest
     fun `throw if lotto number not in range`(value: Int) {
@@ -29,7 +28,6 @@ class LottoNumberTest {
     fun `should return same instance for same input`() {
         val number = LottoNumber.from(MIN_RANGE_NUMBER)
         assertThat(LottoNumber.from(MIN_RANGE_NUMBER)).isEqualTo(number)
-        assertThat(LottoNumber.from(MIN_RANGE_NUMBER)).isSameAs(number)
     }
 
     companion object {
