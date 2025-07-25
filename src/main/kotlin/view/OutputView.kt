@@ -7,15 +7,37 @@ class OutputView {
         println("${lotto.purchaseAmount}")
     }
 
-    fun displayNumberOfLottoTickets(lotto: Lotto) {
-        println("You have purchased ${lotto.numberOfTickets} tickets.")
+    fun displaySingleNumber(number: Int) {
+        println(number)
     }
 
-    fun displayTickets(lotto: Lotto) {
-        for (ticket in lotto.tickets) {
+    fun displayLottoTicketsInfo(lotto: Lotto) {
+        println(
+            "Purchased ${lotto.numberOfManualTickets} manual and ${lotto.numberOfAutomaticTickets} automatic tickets.",
+        )
+        val manualTickets = lotto.tickets.getManualTickets(lotto.numberOfManualTickets)
+        for (ticket in manualTickets) {
+            println(ticket)
+        }
+        val automaticTickets = lotto.tickets.getAutomaticTickets(lotto.numberOfManualTickets)
+        for (ticket in automaticTickets) {
             println(ticket)
         }
         println()
+    }
+
+    fun displayTicketWithoutBrackets(ticket: model.Ticket) {
+        println(ticket.getIntNumbers().sorted().joinToString(", "))
+    }
+
+    fun displayManualTickets(lotto: Lotto) {
+        if (lotto.numberOfManualTickets > 0) {
+            val manualTickets = lotto.tickets.getManualTickets(lotto.numberOfManualTickets)
+            for (ticket in manualTickets) {
+                displayTicketWithoutBrackets(ticket)
+            }
+            println()
+        }
     }
 
     fun displayWinningNumbers(winningNumbers: List<Int>) {
@@ -33,16 +55,28 @@ class OutputView {
     }
 
     fun displayMatchResults(results: List<Int>) {
-        println("Winning Statistics")
-        println("------------------")
-        println("3 Matches (5,000 KRW) - ${results[4]} tickets")
-        println("4 Matches (50,000 KRW) - ${results[3]}  tickets")
-        println("5 Matches (1,500,000 KRW) - ${results[2]}  tickets")
-        println("5 Matches + Bonus Ball (30,000,000 KRW) - ${results[1]}  tickets")
-        println("6 Matches (2,000,000,000 KRW) - ${results[0]}  tickets")
+        println(
+            """
+            Winning Statistics
+            ------------------
+            3 Matches (5,000 KRW) - ${results[4]} tickets
+            4 Matches (50,000 KRW) - ${results[3]}  tickets
+            5 Matches (1,500,000 KRW) - ${results[2]}  tickets
+            5 Matches + Bonus Ball (30,000,000 KRW) - ${results[1]}  tickets
+            6 Matches (2,000,000,000 KRW) - ${results[0]}  tickets
+            """.trimIndent(),
+        )
     }
 
     fun displayWinningStatistic(winningStatistic: Float) {
         println("Total return rate is ${"%.2f".format(winningStatistic)} (A rate below 1 means a loss)\n")
+    }
+
+    fun displayError(message: String) {
+        println(message)
+    }
+
+    fun displayManualTicketsPrompt() {
+        println(PromptMessages.GET_MANUAL_TICKETS_NUMBERS.message)
     }
 }

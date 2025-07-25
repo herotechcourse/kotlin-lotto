@@ -5,7 +5,6 @@ object Statistics {
         lotto: Lotto,
         winningCombination: WinningCombination,
     ): List<Int> {
-        // IntArray for better performance instead of mutablelist()
         val matches = IntArray(6)
         for (ticket in lotto.tickets) {
             when (Rank.valueOfEachTicket(ticket, winningCombination)) {
@@ -30,6 +29,7 @@ object Statistics {
         purchaseAmount: Int,
         matchResult: List<Int>,
     ): Float {
+        require(purchaseAmount > 0) { "Purchase amount must be greater than zero" }
         val winningAmount = calculateWinningAmount(matchResult)
         return (winningAmount.toFloat() / purchaseAmount.toFloat())
     }

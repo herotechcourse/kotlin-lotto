@@ -9,22 +9,16 @@ class WinningCombinationTest {
         @JvmStatic
         fun invalidLists() =
             listOf(
-                // Duplicate numbers
                 listOf(1, 2, 3, 4, 5, 5),
-                // Invalid size
                 listOf(1, 2, 3, 4),
-                // Number out of range
                 listOf(0, 1, 2, 3, 4, 5),
             )
 
         @JvmStatic
         fun invalidBonusNumbers() =
             listOf(
-                // Duplicate with winning numbers
                 6,
-                // Number out of range (violates the lower bound)
                 -1,
-                // Number out of range (violates the upper bound)
                 46,
             )
     }
@@ -33,15 +27,15 @@ class WinningCombinationTest {
     @MethodSource("invalidLists")
     fun `should throw exception - create Ticket with invalid numbers`(numbers: List<Int>) {
         assertThrows<IllegalArgumentException> {
-            Ticket(numbers)
+            Ticket.fromInts(numbers)
         }
     }
 
     @ParameterizedTest
     @MethodSource("invalidBonusNumbers")
     fun `should throw exception - create WinningCombination with invalid bonus number`(bonusNumber: Int) {
+        val winningTicket = Ticket.fromInts(listOf(1, 2, 3, 4, 5, 6))
         assertThrows<IllegalArgumentException> {
-            val winningTicket = Ticket(listOf(1, 2, 3, 4, 5, 6))
             WinningCombination(winningTicket, bonusNumber)
         }
     }

@@ -2,7 +2,9 @@ package controller
 
 import model.Lotto
 import model.Statistics
+import model.Ticket
 import model.WinningCombination
+import view.ErrorMessages
 import view.InputView
 import view.OutputView
 
@@ -11,38 +13,84 @@ class Controller {
         inputView: InputView,
         outputView: OutputView,
     ) {
-        val lotto = handleLottoPurchase(inputView, outputView)
+        val lotto = setNumbersOfEachTickets(inputView, outputView)
+        fillNumbersToEachTickets(lotto, inputView, outputView)
+        outputView.displayLottoTicketsInfo(lotto)
         val winningCombination = handleWinningCombination(inputView, outputView)
         handleResultDisplay(lotto, winningCombination, outputView)
     }
 
-    private fun handleLottoPurchase(
+    private fun setNumbersOfEachTickets(
         inputView: InputView,
         outputView: OutputView,
     ): Lotto {
-        val lotto = createLottoWithRetries(inputView)
-        outputView.displayPurchaseAmount(lotto)
-        outputView.displayNumberOfLottoTickets(lotto)
-        lotto.generateTickets()
-        outputView.displayTickets(lotto)
-        return lotto
+        val purchaseAmount = getPurchaseAmountWithRetry(inputView, outputView)
+        val manualCount = getManualTicketCountWithRetry(inputView, outputView)
+        return Lotto(purchaseAmount, manualCount)
     }
 
-    private fun createLottoWithRetries(
+    private fun getPurchaseAmountWithRetry(
         inputView: InputView,
-        maxAttempts: Int = 3,
-    ): Lotto {
-        var lastException: IllegalArgumentException? = null
-        for (i in 1..maxAttempts) {
+        outputView: OutputView,
+    ): Int {
+        val maxAttempts = 3
+        repeat(maxAttempts) {
             try {
-                val purchaseAmount = inputView.getPurchaseAmount()
-                return Lotto(purchaseAmount)
+                val amount = inputView.getPurchaseAmount()
+                outputView.displayPurchaseAmount(Lotto(amount, 0))
+                return amount
             } catch (e: IllegalArgumentException) {
-                println("${e.message}")
-                lastException = e
+                outputView.displayError(e.message ?: "Unknown error")
             }
         }
-        throw lastException!!
+        throw IllegalArgumentException(ErrorMessages.INPUT_TOO_MANY_ATTEMPT.message)
+    }
+
+    private fun getManualTicketCountWithRetry(
+        inputView: InputView,
+        outputView: OutputView,
+    ): Int {
+        val maxAttempts = 3
+        repeat(maxAttempts) {
+            try {
+                val count = inputView.getNumberOfManualTickets()
+                outputView.displaySingleNumber(count)
+                return count
+            } catch (e: IllegalArgumentException) {
+                outputView.displayError(e.message ?: "Unknown error")
+            }
+        }
+        throw IllegalArgumentException("Too many failed attempts. Please restart the program.")
+    }
+
+    private fun fillNumbersToEachTickets(
+        lotto: Lotto,
+        inputView: InputView,
+        outputView: OutputView,
+    ) {
+        generateManualTickets(lotto, inputView, outputView)
+        outputView.displayManualTickets(lotto)
+        fillAutomaticTickets(lotto)
+    }
+
+    private fun generateManualTickets(
+        lotto: Lotto,
+        inputView: InputView,
+        outputView: OutputView,
+    ) {
+        if (lotto.numberOfManualTickets > 0) {
+            outputView.displayManualTicketsPrompt()
+            repeat(lotto.numberOfManualTickets) {
+                val numbers = inputView.getManualTicketNumbers()
+                lotto.tickets.add(Ticket.fromInts(numbers))
+            }
+        }
+    }
+
+    private fun fillAutomaticTickets(lotto: Lotto) {
+        repeat(lotto.numberOfAutomaticTickets) {
+            lotto.tickets.add(lotto.createTicket())
+        }
     }
 
     private fun handleWinningCombination(
@@ -50,7 +98,7 @@ class Controller {
         outputView: OutputView,
     ): WinningCombination {
         val winningTicket = inputView.getWinningTicket()
-        outputView.displayWinningNumbers(winningTicket.numbers)
+        outputView.displayWinningNumbers(winningTicket.getIntNumbers())
         val bonusNumber = inputView.getBonusNumber(winningTicket)
         outputView.displayBonusNumber(bonusNumber)
         return WinningCombination(winningTicket, bonusNumber)
